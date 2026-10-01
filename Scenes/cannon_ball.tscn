@@ -1,10 +1,20 @@
 [gd_scene format=3 uid="uid://bv30t6gci7mf4"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_10215"]
-radius = 0.25
-height = 0.5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10215"]
+albedo_color = Color(0, 0, 0, 1)
 
-[node name="CannonBall" type="Node3D" unique_id=15974512]
+[sub_resource type="SphereMesh" id="SphereMesh_10215"]
+material = SubResource("StandardMaterial3D_10215")
+radius = 0.125
+height = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_10215"]
+radius = 0.25
+
+[node name="CannonBall" type="RigidBody3D" unique_id=1538441136]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2133899534]
 mesh = SubResource("SphereMesh_10215")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=268688812]
+shape = SubResource("SphereShape3D_10215")

@@ -8,6 +8,11 @@ const mouse_sensitivity_x = 1
 const mouse_sensitivity_y = 1
 
 @export var able_to_interact_with_cannon = false
+@export var able_to_climb = false
+@export var able_to_descend = false
+@export var ladder = false
+@export var climbing = false
+@export var descending = false
 
 var cannon_interacting = false
 
@@ -18,6 +23,9 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	main_scene = $".".owner
 	cannon = main_scene.find_child("Cannon")
+	
+	$".".rotation.y = 0
+	$Camera3D.rotation.x = 0
 	
 func _physics_process(delta: float) -> void:
 	
@@ -35,16 +43,29 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("Interact") and cannon_interacting == true:
 		$Camera3D.current = true
-		cannon.find_child("Pivot").find_child("Camera3D").current = false
+		cannon.find_child("Model").find_child("Camera3D").current = false
 		cannon_interacting = false
-		
+				
 	elif Input.is_action_just_pressed("Interact") and able_to_interact_with_cannon == true:
 		$Camera3D.current = false
-		cannon.find_child("Pivot").find_child("Camera3D").current = true
+		cannon.find_child("Model").find_child("Camera3D").current = true
 		cannon_interacting = true
 		$Camera3D/UI.visible = false
-		
-	if cannon_interacting == false:
+				
+	if Input.is_action_just_pressed("Interact") and able_to_climb == true and not ladder is bool:
+		climbing = true
+		var move_tween = create_tween()
+		move_tween.tween_property($".","global_position",ladder.find_child("StartClimbPoint").global_position,0.25)
+		$Camera3D/UI.visible = false
+
+	elif Input.is_action_just_pressed("Interact") and able_to_descend == true and not ladder is bool:
+		descending = true
+		var move_tween = create_tween()
+		move_tween.tween_property($".","global_position",ladder.find_child("EndClimbPoint").global_position,0.25)
+		$Camera3D/UI.visible = false
+
+	
+	if cannon_interacting == false and climbing == false and descending == false:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var input_dir := Input.get_vector("Left", "Right", "Foward", "Backwards")
@@ -57,24 +78,33 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 		move_and_slide()
 
-	else:
+	elif climbing == false and descending == false:
 		if Input.is_action_pressed("Left"):
 			cannon.rotation.y += 0.01
 		elif Input.is_action_pressed("Right"):
 			cannon.rotation.y -= 0.01
 		if Input.is_action_pressed("Foward"):
-			cannon.find_child("Pivot").rotation.x += 0.01
-			cannon.find_child("Pivot").rotation.x = clamp(cannon.find_child("Pivot").rotation.x,0,0.4)
+			cannon.rotation.x += 0.01
+			cannon.rotation.x = clamp(cannon.rotation.x,-0.6,0.4)
 		elif Input.is_action_pressed("Backwards"):
-			cannon.find_child("Pivot").rotation.x -= 0.01
-			cannon.find_child("Pivot").rotation.x = clamp(cannon.find_child("Pivot").rotation.x,0,0.4)
+			cannon.rotation.x -= 0.01
+			cannon.rotation.x = clamp(cannon.rotation.x,-0.6,0.4)
+	elif climbing == true:
+		$".".velocity.y = 2
+		$".".velocity.x = 0
+		$".".velocity.z = 0
+		move_and_slide()
+	elif descending == true:
+		$".".velocity.y = -2
+		$".".velocity.x = 0
+		$".".velocity.z = 0
+		move_and_slide()
 
-	
 func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:
 		if not cannon_interacting:
-			$".".global_rotation.y -= event.relative.x / 1000
+			$".".rotation.y -= event.relative.x / 1000
 			$Camera3D.rotation.x -= event.relative.y / 1000
 			$Camera3D.rotation.x = clamp($Camera3D.rotation.x,-0.85,0.75)
 		

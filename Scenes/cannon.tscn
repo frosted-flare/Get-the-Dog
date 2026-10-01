@@ -1,68 +1,33 @@
 [gd_scene format=3 uid="uid://br2dwecic02pk"]
 
 [ext_resource type="Script" uid="uid://cs32fbh6b4djf" path="res://Scripts/cannon.gd" id="1_qayxd"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlvt6"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_3uv2y"]
-material = SubResource("StandardMaterial3D_qlvt6")
-top_radius = 0.25
-bottom_radius = 0.25
+[ext_resource type="PackedScene" uid="uid://c50ob3ykn3gw5" path="res://Assets/Canon.fbx" id="2_qlvt6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4c0tx"]
 radius = 3.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c0tx"]
-albedo_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qayxd"]
-material = SubResource("StandardMaterial3D_4c0tx")
-size = Vector3(1, 0.5, 1.5)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_qayxd"]
-top_radius = 0.2
-bottom_radius = 0.2
-height = 0.2
-
 [node name="Cannon" type="Node3D" unique_id=1252306198]
 script = ExtResource("1_qayxd")
 
-[node name="Pivot" type="Node3D" parent="." unique_id=923067004]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45777977, 0.26325017)
+[node name="Model" parent="." unique_id=1788354411 instance=ExtResource("2_qlvt6")]
+transform = Transform3D(1, 0, 0, 0, 0.9579378, 0.286976, 0, -0.286976, 0.9579378, 0, 0, 0)
 
-[node name="Barrel" type="MeshInstance3D" parent="Pivot" unique_id=681634092]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.8934215)
-mesh = SubResource("CylinderMesh_3uv2y")
+[node name="Camera3D" type="Camera3D" parent="Model" unique_id=516165824]
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0.43554097, 2.1570966)
 
-[node name="Camera3D" type="Camera3D" parent="Pivot" unique_id=516165824]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.742535, 1.1480157)
+[node name="Out" type="Node3D" parent="Model" unique_id=534608067]
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0.7119758, -0.4626631)
 
-[node name="Area3D" type="Area3D" parent="." unique_id=7918161]
+[node name="Area3D" type="Area3D" parent="Model" unique_id=7918161]
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1511946400]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Area3D" unique_id=1511946400]
 shape = SubResource("SphereShape3D_4c0tx")
 
-[node name="Mesh" type="Node3D" parent="." unique_id=208849259]
+[node name="ShootTimer" type="Timer" parent="." unique_id=119925235]
+wait_time = 4.0
+one_shot = true
 
-[node name="Base" type="MeshInstance3D" parent="Mesh" unique_id=280829189]
-mesh = SubResource("BoxMesh_qayxd")
-
-[node name="Wheel 1" type="MeshInstance3D" parent="Mesh" unique_id=1226793326]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.6285625, -0.15665084, 0.70151496)
-mesh = SubResource("CylinderMesh_qayxd")
-
-[node name="Wheel 2" type="MeshInstance3D" parent="Mesh" unique_id=612223641]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.6285625, -0.15665084, -0.56094056)
-mesh = SubResource("CylinderMesh_qayxd")
-
-[node name="Wheel 3" type="MeshInstance3D" parent="Mesh" unique_id=1583817669]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.58004504, -0.15665084, 0.70151496)
-mesh = SubResource("CylinderMesh_qayxd")
-
-[node name="Wheel 4" type="MeshInstance3D" parent="Mesh" unique_id=1362836257]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.58004504, -0.15665084, -0.56094056)
-mesh = SubResource("CylinderMesh_qayxd")
-
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Model/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Model/Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

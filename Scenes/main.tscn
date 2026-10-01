@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://86iqaqfdo5kk" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://br2dwecic02pk" path="res://Scenes/cannon.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cffie1mdbifgm" path="res://Scenes/ladder.tscn" id="3_8gbba"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gbba"]
 albedo_color = Color(0.49019608, 0.49019608, 0.49019608, 1)
@@ -30,6 +31,7 @@ volumetric_fog_enabled = true
 [node name="Main" type="Node3D" unique_id=1186984942]
 
 [node name="Floor" type="Node3D" parent="." unique_id=2012811705]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.6483755, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1883332614]
 mesh = SubResource("BoxMesh_7u77a")
@@ -39,11 +41,22 @@ mesh = SubResource("BoxMesh_7u77a")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=127961595]
 shape = SubResource("BoxShape3D_7u77a")
 
+[node name="Floor2" type="Node3D" parent="." unique_id=1032938668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66070557, 24.95776)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2" unique_id=498782530]
+mesh = SubResource("BoxMesh_7u77a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2" unique_id=1196970910]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D" unique_id=30237998]
+shape = SubResource("BoxShape3D_7u77a")
+
 [node name="Player" parent="." unique_id=1962825026 instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1784222, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1784222, 24.38574)
 
 [node name="Cannon" parent="." unique_id=1252306198 instance=ExtResource("2_bo1nx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5070851, -11.679779)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.868624, -11.679779)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075486805]
 transform = Transform3D(1, 0, 0, 0, 0.52991927, 0.8480481, 0, -0.8480481, 0.52991927, 0, 17.70194, 0)
@@ -51,3 +64,8 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=704008257]
 environment = SubResource("Environment_jjvhh")
+
+[node name="Bullets" type="Node3D" parent="." unique_id=1849115264]
+
+[node name="Ladder" parent="." unique_id=1682401452 instance=ExtResource("3_8gbba")]
+transform = Transform3D(-0.0105590485, 0, -0.99994427, 0, 1, 0, 0.99994427, 0, -0.0105590485, 0, 1.414818, 12.601361)
