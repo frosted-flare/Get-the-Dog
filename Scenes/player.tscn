@@ -17,3 +17,21 @@ mesh = SubResource("CapsuleMesh_v0iea")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=694327252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73910904, -0.48688865)
+
+[node name="UI" type="CanvasLayer" parent="Camera3D" unique_id=461760537]
+visible = false
+
+[node name="Label" type="Label" parent="Camera3D/UI" unique_id=2055747752]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -49.0
+offset_right = 70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "Press E to interact
+"

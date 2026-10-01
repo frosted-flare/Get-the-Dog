@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bv30t6gci7mf4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_10215"]
+radius = 0.25
+height = 0.5
+
+[node name="CannonBall" type="Node3D" unique_id=15974512]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2133899534]
+mesh = SubResource("SphereMesh_10215")
