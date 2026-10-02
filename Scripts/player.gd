@@ -15,6 +15,7 @@ const mouse_sensitivity_y = 1
 @export var descending = false
 @export var holding_food = false
 @export var speed = 10
+@export var quick_time = false
 
 var cannon_interacting = false
 
@@ -47,7 +48,10 @@ func _physics_process(delta: float) -> void:
 	# Handle shoot.
 	if Input.is_action_just_pressed("Fire") and holding_food == true and cannon_interacting == false:
 		food_box.fire()
-		
+	# Handle quicktime.
+	if Input.is_action_just_pressed("Fire") and quick_time == true:
+		$Camera3D/UI/QuickTime.hide()
+	
 	if Input.is_action_just_pressed("Interact") and cannon_interacting == true:
 		$Camera3D.current = true
 		cannon.find_child("Model").find_child("Camera3D").current = false

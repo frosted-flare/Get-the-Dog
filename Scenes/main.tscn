@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://btebwo0tyxevb" path="res://Scenes/dog.tscn" id="6_21xkr"]
 [ext_resource type="Script" uid="uid://u05lpkwmexfr" path="res://Scripts/water.gd" id="7_6bp64"]
 [ext_resource type="Script" uid="uid://c6xqcic14qpmp" path="res://Scripts/static_body_3d_2.gd" id="7_344ge"]
+[ext_resource type="Script" uid="uid://cgj4pkbnw4508" path="res://Scripts/quicktime_trigger.gd" id="9_ynf5e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gbba"]
 albedo_color = Color(0.18299097, 0.023310648, 0.023579773, 1)
@@ -65,6 +66,9 @@ size = Vector2(25, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6bp64"]
 size = Vector3(25, 1, 50)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_344ge"]
+radius = 12.0
 
 [node name="Main" type="Node3D" unique_id=1186984942]
 
@@ -126,7 +130,7 @@ mesh = SubResource("BoxMesh_7u77a")
 shape = SubResource("BoxShape3D_7u77a")
 
 [node name="Player" parent="." unique_id=1962825026 instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.03597, 112.10311)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.414173, 34.97989)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075486805]
 transform = Transform3D(1, 0, 0, 0, 0.52991927, 0.8480481, 0, -0.8480481, 0.52991927, 0, 17.70194, 0)
@@ -260,5 +264,13 @@ mesh = SubResource("PlaneMesh_6bp64")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water/MeshInstance3D/Area3D" unique_id=187314770]
 shape = SubResource("BoxShape3D_6bp64")
 
+[node name="QuickTimerTrigger" type="Area3D" parent="." unique_id=987750757]
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 9.565766, 26.254513)
+script = ExtResource("9_ynf5e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="QuickTimerTrigger" unique_id=818240607]
+shape = SubResource("SphereShape3D_344ge")
+
 [connection signal="body_entered" from="Water/MeshInstance3D/Area3D" to="Water" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Water/MeshInstance3D/Area3D" to="Water" method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="QuickTimerTrigger" to="QuickTimerTrigger" method="_on_body_entered"]
