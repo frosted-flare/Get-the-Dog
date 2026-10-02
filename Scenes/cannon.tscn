@@ -1,33 +1,33 @@
 [gd_scene format=3 uid="uid://br2dwecic02pk"]
 
 [ext_resource type="Script" uid="uid://cs32fbh6b4djf" path="res://Scripts/cannon.gd" id="1_qayxd"]
-[ext_resource type="PackedScene" uid="uid://c50ob3ykn3gw5" path="res://Assets/Canon.fbx" id="2_qlvt6"]
+[ext_resource type="PackedScene" uid="uid://cmrk1n8abga6b" path="res://Assets/Canon.glb" id="2_qlvt6"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4c0tx"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_3uv2y"]
 radius = 3.0
 
-[node name="Cannon" type="Node3D" unique_id=1252306198]
+[node name="Canon" type="Node3D" unique_id=1598722398]
 script = ExtResource("1_qayxd")
 
-[node name="Model" parent="." unique_id=1788354411 instance=ExtResource("2_qlvt6")]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, 0.286976, 0, -0.286976, 0.9579378, 0, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2064333991]
+transform = Transform3D(1, 0, 0, 0, 0.9964298, 0.08442566, 0, -0.08442566, 0.9964298, 0, 0.9650644, 0.70856297)
 
-[node name="Camera3D" type="Camera3D" parent="Model" unique_id=516165824]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0.61180985, 1.056338)
+[node name="Out" type="Node3D" parent="." unique_id=974095910]
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0.53351307, -0.68468904)
 
-[node name="Out" type="Node3D" parent="Model" unique_id=534608067]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0.7119758, -0.4626631)
-
-[node name="Area3D" type="Area3D" parent="Model" unique_id=7918161]
+[node name="Area3D" type="Area3D" parent="." unique_id=1396432379]
 transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Area3D" unique_id=1511946400]
-shape = SubResource("SphereShape3D_4c0tx")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=379438667]
+shape = SubResource("SphereShape3D_3uv2y")
 
-[node name="ShootTimer" type="Timer" parent="." unique_id=119925235]
+[node name="ShootTimer" type="Timer" parent="." unique_id=1210084147]
 wait_time = 4.0
 one_shot = true
 
-[connection signal="body_entered" from="Model/Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Model/Area3D" to="." method="_on_area_3d_body_exited"]
+[node name="Canon2" parent="." unique_id=445003472 instance=ExtResource("2_qlvt6")]
+transform = Transform3D(1, 0, 0, 0, 0.95105654, 0.309017, 0, -0.309017, 0.95105654, 0, 0, 0)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

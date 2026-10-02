@@ -9,8 +9,8 @@ var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	main_scene = $".".owner
-	player = main_scene.find_child("Player")
+	player = $"../../.."
+	main_scene = player.owner
 
 func start():
 	timer = $QuickTimeTimer
@@ -28,6 +28,9 @@ func _process(delta: float) -> void:
 			$VBoxContainer/Label.text = str(snapped(timer.time_left,0.1))
 
 func _on_quick_time_timer_timeout() -> void:
-	$".".hide()
 	if is_instance_valid(player):
-		player.quick_time = false
+		if player.quick_time == true:
+			main_scene.fail_time_event()
+		$".".hide()
+		if is_instance_valid(player):
+			player.quick_time = false

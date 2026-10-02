@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://crwjqqmqfix0b"]
 
+[ext_resource type="Script" uid="uid://dou2lyx5b7pk2" path="res://Scripts/main.gd" id="1_hptm8"]
 [ext_resource type="PackedScene" uid="uid://86iqaqfdo5kk" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://br2dwecic02pk" path="res://Scenes/cannon.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cffie1mdbifgm" path="res://Scenes/ladder.tscn" id="3_8gbba"]
@@ -15,16 +16,32 @@ albedo_color = Color(0.18299097, 0.023310648, 0.023579773, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7u77a"]
 material = SubResource("StandardMaterial3D_8gbba")
-size = Vector3(25, 0.5, 50)
+size = Vector3(20, 0.5, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7u77a"]
-size = Vector3(25, 0.5, 50)
+size = Vector3(20, 20, 120)
 
 [sub_resource type="BoxMesh" id="BoxMesh_21xkr"]
 size = Vector3(25, 4, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_21xkr"]
 size = Vector3(25, 4, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ynf5e"]
+material = SubResource("StandardMaterial3D_8gbba")
+size = Vector3(20, 20, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hptm8"]
+material = SubResource("StandardMaterial3D_8gbba")
+size = Vector3(20, 20, 15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d1ilt"]
+material = SubResource("StandardMaterial3D_8gbba")
+size = Vector3(7.5, 20, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6iyac"]
+material = SubResource("StandardMaterial3D_8gbba")
+size = Vector3(2, 2, 20)
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_bo1nx"]
 rayleigh_color = Color(0, 0.003921569, 1, 1)
@@ -54,7 +71,7 @@ noise = SubResource("FastNoiseLite_21xkr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21xkr"]
 transparency = 1
-albedo_color = Color(0.4509804, 0.627451, 1, 0.5411765)
+albedo_color = Color(0.4509804, 0.627451, 1, 0.38431373)
 roughness = 0.2
 normal_enabled = true
 normal_scale = -0.55
@@ -62,15 +79,16 @@ normal_texture = SubResource("NoiseTexture2D_6bp64")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6bp64"]
 material = SubResource("StandardMaterial3D_21xkr")
-size = Vector2(25, 50)
+size = Vector2(500, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6bp64"]
 size = Vector3(25, 1, 50)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_344ge"]
-radius = 12.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_hptm8"]
+size = Vector3(20, 10, 1)
 
 [node name="Main" type="Node3D" unique_id=1186984942]
+script = ExtResource("1_hptm8")
 
 [node name="Floor" type="Node3D" parent="." unique_id=2012811705]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.6483755, 84.5352)
@@ -96,16 +114,37 @@ mesh = SubResource("BoxMesh_21xkr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8504734, 0)
 shape = SubResource("BoxShape3D_21xkr")
 
-[node name="Floor4" type="Node3D" parent="." unique_id=870587187]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.012418, 135.66554)
+[node name="Boat" type="Node3D" parent="." unique_id=870587187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.3301277, 251.0261)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor4" unique_id=960978372]
-mesh = SubResource("BoxMesh_7u77a")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boat" unique_id=960978372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38.48105)
+mesh = SubResource("BoxMesh_ynf5e")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor4" unique_id=23378061]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Boat" unique_id=537219002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.469315)
+mesh = SubResource("BoxMesh_hptm8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D" unique_id=200915794]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Boat" unique_id=415157000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2565346, 0, 12.583817)
+mesh = SubResource("BoxMesh_d1ilt")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Boat" unique_id=547553382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.192518, 0, 12.583817)
+mesh = SubResource("BoxMesh_d1ilt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Boat" unique_id=23378061]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boat/StaticBody3D" unique_id=200915794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28.630508)
 shape = SubResource("BoxShape3D_7u77a")
+
+[node name="Mast" type="Node3D" parent="Boat" unique_id=1400157813]
+transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 10.566046, 10.02103, 12.980133)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Boat/Mast" unique_id=1862166667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.115387)
+mesh = SubResource("BoxMesh_6iyac")
 
 [node name="Floor2" type="Node3D" parent="." unique_id=1367362374]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.648, 28)
@@ -130,10 +169,11 @@ mesh = SubResource("BoxMesh_7u77a")
 shape = SubResource("BoxShape3D_7u77a")
 
 [node name="Player" parent="." unique_id=1962825026 instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.414173, 34.97989)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 17.310558, 165.61821)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075486805]
-transform = Transform3D(1, 0, 0, 0, 0.52991927, 0.8480481, 0, -0.8480481, 0.52991927, 0, 17.70194, 0)
+transform = Transform3D(-0.560639, 0.8280603, 3.6195665e-08, 0, -4.371139e-08, 1, 0.8280603, 0.560639, 2.450631e-08, 0, 17.70194, 0)
+light_energy = 3.0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=704008257]
@@ -209,8 +249,8 @@ mesh = SubResource("CylinderMesh_21xkr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D11" unique_id=417760715]
 shape = SubResource("CylinderShape3D_6bp64")
 
-[node name="Cannon" parent="Barrel/StaticBody3D11" unique_id=1252306198 instance=ExtResource("2_bo1nx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38888025, 0.96821404, -0.28568268)
+[node name="Cannon" parent="Barrel/StaticBody3D11" unique_id=445003472 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4608283, 1.0195713, -0.6439438)
 
 [node name="StaticBody3D14" type="AnimatableBody3D" parent="Barrel" unique_id=163566320]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2005434, 0, -15.319687)
@@ -253,7 +293,7 @@ mesh = SubResource("CylinderMesh_21xkr")
 shape = SubResource("CylinderShape3D_6bp64")
 
 [node name="Water" type="Node3D" parent="." unique_id=1012524252]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.588955, 84.824135)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.0347977, 170.74435)
 script = ExtResource("7_6bp64")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Water" unique_id=980293294]
@@ -265,12 +305,19 @@ mesh = SubResource("PlaneMesh_6bp64")
 shape = SubResource("BoxShape3D_6bp64")
 
 [node name="QuickTimerTrigger" type="Area3D" parent="." unique_id=987750757]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 9.565766, 26.254513)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.679993, 15.916804, 154.21925)
 script = ExtResource("9_ynf5e")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="QuickTimerTrigger" unique_id=818240607]
-shape = SubResource("SphereShape3D_344ge")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3614626, 0)
+shape = SubResource("BoxShape3D_hptm8")
+
+[node name="RandomEventTimer" type="Timer" parent="." unique_id=682047180]
+wait_time = 0.5
+
+[node name="Player_Fragments" type="Node3D" parent="." unique_id=1436467485]
 
 [connection signal="body_entered" from="Water/MeshInstance3D/Area3D" to="Water" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Water/MeshInstance3D/Area3D" to="Water" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="QuickTimerTrigger" to="QuickTimerTrigger" method="_on_body_entered"]
+[connection signal="timeout" from="RandomEventTimer" to="." method="_on_random_event_timer_timeout"]
