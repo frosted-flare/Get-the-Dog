@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://btebwo0tyxevb"]
+
+[ext_resource type="Script" uid="uid://bel0dsty655t8" path="res://Scripts/dog.gd" id="1_nvlu8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3npvw"]
+size = Vector3(0.3345337, 0.6191406, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3npvw"]
+size = Vector3(0.2, 0.2, 0.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nvlu8"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uny1q"]
+size = Vector3(0.05, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y1yv2"]
+size = Vector3(0.05, 0.2, 0.1)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1653017801]
+script = ExtResource("1_nvlu8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=59560378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035308838, 0.05078125, 0)
+shape = SubResource("BoxShape3D_3npvw")
+
+[node name="Mesh" type="Node3D" parent="." unique_id=584217058]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh" unique_id=950496540]
+mesh = SubResource("BoxMesh_3npvw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh" unique_id=11463174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20970747, 0.3450585)
+mesh = SubResource("BoxMesh_nvlu8")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh" unique_id=1051196539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11721498, -0.16306075, 0.3450585)
+mesh = SubResource("BoxMesh_uny1q")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Mesh" unique_id=1780685499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11721498, -0.16306075, -0.31147444)
+mesh = SubResource("BoxMesh_uny1q")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Mesh" unique_id=277791435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11069727, -0.16306075, 0.3450585)
+mesh = SubResource("BoxMesh_uny1q")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Mesh" unique_id=1779784234]
+transform = Transform3D(0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0, 0, 1, -0.13748461, 0.22105977, 0.44647747)
+mesh = SubResource("BoxMesh_y1yv2")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Mesh" unique_id=2081684495]
+transform = Transform3D(-0.93969256, -0.3420201, -8.742278e-08, -0.3420201, 0.93969256, 0, 8.215053e-08, 2.9900345e-08, -1, 0.11827123, 0.22105977, 0.44647747)
+mesh = SubResource("BoxMesh_y1yv2")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Mesh" unique_id=1474504806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11069727, -0.16306075, -0.31147444)
+mesh = SubResource("BoxMesh_uny1q")
+
+[node name="Dog" type="Node3D" parent="." unique_id=1764779163]
+
+[node name="Timer" type="Timer" parent="." unique_id=1622664329]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

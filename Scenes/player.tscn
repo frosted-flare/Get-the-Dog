@@ -6,6 +6,12 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v0iea"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_v0iea"]
+size = Vector3(0.2, 0.2, 0.8)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v0iea"]
+radius = 0.1
+
 [node name="Player" type="CharacterBody3D" unique_id=1962825026]
 script = ExtResource("1_v0iea")
 
@@ -35,3 +41,25 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 64
 text = "Press E to interact
 "
+
+[node name="Right_Arm" type="MeshInstance3D" parent="Camera3D" unique_id=129741026]
+transform = Transform3D(1, 0, 0, 0, 0.9395134, 0.3425121, 0, -0.3425121, 0.9395134, 0.4950791, -0.3161124, -0.3001836)
+mesh = SubResource("BoxMesh_v0iea")
+
+[node name="Throw_Position" type="Node3D" parent="Camera3D/Right_Arm" unique_id=2036275465]
+transform = Transform3D(1, 0, 0, 0, 0.9395137, -0.34251207, 0, 0.34251207, 0.9395137, 0, -0.0031960607, -0.39060712)
+
+[node name="Left_Arm" type="MeshInstance3D" parent="Camera3D" unique_id=1980034504]
+transform = Transform3D(1, 0, 0, 0, 0.9395134, 0.3425121, 0, -0.3425121, 0.9395134, -0.495, -0.316, -0.3)
+mesh = SubResource("BoxMesh_v0iea")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera3D" unique_id=1986006736]
+transform = Transform3D(1, 0, 0, 0, 0.9395135, 0.34251216, 0, -0.34251216, 0.9395135, -0.495, -0.336, -0.662)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=584517829]
+transform = Transform3D(1, 0, 0, 0, 0.9395134, 0.3425121, 0, -0.3425121, 0.9395134, 0.4950791, 0.27189183, -1.1490126)
+mass = 0.001
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=152569553]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 0, 0)
+shape = SubResource("SphereShape3D_v0iea")

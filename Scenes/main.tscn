@@ -3,7 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://86iqaqfdo5kk" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://br2dwecic02pk" path="res://Scenes/cannon.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cffie1mdbifgm" path="res://Scenes/ladder.tscn" id="3_8gbba"]
-[ext_resource type="PackedScene" uid="uid://cr7r6gomeh24q" path="res://Scenes/rope.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://b8atdbfs64ehq" path="res://Scenes/cannon_breakable.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://fnmstsegn4sl" path="res://Scenes/food.tscn" id="6_6bp64"]
+[ext_resource type="PackedScene" uid="uid://btebwo0tyxevb" path="res://Scenes/dog.tscn" id="6_21xkr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gbba"]
 albedo_color = Color(0.49019608, 0.49019608, 0.49019608, 1)
@@ -32,7 +34,7 @@ volumetric_fog_enabled = true
 [node name="Main" type="Node3D" unique_id=1186984942]
 
 [node name="Floor" type="Node3D" parent="." unique_id=2012811705]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.6483755, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.6483755, 55.077305)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1883332614]
 mesh = SubResource("BoxMesh_7u77a")
@@ -42,22 +44,44 @@ mesh = SubResource("BoxMesh_7u77a")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=127961595]
 shape = SubResource("BoxShape3D_7u77a")
 
-[node name="Floor2" type="Node3D" parent="." unique_id=1032938668]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66070557, 24.95776)
+[node name="Floor2" type="Node3D" parent="." unique_id=1367362374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.648, 28)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2" unique_id=498782530]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2" unique_id=820151537]
 mesh = SubResource("BoxMesh_7u77a")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor2" unique_id=1196970910]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2" unique_id=383219712]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D" unique_id=30237998]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D" unique_id=34691175]
+shape = SubResource("BoxShape3D_7u77a")
+
+[node name="Floor3" type="Node3D" parent="." unique_id=1617489505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.648, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor3" unique_id=735356358]
+mesh = SubResource("BoxMesh_7u77a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor3" unique_id=2024144700]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D" unique_id=1957605933]
+shape = SubResource("BoxShape3D_7u77a")
+
+[node name="Start" type="Node3D" parent="." unique_id=138016929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6924648, 79.518936)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Start" unique_id=1079412810]
+mesh = SubResource("BoxMesh_7u77a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Start" unique_id=2099750388]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Start/StaticBody3D" unique_id=1793677524]
 shape = SubResource("BoxShape3D_7u77a")
 
 [node name="Player" parent="." unique_id=1962825026 instance=ExtResource("1_jjgbg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1784222, 24.38574)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.913589, 75.52138)
 
 [node name="Cannon" parent="." unique_id=1252306198 instance=ExtResource("2_bo1nx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.868624, -11.679779)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.868624, 26.89757)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075486805]
 transform = Transform3D(1, 0, 0, 0, 0.52991927, 0.8480481, 0, -0.8480481, 0.52991927, 0, 17.70194, 0)
@@ -69,7 +93,13 @@ environment = SubResource("Environment_jjvhh")
 [node name="Bullets" type="Node3D" parent="." unique_id=1849115264]
 
 [node name="Ladder" parent="." unique_id=1682401452 instance=ExtResource("3_8gbba")]
-transform = Transform3D(-0.0105590485, 0, -0.99994427, 0, 1, 0, 0.99994427, 0, -0.0105590485, 0, 1.414818, 12.601361)
+transform = Transform3D(-0.0105590485, 0, -0.99994427, 0, 1, 0, 0.99994427, 0, -0.0105590485, 0, 1.414818, 67.7105)
 
-[node name="Rope" parent="." unique_id=578499675 instance=ExtResource("4_jjvhh")]
-transform = Transform3D(0.7872795, -0.6165963, 0, 0.6165963, 0.7872795, 0, 0, 0, 1, 0, 5.448205, 17.19406)
+[node name="Cannon_Breakable" parent="." unique_id=1377443331 instance=ExtResource("4_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 11.0082035, 19.305786)
+
+[node name="CharacterBody3D" parent="." unique_id=1653017801 instance=ExtResource("6_21xkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4777116, 12.05634, 0)
+
+[node name="Food" parent="." unique_id=188544478 instance=ExtResource("6_6bp64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45494187, 9.391505, 0)

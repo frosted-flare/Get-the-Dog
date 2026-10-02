@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b8atdbfs64ehq"]
+
+[ext_resource type="Script" uid="uid://gluseem0iugw" path="res://Scripts/Breakable.gd" id="1_1d8ht"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1d8ht"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fjqwh"]
+material = SubResource("StandardMaterial3D_1d8ht")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1d8ht"]
+height = 0.2
+radius = 1.0
+
+[node name="Cannon_Breakable" type="Node3D" unique_id=1377443331]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=134859724]
+mesh = SubResource("CylinderMesh_fjqwh")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=187911281]
+script = ExtResource("1_1d8ht")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1098794566]
+shape = SubResource("CylinderShape3D_1d8ht")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

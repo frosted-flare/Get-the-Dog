@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b1j2r87ofbjjb"]
+
+[ext_resource type="Script" uid="uid://cdvb88t3snxx8" path="res://Scripts/food_object.gd" id="1_do4pt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aasb4"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_aasb4"]
+material = SubResource("StandardMaterial3D_aasb4")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aasb4"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="FoodObject" type="RigidBody3D" unique_id=1538441136]
+script = ExtResource("1_do4pt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2133899534]
+mesh = SubResource("BoxMesh_aasb4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=268688812]
+shape = SubResource("BoxShape3D_aasb4")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=923043053]
+target_position = Vector3(0, -0.1, 0)

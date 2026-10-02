@@ -8,16 +8,19 @@ const mouse_sensitivity_x = 1
 const mouse_sensitivity_y = 1
 
 @export var able_to_interact_with_cannon = false
+@export var able_to_interact_with_food = false
 @export var able_to_climb = false
 @export var able_to_descend = false
 @export var ladder = false
 @export var climbing = false
 @export var descending = false
+@export var holding_food = false
 
 var cannon_interacting = false
 
 var main_scene
 var cannon 
+var food_box
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -26,6 +29,7 @@ func _ready():
 	
 	$".".rotation.y = 0
 	$Camera3D.rotation.x = 0
+	food_box = main_scene.find_child("Food")
 	
 func _physics_process(delta: float) -> void:
 	
@@ -40,18 +44,25 @@ func _physics_process(delta: float) -> void:
 	# Handle shoot.
 	if Input.is_action_just_pressed("Fire") and cannon_interacting == true:
 		cannon.fire()
+	# Handle shoot.
+	if Input.is_action_just_pressed("Fire") and holding_food == true:
+		food_box.fire()
 		
 	if Input.is_action_just_pressed("Interact") and cannon_interacting == true:
 		$Camera3D.current = true
 		cannon.find_child("Model").find_child("Camera3D").current = false
 		cannon_interacting = false
-				
+		$".".show()
+		$"../Food".show()
+
 	elif Input.is_action_just_pressed("Interact") and able_to_interact_with_cannon == true:
 		$Camera3D.current = false
 		cannon.find_child("Model").find_child("Camera3D").current = true
 		cannon_interacting = true
 		$Camera3D/UI.visible = false
-				
+		$".".hide()
+		$"../Food".hide()
+
 	if Input.is_action_just_pressed("Interact") and able_to_climb == true and not ladder is bool:
 		climbing = true
 		var move_tween = create_tween()
@@ -63,8 +74,10 @@ func _physics_process(delta: float) -> void:
 		var move_tween = create_tween()
 		move_tween.tween_property($".","global_position",ladder.find_child("EndClimbPoint").global_position,0.25)
 		$Camera3D/UI.visible = false
-
-	
+		
+	if Input.is_action_just_pressed("Interact") and able_to_interact_with_food == true:
+		holding_food = true
+		$Camera3D/RemoteTransform3D.remote_path = food_box.get_path()
 	if cannon_interacting == false and climbing == false and descending == false:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
@@ -80,14 +93,14 @@ func _physics_process(delta: float) -> void:
 
 	elif climbing == false and descending == false:
 		if Input.is_action_pressed("Left"):
-			cannon.rotation.y += 0.01
+			cannon.rotation.y += 0.3 * delta
 		elif Input.is_action_pressed("Right"):
-			cannon.rotation.y -= 0.01
+			cannon.rotation.y -= 0.3 * delta
 		if Input.is_action_pressed("Foward"):
-			cannon.rotation.x += 0.01
+			cannon.rotation.x += 0.3 * delta
 			cannon.rotation.x = clamp(cannon.rotation.x,-0.6,0.4)
 		elif Input.is_action_pressed("Backwards"):
-			cannon.rotation.x -= 0.01
+			cannon.rotation.x -= 0.3 * delta
 			cannon.rotation.x = clamp(cannon.rotation.x,-0.6,0.4)
 	elif climbing == true:
 		$".".velocity.y = 2
@@ -99,7 +112,7 @@ func _physics_process(delta: float) -> void:
 		$".".velocity.x = 0
 		$".".velocity.z = 0
 		move_and_slide()
-
+	
 func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:
@@ -107,6 +120,3 @@ func _input(event: InputEvent) -> void:
 			$".".rotation.y -= event.relative.x / 1000
 			$Camera3D.rotation.x -= event.relative.y / 1000
 			$Camera3D.rotation.x = clamp($Camera3D.rotation.x,-0.85,0.75)
-		
-	
-	

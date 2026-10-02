@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://fnmstsegn4sl"]
+
+[ext_resource type="Script" uid="uid://c1sygtampjeu8" path="res://Scripts/food.gd" id="1_j4qko"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_i36i8"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4qko"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_i36i8")
+
+[sub_resource type="BoxMesh" id="BoxMesh_fhto3"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_j4qko")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h4kkx"]
+radius = 5.0
+
+[node name="Food" type="Node3D" unique_id=188544478]
+script = ExtResource("1_j4qko")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=193907942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("BoxMesh_fhto3")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1133154086]
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, -0.25, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=813533081]
+shape = SubResource("SphereShape3D_h4kkx")
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=915969689]
+one_shot = true
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1345177760]
+
+[node name="Label" type="Label" parent="SubViewport" unique_id=2106293013]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "DOG FOOD
+"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
