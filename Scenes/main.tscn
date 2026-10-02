@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://86iqaqfdo5kk" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://br2dwecic02pk" path="res://Scenes/cannon.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://cffie1mdbifgm" path="res://Scenes/ladder.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://cr7r6gomeh24q" path="res://Scenes/rope.tscn" id="4_jjvhh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gbba"]
 albedo_color = Color(0.49019608, 0.49019608, 0.49019608, 1)
@@ -69,3 +70,6 @@ environment = SubResource("Environment_jjvhh")
 
 [node name="Ladder" parent="." unique_id=1682401452 instance=ExtResource("3_8gbba")]
 transform = Transform3D(-0.0105590485, 0, -0.99994427, 0, 1, 0, 0.99994427, 0, -0.0105590485, 0, 1.414818, 12.601361)
+
+[node name="Rope" parent="." unique_id=578499675 instance=ExtResource("4_jjvhh")]
+transform = Transform3D(0.7872795, -0.6165963, 0, 0.6165963, 0.7872795, 0, 0, 0, 1, 0, 5.448205, 17.19406)

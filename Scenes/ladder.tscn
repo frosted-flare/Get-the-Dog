@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cffie1mdbifgm"]
 
-[ext_resource type="Script" uid="uid://1egaqyw3i2rn" path="res://Scenes/ladder.gd" id="1_75hc7"]
+[ext_resource type="Script" uid="uid://1egaqyw3i2rn" path="res://Scripts/ladder.gd" id="1_75hc7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ly8pi"]
 size = Vector3(0.2, 0.2, 1)

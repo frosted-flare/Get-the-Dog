@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://cr7r6gomeh24q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_atpgl"]
+radius = 0.05
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atpgl"]
+albedo_color = Color(0.39607844, 0.2627451, 0.12941177, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_aw0jv"]
+material = SubResource("StandardMaterial3D_atpgl")
+radius = 0.05
+height = 0.6
+
+[node name="Rope" type="Node3D" unique_id=578499675]
+
+[node name="Segment1" type="Node3D" parent="." unique_id=1862335160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Segment1" unique_id=1767666344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+node_b = NodePath("../../Segment2/RigidBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Segment1" unique_id=1527877011]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Segment1/StaticBody3D" unique_id=691173240]
+shape = SubResource("CapsuleShape3D_atpgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Segment1/StaticBody3D" unique_id=1506453337]
+mesh = SubResource("CapsuleMesh_aw0jv")
+
+[node name="Segment2" type="Node3D" parent="." unique_id=865642367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Segment2" unique_id=521859808]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Segment2/RigidBody3D" unique_id=1356612126]
+shape = SubResource("CapsuleShape3D_atpgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Segment2/RigidBody3D" unique_id=1866783512]
+mesh = SubResource("CapsuleMesh_aw0jv")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Segment2" unique_id=976973661]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../../Segment3/RigidBody3D")
+
+[node name="Segment3" type="Node3D" parent="." unique_id=1665599837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Segment3" unique_id=219769340]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Segment3/RigidBody3D" unique_id=318818167]
+shape = SubResource("CapsuleShape3D_atpgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Segment3/RigidBody3D" unique_id=1758878356]
+mesh = SubResource("CapsuleMesh_aw0jv")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Segment3" unique_id=558734100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../../Segment4/RigidBody3D")
+
+[node name="Segment4" type="Node3D" parent="." unique_id=680288943]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Segment4" unique_id=714290119]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Segment4/RigidBody3D" unique_id=657504194]
+shape = SubResource("CapsuleShape3D_atpgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Segment4/RigidBody3D" unique_id=1205329837]
+mesh = SubResource("CapsuleMesh_aw0jv")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Segment4" unique_id=217119134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../../Segment5/RigidBody3D")
+
+[node name="Segment5" type="Node3D" parent="." unique_id=53564643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Segment5" unique_id=696782260]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Segment5/RigidBody3D" unique_id=1481874718]
+shape = SubResource("CapsuleShape3D_atpgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Segment5/RigidBody3D" unique_id=1522516299]
+mesh = SubResource("CapsuleMesh_aw0jv")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Segment5" unique_id=1405222998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../../Segment6/RigidBody3D")
+
+[node name="Segment6" type="Node3D" parent="." unique_id=400930478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Segment6" unique_id=546371761]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Segment6/RigidBody3D" unique_id=1559400602]
+shape = SubResource("CapsuleShape3D_atpgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Segment6/RigidBody3D" unique_id=1622176294]
+mesh = SubResource("CapsuleMesh_aw0jv")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Segment6" unique_id=1988767373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../../Segment7/RigidBody3D")
+
+[node name="Segment7" type="Node3D" parent="." unique_id=1200983142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Segment7" unique_id=1230274361]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Segment7/RigidBody3D" unique_id=311192580]
+shape = SubResource("CapsuleShape3D_atpgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Segment7/RigidBody3D" unique_id=838831484]
+mesh = SubResource("CapsuleMesh_aw0jv")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Segment7" unique_id=1499262140]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../../Segment8/RigidBody3D")
+
+[node name="Segment8" type="Node3D" parent="." unique_id=1277876193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Segment8" unique_id=1059805305]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Segment8/RigidBody3D" unique_id=620993222]
+shape = SubResource("CapsuleShape3D_atpgl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Segment8/RigidBody3D" unique_id=952983656]
+mesh = SubResource("CapsuleMesh_aw0jv")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Segment8" unique_id=856690182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+node_a = NodePath("../RigidBody3D")
+node_b = NodePath("../../Segment3/RigidBody3D")
