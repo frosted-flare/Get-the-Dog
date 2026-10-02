@@ -9,6 +9,9 @@
 [sub_resource type="BoxMesh" id="BoxMesh_v0iea"]
 size = Vector3(0.2, 0.2, 0.8)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_cvnsp"]
+radius = 0.1
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_v0iea"]
 radius = 0.1
 
@@ -48,6 +51,15 @@ mesh = SubResource("BoxMesh_v0iea")
 
 [node name="Throw_Position" type="Node3D" parent="Camera3D/Right_Arm" unique_id=2036275465]
 transform = Transform3D(1, 0, 0, 0, 0.9395137, -0.34251207, 0, 0.34251207, 0.9395137, 0, -0.0031960607, -0.39060712)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Camera3D/Right_Arm" unique_id=2074794536]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 0.107530534, -0.42037034)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Right_Arm/RigidBody3D" unique_id=59320924]
+shape = SubResource("SphereShape3D_cvnsp")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Camera3D/Right_Arm/RigidBody3D" unique_id=169428303]
+node_a = NodePath("..")
 
 [node name="Left_Arm" type="MeshInstance3D" parent="Camera3D" unique_id=1980034504]
 transform = Transform3D(1, 0, 0, 0, 0.9395134, 0.3425121, 0, -0.3425121, 0.9395134, -0.495, -0.316, -0.3)

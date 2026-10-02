@@ -78,62 +78,6 @@ mesh = SubResource("BoxMesh_75hc7")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh/Part4" unique_id=478038596]
 mesh = SubResource("BoxMesh_75hc7")
 
-[node name="Part5" type="Node3D" parent="Mesh" unique_id=1059108431]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -0.6)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh/Part5" unique_id=357052393]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
-mesh = SubResource("BoxMesh_ly8pi")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh/Part5" unique_id=255725568]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
-mesh = SubResource("BoxMesh_75hc7")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh/Part5" unique_id=1557490587]
-mesh = SubResource("BoxMesh_75hc7")
-
-[node name="Part6" type="Node3D" parent="Mesh" unique_id=2061775222]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -0.6)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh/Part6" unique_id=54643824]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
-mesh = SubResource("BoxMesh_ly8pi")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh/Part6" unique_id=1545092453]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
-mesh = SubResource("BoxMesh_75hc7")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh/Part6" unique_id=183199682]
-mesh = SubResource("BoxMesh_75hc7")
-
-[node name="Part7" type="Node3D" parent="Mesh" unique_id=225740705]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -0.6)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh/Part7" unique_id=1542461119]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
-mesh = SubResource("BoxMesh_ly8pi")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh/Part7" unique_id=1570573153]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
-mesh = SubResource("BoxMesh_75hc7")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh/Part7" unique_id=1998313852]
-mesh = SubResource("BoxMesh_75hc7")
-
-[node name="Part8" type="Node3D" parent="Mesh" unique_id=255659152]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -0.6)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh/Part8" unique_id=422611782]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
-mesh = SubResource("BoxMesh_ly8pi")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh/Part8" unique_id=1671526161]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
-mesh = SubResource("BoxMesh_75hc7")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh/Part8" unique_id=2052555472]
-mesh = SubResource("BoxMesh_75hc7")
-
 [node name="Start" type="Area3D" parent="." unique_id=358212469]
 transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0, 0)
 
@@ -147,13 +91,13 @@ transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378
 shape = SubResource("SphereShape3D_fnw1j")
 
 [node name="End" type="Area3D" parent="." unique_id=1133841572]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 7, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 5.3687506, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="End" unique_id=965063996]
 shape = SubResource("SphereShape3D_fc354")
 
 [node name="EndToLeave" type="Area3D" parent="." unique_id=1353037888]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 7, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 3.2374086, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EndToLeave" unique_id=647578692]
 shape = SubResource("SphereShape3D_fnw1j")
@@ -165,10 +109,10 @@ transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378
 transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 1.0464896, 1.7161148, 0)
 
 [node name="EndPoint" type="Node3D" parent="." unique_id=1774011310]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, -0.8210919, 9.698914, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, -2.4518158, 8.466893, 0)
 
 [node name="EndClimbPoint" type="Node3D" parent="." unique_id=1032130988]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 1.046, 8.408, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 1.046, 3.2492118, 0)
 
 [connection signal="body_entered" from="Start" to="." method="_on_start_body_entered"]
 [connection signal="body_exited" from="Start" to="." method="_on_start_body_exited"]

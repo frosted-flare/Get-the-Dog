@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SaveDog"
-run/main_scene="uid://crwjqqmqfix0b"
+run/main_scene="uid://cs6sq3ryqa4gc"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,8 +19,12 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
+window/size/mode=1
 window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="SaveDog"
 
 [input]
 
@@ -67,8 +71,10 @@ Interact={
 
 [physics]
 
-common/physics_ticks_per_second=120
+common/physics_ticks_per_second=240
 3d/physics_engine="Jolt Physics"
+3d/solver/solver_iterations=64
+2d/solver/solver_iterations=64
 common/physics_interpolation=true
 
 [rendering]

@@ -63,4 +63,15 @@ mesh = SubResource("BoxMesh_uny1q")
 wait_time = 0.1
 autostart = true
 
+[node name="TurnTimer" type="Timer" parent="." unique_id=100276062]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="MoveTimer" type="Timer" parent="." unique_id=650441017]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

@@ -1,0 +1,217 @@
+[gd_scene format=3 uid="uid://cs6sq3ryqa4gc"]
+
+[ext_resource type="Script" uid="uid://dph3ihv0m6fpn" path="res://Scripts/menu.gd" id="1_1rerr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4yt8"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rerr"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+
+[sub_resource type="Gradient" id="Gradient_1rerr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xhh6f"]
+gradient = SubResource("Gradient_1rerr")
+
+[sub_resource type="Gradient" id="Gradient_xhh6f"]
+colors = PackedColorArray(0.09803922, 0.09803922, 0.09803922, 1, 0.09803922, 0.09803922, 0.09803922, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cayip"]
+gradient = SubResource("Gradient_xhh6f")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhh6f"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Menu" type="Node2D" unique_id=365552721]
+script = ExtResource("1_1rerr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1277456596]
+
+[node name="Main" type="Panel" parent="CanvasLayer" unique_id=437374334]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main" unique_id=1144378177]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -236.0
+offset_right = 480.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Play" type="Button" parent="CanvasLayer/Main/VBoxContainer" unique_id=1925801027]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
+text = "Play
+"
+
+[node name="Settings" type="Button" parent="CanvasLayer/Main/VBoxContainer" unique_id=50732]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
+text = "Settings
+
+"
+
+[node name="Credits" type="Button" parent="CanvasLayer/Main/VBoxContainer" unique_id=1753402512]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
+text = "Credits
+
+"
+
+[node name="Exit" type="Button" parent="CanvasLayer/Main/VBoxContainer" unique_id=1001567778]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
+text = "Exit
+
+"
+
+[node name="Settings" type="Panel" parent="CanvasLayer" unique_id=1582258569]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings" unique_id=1793508444]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -236.0
+offset_right = 480.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Fullscreen" type="CheckBox" parent="CanvasLayer/Settings/VBoxContainer" unique_id=1166034096]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_icons/checked = SubResource("GradientTexture2D_xhh6f")
+theme_override_icons/unchecked = SubResource("GradientTexture2D_cayip")
+text = "Fullscreen
+"
+
+[node name="Return" type="Button" parent="CanvasLayer/Settings/VBoxContainer" unique_id=880362344]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
+text = "Return
+
+
+
+"
+
+[node name="Credits" type="Panel" parent="CanvasLayer" unique_id=1190485824]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Credits" unique_id=1184915129]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -236.0
+offset_right = 480.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1705022113]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
+text = "This excellent game was 
+made by the amazing team of:"
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=382733423]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
+text = "Game Designer: Leftchester"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1649390998]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
+text = "Modeler: a.mathyas"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1397602670]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
+text = "Composer: BATATA ALADA"
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1383596125]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
+text = "Programmer: SWX"
+vertical_alignment = 1
+
+[node name="CreditsReturn" type="Button" parent="CanvasLayer/Credits/VBoxContainer" unique_id=198801459]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
+text = "Return
+
+
+
+"
+
+[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Settings/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="CanvasLayer/Settings/VBoxContainer/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/CreditsReturn" to="." method="_on_credits_return_pressed"]

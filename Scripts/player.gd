@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
+const SPEED = 5.0*2
 const JUMP_VELOCITY = 4.5
 
 const mouse_sensitivity_x = 1
@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Fire") and cannon_interacting == true:
 		cannon.fire()
 	# Handle shoot.
-	if Input.is_action_just_pressed("Fire") and holding_food == true:
+	if Input.is_action_just_pressed("Fire") and holding_food == true and cannon_interacting == false:
 		food_box.fire()
 		
 	if Input.is_action_just_pressed("Interact") and cannon_interacting == true:
@@ -78,6 +78,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Interact") and able_to_interact_with_food == true:
 		holding_food = true
 		$Camera3D/RemoteTransform3D.remote_path = food_box.get_path()
+		
 	if cannon_interacting == false and climbing == false and descending == false:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
