@@ -69,5 +69,4 @@ func _on_turn_timer_timeout() -> void:
 		direction.z += randf_range(-0.7,0.7)
 		var turn_tween = create_tween()
 		var turn_angle = $".".global_transform.basis.z.angle_to(direction)
-
 		turn_tween.tween_property($".","rotation:y",atan2(direction.x,direction.z),randf_range(0.2,0.5))

@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://86iqaqfdo5kk"]
 
 [ext_resource type="Script" uid="uid://bftwc00pxg4xn" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://cjvdas1x3dyjh" path="res://Assets/PlayerCharacter.glb" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://dvll6ffmi5eho" path="res://Scripts/quick_time.gd" id="2_cvnsp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f60y1"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_v0iea"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0iea"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -23,17 +22,13 @@ size = Vector3(0.2, 0.2, 0.8)
 [sub_resource type="SphereShape3D" id="SphereShape3D_cvnsp"]
 radius = 0.1
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_v0iea"]
-radius = 0.1
-
 [node name="Player" type="CharacterBody3D" unique_id=1962825026]
 script = ExtResource("1_v0iea")
 
+[node name="PlayerCharacter" parent="." unique_id=1474071098 instance=ExtResource("2_6t5aa")]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1827617054]
 shape = SubResource("CapsuleShape3D_f60y1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1307162967]
-mesh = SubResource("CapsuleMesh_v0iea")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=694327252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73910904, -0.48688865)
@@ -64,6 +59,7 @@ text = "Press E to interact
 "
 
 [node name="QuickTime" type="Panel" parent="Camera3D/UI" unique_id=781900047]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -92,7 +88,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="QuickTimeTimer" type="Timer" parent="Camera3D/UI/QuickTime" unique_id=1671749739]
-wait_time = 2.0
+wait_time = 10.0
 one_shot = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera3D/UI/QuickTime" unique_id=15493699]
@@ -102,10 +98,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -136.5
-offset_right = 256.0
-offset_bottom = 136.5
+offset_left = -788.0
+offset_top = -119.0
+offset_right = 788.0
+offset_bottom = 431.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -113,6 +109,25 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 200
 text = "2.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 1
+
+[node name="QuickTimeText" type="Label" parent="Camera3D/UI/QuickTime" unique_id=1487170889]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -788.0
+offset_top = 271.0
+offset_right = 788.0
+offset_bottom = 544.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Dodge the wood"
 horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
@@ -140,12 +155,6 @@ mesh = SubResource("BoxMesh_v0iea")
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera3D" unique_id=1986006736]
 transform = Transform3D(1, 0, 0, 0, 0.9395135, 0.34251216, 0, -0.34251216, 0.9395135, -0.495, -0.336, -0.662)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=584517829]
-transform = Transform3D(1, 0, 0, 0, 0.9395134, 0.3425121, 0, -0.3425121, 0.9395134, 0.4950791, 0.27189183, -1.1490126)
-mass = 0.001
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=152569553]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 0, 0)
-shape = SubResource("SphereShape3D_v0iea")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1060638923]
 
 [connection signal="timeout" from="Camera3D/UI/QuickTime/QuickTimeTimer" to="Camera3D/UI/QuickTime" method="_on_quick_time_timer_timeout"]

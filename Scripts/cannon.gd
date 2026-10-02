@@ -18,7 +18,7 @@ func fire():
 	if reload == false:
 		var direction = -global_transform.basis.z
 		var ball = cannon_ball.instantiate()
-		ball.global_position = $Model/Out.global_position
+		ball.global_position = $Out.global_position
 		main_scene.find_child("Bullets").add_child(ball)
 		ball.apply_central_impulse(direction * cannon_strength)
 		

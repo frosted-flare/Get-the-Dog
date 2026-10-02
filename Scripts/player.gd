@@ -18,6 +18,7 @@ const mouse_sensitivity_y = 1
 @export var quick_time = false
 
 var cannon_interacting = false
+var dodging = false
 
 var main_scene
 var cannon 
@@ -27,8 +28,9 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	main_scene = $".".owner
 	cannon = main_scene.find_child("Cannon")
+	print(cannon.name)
 	
-	$".".rotation.y = 0
+	$".".rotation.y = 3
 	$Camera3D.rotation.x = 0
 	food_box = main_scene.find_child("Food")
 	
@@ -37,7 +39,9 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	else:
+		dodging = false
+			
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -51,17 +55,19 @@ func _physics_process(delta: float) -> void:
 	# Handle quicktime.
 	if Input.is_action_just_pressed("Fire") and quick_time == true:
 		$Camera3D/UI/QuickTime.hide()
-	
+		quick_time = false
+		main_scene.pass_time_event()
+		
 	if Input.is_action_just_pressed("Interact") and cannon_interacting == true:
 		$Camera3D.current = true
-		cannon.find_child("Model").find_child("Camera3D").current = false
+		cannon.find_child("Camera3D").current = false
 		cannon_interacting = false
 		$".".show()
 		$"../Food".show()
 
 	elif Input.is_action_just_pressed("Interact") and able_to_interact_with_cannon == true:
 		$Camera3D.current = false
-		cannon.find_child("Model").find_child("Camera3D").current = true
+		cannon.find_child("Camera3D").current = true
 		cannon_interacting = true
 		$Camera3D/UI.visible = false
 		$".".hide()
@@ -83,7 +89,7 @@ func _physics_process(delta: float) -> void:
 		holding_food = true
 		$Camera3D/RemoteTransform3D.remote_path = food_box.get_path()
 		
-	if cannon_interacting == false and climbing == false and descending == false:
+	if cannon_interacting == false and climbing == false and descending == false and dodging == false:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var input_dir := Input.get_vector("Left", "Right", "Foward", "Backwards")
@@ -95,7 +101,9 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, speed)
 			velocity.z = move_toward(velocity.z, 0, speed)
 		move_and_slide()
-
+	if dodging == true:
+		move_and_slide()
+	
 	elif climbing == false and descending == false:
 		if Input.is_action_pressed("Left"):
 			cannon.rotation.y += 0.3 * delta
@@ -124,4 +132,12 @@ func _input(event: InputEvent) -> void:
 		if not cannon_interacting:
 			$".".rotation.y -= event.relative.x / 1000
 			$Camera3D.rotation.x -= event.relative.y / 1000
-			$Camera3D.rotation.x = clamp($Camera3D.rotation.x,-0.85,0.75)
+			$Camera3D.rotation.x = clamp($Camera3D.rotation.x,-0.85,1.5)
+			
+			
+func dodge():
+	dodging = true
+	var direction = transform.basis.z
+	velocity = Vector3(0,0,0)
+	velocity += direction * 10
+	velocity.y += 5

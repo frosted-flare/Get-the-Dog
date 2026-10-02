@@ -7,11 +7,11 @@ var player
 func _ready() -> void:
 	main_scene = $".".owner
 	player = main_scene.find_child("Player")
+	$"../RandomEventTimer".start()
+	
+func _process(delta: float) -> void:
+	pass
 	
 func _on_body_entered(body: Node3D) -> void:
 	if body.name == "Player":
-		var player = body
-		var player_ui = body.find_child("Camera3D").find_child("UI")
-		
-		player_ui.find_child("QuickTime").start()
-		player.quick_time = true
+		main_scene.quick_time_event()
