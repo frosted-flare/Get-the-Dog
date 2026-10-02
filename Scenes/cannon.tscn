@@ -13,7 +13,7 @@ script = ExtResource("1_qayxd")
 transform = Transform3D(1, 0, 0, 0, 0.9579378, 0.286976, 0, -0.286976, 0.9579378, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Model" unique_id=516165824]
-transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0.43554097, 2.1570966)
+transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0.61180985, 1.056338)
 
 [node name="Out" type="Node3D" parent="Model" unique_id=534608067]
 transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, 0.7119758, -0.4626631)

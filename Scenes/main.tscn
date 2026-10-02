@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b8atdbfs64ehq" path="res://Scenes/cannon_breakable.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://fnmstsegn4sl" path="res://Scenes/food.tscn" id="6_6bp64"]
 [ext_resource type="PackedScene" uid="uid://btebwo0tyxevb" path="res://Scenes/dog.tscn" id="6_21xkr"]
+[ext_resource type="Script" uid="uid://u05lpkwmexfr" path="res://Scripts/water.gd" id="7_6bp64"]
+[ext_resource type="Script" uid="uid://c6xqcic14qpmp" path="res://Scripts/static_body_3d_2.gd" id="7_344ge"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gbba"]
 albedo_color = Color(0.18299097, 0.023310648, 0.023579773, 1)
@@ -126,9 +128,6 @@ shape = SubResource("BoxShape3D_7u77a")
 [node name="Player" parent="." unique_id=1962825026 instance=ExtResource("1_jjgbg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.03597, 112.10311)
 
-[node name="Cannon" parent="." unique_id=1252306198 instance=ExtResource("2_bo1nx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8143787, 10.79214, 84.747444)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075486805]
 transform = Transform3D(1, 0, 0, 0, 0.52991927, 0.8480481, 0, -0.8480481, 0.52991927, 0, 17.70194, 0)
 shadow_enabled = true
@@ -141,12 +140,6 @@ environment = SubResource("Environment_jjvhh")
 [node name="Ladder" parent="." unique_id=1682401452 instance=ExtResource("3_8gbba")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.216466, 9.417377, 109.31958)
 
-[node name="Cannon_Breakable" parent="." unique_id=1377443331 instance=ExtResource("4_jjvhh")]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 11.943344, 75.07787)
-
-[node name="Cannon_Breakable3" parent="." unique_id=253723261 instance=ExtResource("4_jjvhh")]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, -4.8177147, 11.943344, 80.91274)
-
 [node name="CharacterBody3D" parent="." unique_id=1653017801 instance=ExtResource("6_21xkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4777116, 12.05634, 0)
 
@@ -156,25 +149,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45494187, 9.391505, 0)
 [node name="Barrel" type="Node3D" parent="." unique_id=514616893]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.823926, 86.34683)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Barrel" unique_id=2099757087]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D" unique_id=432367203]
-mesh = SubResource("CylinderMesh_21xkr")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D" unique_id=1877863211]
-shape = SubResource("CylinderShape3D_6bp64")
-
-[node name="StaticBody3D9" type="StaticBody3D" parent="Barrel" unique_id=1889706456]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.835393, 0, -1.3606262)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D9" unique_id=214268063]
-mesh = SubResource("CylinderMesh_21xkr")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D9" unique_id=118491267]
-shape = SubResource("CylinderShape3D_6bp64")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="Barrel" unique_id=780925646]
+[node name="StaticBody3D2" type="AnimatableBody3D" parent="Barrel" unique_id=1419487916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.998022, 0, 18.922836)
+script = ExtResource("7_344ge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D2" unique_id=45087120]
 mesh = SubResource("CylinderMesh_21xkr")
@@ -182,65 +159,106 @@ mesh = SubResource("CylinderMesh_21xkr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D2" unique_id=1040894249]
 shape = SubResource("CylinderShape3D_6bp64")
 
-[node name="StaticBody3D5" type="StaticBody3D" parent="Barrel" unique_id=982542508]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.540201, 0, -5.522896)
+[node name="StaticBody3D10" type="AnimatableBody3D" parent="Barrel" unique_id=1609055508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47764206, 0, -0.94384)
+script = ExtResource("7_344ge")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D5" unique_id=59122644]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D10" unique_id=19847833]
 mesh = SubResource("CylinderMesh_21xkr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D5" unique_id=374430390]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D10" unique_id=500403300]
 shape = SubResource("CylinderShape3D_6bp64")
 
-[node name="StaticBody3D6" type="StaticBody3D" parent="Barrel" unique_id=1192629713]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27594376, 0, -11.488571)
+[node name="StaticBody3D13" type="AnimatableBody3D" parent="Barrel" unique_id=475245543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1509378, 0, -11.434631)
+script = ExtResource("7_344ge")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D6" unique_id=498132718]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D13" unique_id=26255999]
 mesh = SubResource("CylinderMesh_21xkr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D6" unique_id=560311553]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D13" unique_id=1077788281]
 shape = SubResource("CylinderShape3D_6bp64")
 
-[node name="StaticBody3D7" type="StaticBody3D" parent="Barrel" unique_id=217176803]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.621354, 0, -18.965675)
+[node name="Cannon_Breakable" parent="Barrel/StaticBody3D13" unique_id=1377443331 instance=ExtResource("4_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0.1509378, 1.9703064, 0.1656723)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D7" unique_id=1845459480]
+[node name="StaticBody3D12" type="AnimatableBody3D" parent="Barrel" unique_id=1351827014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9685707, 0, -5.446968)
+script = ExtResource("7_344ge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D12" unique_id=1039332556]
 mesh = SubResource("CylinderMesh_21xkr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D7" unique_id=490521373]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D12" unique_id=385596550]
 shape = SubResource("CylinderShape3D_6bp64")
 
-[node name="StaticBody3D8" type="StaticBody3D" parent="Barrel" unique_id=609266556]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1358147, 0, -24.393402)
+[node name="Cannon_Breakable3" parent="Barrel/StaticBody3D12" unique_id=253723261 instance=ExtResource("4_jjvhh")]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0.15085602, 1.9130383, 0.012878418)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D8" unique_id=1847503830]
+[node name="StaticBody3D11" type="AnimatableBody3D" parent="Barrel" unique_id=1044009162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.708042, 0, -1.9954071)
+script = ExtResource("7_344ge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D11" unique_id=991573391]
 mesh = SubResource("CylinderMesh_21xkr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D8" unique_id=1972408503]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D11" unique_id=417760715]
 shape = SubResource("CylinderShape3D_6bp64")
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="Barrel" unique_id=1419155185]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0285454, 0, 12.395317)
+[node name="Cannon" parent="Barrel/StaticBody3D11" unique_id=1252306198 instance=ExtResource("2_bo1nx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38888025, 0.96821404, -0.28568268)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D3" unique_id=489517376]
+[node name="StaticBody3D14" type="AnimatableBody3D" parent="Barrel" unique_id=163566320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2005434, 0, -15.319687)
+script = ExtResource("7_344ge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D14" unique_id=1063914366]
 mesh = SubResource("CylinderMesh_21xkr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D3" unique_id=2091018021]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D14" unique_id=1751573703]
 shape = SubResource("CylinderShape3D_6bp64")
 
-[node name="StaticBody3D4" type="StaticBody3D" parent="Barrel" unique_id=929709390]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.076208, 0, 7.022049)
+[node name="StaticBody3D15" type="AnimatableBody3D" parent="Barrel" unique_id=1575790199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.226056, 0, -23.688507)
+script = ExtResource("7_344ge")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D4" unique_id=579961851]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D15" unique_id=1403588354]
 mesh = SubResource("CylinderMesh_21xkr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D4" unique_id=1683632388]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D15" unique_id=1551892271]
 shape = SubResource("CylinderShape3D_6bp64")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=980293294]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.249222, 85.33339)
+[node name="StaticBody3D16" type="AnimatableBody3D" parent="Barrel" unique_id=417559680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1031656, 0, 13.5887985)
+script = ExtResource("7_344ge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D16" unique_id=1003514477]
+mesh = SubResource("CylinderMesh_21xkr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D16" unique_id=783376339]
+shape = SubResource("CylinderShape3D_6bp64")
+
+[node name="StaticBody3D17" type="AnimatableBody3D" parent="Barrel" unique_id=862915528]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59837055, 0, 4.2678833)
+script = ExtResource("7_344ge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barrel/StaticBody3D17" unique_id=448613959]
+mesh = SubResource("CylinderMesh_21xkr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel/StaticBody3D17" unique_id=2035738732]
+shape = SubResource("CylinderShape3D_6bp64")
+
+[node name="Water" type="Node3D" parent="." unique_id=1012524252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.588955, 84.824135)
+script = ExtResource("7_6bp64")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Water" unique_id=980293294]
 mesh = SubResource("PlaneMesh_6bp64")
 
-[node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=1133515793]
+[node name="Area3D" type="Area3D" parent="Water/MeshInstance3D" unique_id=1133515793]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" unique_id=187314770]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/MeshInstance3D/Area3D" unique_id=187314770]
 shape = SubResource("BoxShape3D_6bp64")
+
+[connection signal="body_entered" from="Water/MeshInstance3D/Area3D" to="Water" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Water/MeshInstance3D/Area3D" to="Water" method="_on_area_3d_body_exited"]
