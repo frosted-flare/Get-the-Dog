@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://grbmro0f52mw"]
+
+[ext_resource type="PackedScene" uid="uid://h43wvv4b8ttm" path="res://Assets/Deck.glb" id="1_dyu02"]
+
+[node name="CanonLevelDesign" type="Node3D" unique_id=157163258]
+
+[node name="Deck" parent="." unique_id=1046367430 instance=ExtResource("1_dyu02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50132024, 0, -0.21832442)
