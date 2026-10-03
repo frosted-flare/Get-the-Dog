@@ -26,6 +26,9 @@ func _process(delta: float) -> void:
 		if time_elapsed-var_last_update > 0.1:
 			var_last_update = time_elapsed
 			$VBoxContainer/Label.text = str(snapped(timer.time_left,0.1))
+	
+	if is_instance_valid($"../../../SwimTimer"): # Does swim timer
+		$"../Underwater/Time".text = str(snapped($"../../../SwimTimer".time_left,0.1))
 
 func _on_quick_time_timer_timeout() -> void:
 	if is_instance_valid(player):

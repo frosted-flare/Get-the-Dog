@@ -14,6 +14,8 @@ func _on_start_body_entered(body: Node3D) -> void:
 	if body.name == "Player":
 		var player = body
 		var player_ui = body.find_child("Camera3D").find_child("UI")
+		player_ui.find_child("QuickTime").visible = false
+		player_ui.find_child("Panel").visible = true
 		player_ui.find_child("Text").text = "Press E to climb"
 		player_ui.visible = true
 		player.able_to_climb = true
@@ -26,6 +28,7 @@ func _on_start_body_exited(body: Node3D) -> void:
 		player_ui.visible = false
 		player.able_to_climb = false
 		player.ladder = false
+		player_ui.find_child("Panel").visible = false
 	
 func _on_end_to_leave_body_entered(body: Node3D) -> void:
 	if body.name == "Player":

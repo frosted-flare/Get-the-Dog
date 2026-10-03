@@ -14,6 +14,7 @@ height = 0.25
 radius = 0.25
 
 [node name="CannonBall" type="RigidBody3D" unique_id=1538441136]
+collision_layer = 8
 script = ExtResource("1_fd25l")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2133899534]
