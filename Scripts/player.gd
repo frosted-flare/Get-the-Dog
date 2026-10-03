@@ -137,7 +137,10 @@ func _input(event: InputEvent) -> void:
 			
 func dodge():
 	dodging = true
-	var direction = transform.basis.z
+	var direction = transform.basis.x
 	velocity = Vector3(0,0,0)
-	velocity += direction * 10
-	velocity.y += 5
+	if randi_range(1,2) == 1:
+		velocity += direction * -10
+	else:
+		velocity += direction * 10
+	velocity.y += 3

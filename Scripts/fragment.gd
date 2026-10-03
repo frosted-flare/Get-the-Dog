@@ -11,5 +11,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	self.global_position.x = player.global_position.x
-	self.global_position.z = player.global_position.z
+	if player.quick_time == true:
+		self.global_position.x = player.global_position.x
+		self.global_position.z = player.global_position.z
