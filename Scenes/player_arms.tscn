@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dd3xbaku0aomh"]
+
+[ext_resource type="PackedScene" uid="uid://chc3k3oa2pp5i" path="res://Assets/PlayerArms.glb" id="1_t0651"]
+
+[node name="PlayerArms2" unique_id=1810898172 instance=ExtResource("1_t0651")]
+
+[node name="PlayerArms" parent="." index="0" unique_id=52975723]
+cast_shadow = 0

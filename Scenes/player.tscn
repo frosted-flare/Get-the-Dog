@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bftwc00pxg4xn" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://cjvdas1x3dyjh" path="res://Assets/PlayerCharacter.glb" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://dvll6ffmi5eho" path="res://Scripts/quick_time.gd" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://dd3xbaku0aomh" path="res://Scenes/player_arms.tscn" id="5_fkybt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f60y1"]
 
@@ -18,12 +19,6 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t5aa"]
 bg_color = Color(0.22745098, 0.4509804, 1, 0.5411765)
-
-[sub_resource type="BoxMesh" id="BoxMesh_v0iea"]
-size = Vector3(0.2, 0.2, 0.8)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_cvnsp"]
-radius = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6t5aa"]
 radius = 0.1
@@ -170,28 +165,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
 
-[node name="Right_Arm" type="MeshInstance3D" parent="Camera3D" unique_id=129741026]
-transform = Transform3D(1, 0, 0, 0, 0.9395134, 0.3425121, 0, -0.3425121, 0.9395134, 0.4950791, -0.3161124, -0.3001836)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_v0iea")
-
-[node name="Throw_Position" type="Node3D" parent="Camera3D/Right_Arm" unique_id=2036275465]
-transform = Transform3D(1, 0, 0, 0, 0.9395137, -0.34251207, 0, 0.34251207, 0.9395137, 0, -0.0031960607, -0.39060712)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="Camera3D/Right_Arm" unique_id=2074794536]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 2.9802322e-08, 0, -2.9802322e-08, 1.0000001, 0, 0.107530534, -0.42037034)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Right_Arm/RigidBody3D" unique_id=59320924]
-shape = SubResource("SphereShape3D_cvnsp")
-
-[node name="PinJoint3D" type="PinJoint3D" parent="Camera3D/Right_Arm/RigidBody3D" unique_id=169428303]
-node_a = NodePath("..")
-
-[node name="Left_Arm" type="MeshInstance3D" parent="Camera3D" unique_id=1980034504]
-transform = Transform3D(1, 0, 0, 0, 0.9395134, 0.3425121, 0, -0.3425121, 0.9395134, -0.495, -0.316, -0.3)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_v0iea")
-
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera3D" unique_id=1986006736]
 transform = Transform3D(1, 0, 0, 0, 0.9395135, 0.34251216, 0, -0.34251216, 0.9395135, -0.495, -0.336, -0.662)
 
@@ -199,6 +172,15 @@ transform = Transform3D(1, 0, 0, 0, 0.9395135, 0.34251216, 0, -0.34251216, 0.939
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/CamArea" unique_id=222596773]
 shape = SubResource("SphereShape3D_6t5aa")
+
+[node name="Left_Arm" parent="Camera3D" unique_id=1662901491 instance=ExtResource("5_fkybt")]
+transform = Transform3D(-4.371138e-08, -1.7256831e-15, -1, -0.49067566, 0.8713423, 2.144811e-08, 0.8713423, 0.49067566, -3.8087578e-08, -0.61, -1.35, -0.44)
+
+[node name="Right_Arm" parent="Camera3D" unique_id=1810898172 instance=ExtResource("5_fkybt")]
+transform = Transform3D(-4.371138e-08, -1.7256831e-15, -1, -0.49067566, 0.8713423, 2.144811e-08, 0.8713423, 0.49067566, -3.8087578e-08, 0.495, -1.35, -0.44)
+
+[node name="ThrowPosition" type="Node3D" parent="Camera3D/Right_Arm" unique_id=1187748524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 1.4210855e-14, 1, -0.6194396, 0.7165297, 0.032982707)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1060638923]
 

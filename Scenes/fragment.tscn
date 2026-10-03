@@ -1,12 +1,23 @@
 [gd_scene format=3 uid="uid://b1s2bdrvbusmu"]
 
 [ext_resource type="Script" uid="uid://duquy32ukturb" path="res://Scripts/fragment.gd" id="1_fnwbw"]
+[ext_resource type="PackedScene" uid="uid://c4calvgxkd7d6" path="res://Assets/Debris1.glb" id="2_p68qc"]
+[ext_resource type="PackedScene" uid="uid://1litfu0drguf" path="res://Assets/Debris2.glb" id="3_rrlh5"]
+[ext_resource type="PackedScene" uid="uid://dqb6fmb8kikqo" path="res://Assets/Debris3.glb" id="4_mkcpo"]
+[ext_resource type="PackedScene" uid="uid://bisowjb4v62x" path="res://Assets/Debris4.glb" id="5_genwe"]
+[ext_resource type="PackedScene" uid="uid://d05aibudyn0q5" path="res://Assets/Debris5.glb" id="6_c5kn5"]
+[ext_resource type="PackedScene" uid="uid://707x7e08snfj" path="res://Assets/Debris6.glb" id="7_7oltg"]
+[ext_resource type="PackedScene" uid="uid://b78five1hnlcj" path="res://Assets/Debris7.glb" id="8_qrtnq"]
+[ext_resource type="PackedScene" uid="uid://cntcjg6a5e3nr" path="res://Assets/Debris8.glb" id="9_p3s0b"]
+[ext_resource type="PackedScene" uid="uid://4g1wumn8m6pu" path="res://Assets/Debris9.glb" id="10_pmt7x"]
+[ext_resource type="PackedScene" uid="uid://dwq72gx4b4nu2" path="res://Assets/Debris10.glb" id="11_ar5jo"]
+[ext_resource type="PackedScene" uid="uid://c0c1nog78hsyf" path="res://Assets/Debris11.glb" id="12_2hb2t"]
+[ext_resource type="PackedScene" uid="uid://b6vjhpvpv40y0" path="res://Assets/Debris12.glb" id="13_t8mdr"]
+[ext_resource type="PackedScene" uid="uid://drkvglfybvruu" path="res://Assets/Debris13.glb" id="14_mbd1e"]
+[ext_resource type="PackedScene" uid="uid://cvbcafugjiwdh" path="res://Assets/Debris14.glb" id="15_2te65"]
+[ext_resource type="PackedScene" uid="uid://pmoyumglx3ja" path="res://Assets/Debris15.glb" id="16_thasp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnwbw"]
-size = Vector3(3, 3, 3)
-
-[sub_resource type="PrismMesh" id="PrismMesh_6pff7"]
-size = Vector3(3, 3, 3)
 
 [node name="Fragment" type="RigidBody3D" unique_id=729870947]
 collision_layer = 4
@@ -17,11 +28,55 @@ gravity_scale = 10.0
 script = ExtResource("1_fnwbw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=143062281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1616062, 0)
 shape = SubResource("BoxShape3D_fnwbw")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=670821574]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("PrismMesh_6pff7")
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1838088961]
 target_position = Vector3(0, -0.5, 0)
+
+[node name="Fragments" type="Node3D" parent="." unique_id=1301804053]
+
+[node name="Debris1" parent="Fragments" unique_id=1460159163 instance=ExtResource("2_p68qc")]
+visible = false
+
+[node name="Debris2" parent="Fragments" unique_id=2022238824 instance=ExtResource("3_rrlh5")]
+visible = false
+
+[node name="Debris3" parent="Fragments" unique_id=1129442512 instance=ExtResource("4_mkcpo")]
+visible = false
+
+[node name="Debris4" parent="Fragments" unique_id=1759013801 instance=ExtResource("5_genwe")]
+visible = false
+
+[node name="Debris5" parent="Fragments" unique_id=182102743 instance=ExtResource("6_c5kn5")]
+visible = false
+
+[node name="Debris6" parent="Fragments" unique_id=57107578 instance=ExtResource("7_7oltg")]
+visible = false
+
+[node name="Debris7" parent="Fragments" unique_id=1317895519 instance=ExtResource("8_qrtnq")]
+visible = false
+
+[node name="Debris8" parent="Fragments" unique_id=1938064090 instance=ExtResource("9_p3s0b")]
+visible = false
+
+[node name="Debris9" parent="Fragments" unique_id=6362045 instance=ExtResource("10_pmt7x")]
+visible = false
+
+[node name="Debris10" parent="Fragments" unique_id=1093711018 instance=ExtResource("11_ar5jo")]
+visible = false
+
+[node name="Debris11" parent="Fragments" unique_id=468416370 instance=ExtResource("12_2hb2t")]
+visible = false
+
+[node name="Debris12" parent="Fragments" unique_id=1904632790 instance=ExtResource("13_t8mdr")]
+visible = false
+
+[node name="Debris13" parent="Fragments" unique_id=1985317180 instance=ExtResource("14_mbd1e")]
+visible = false
+
+[node name="Debris14" parent="Fragments" unique_id=1100045635 instance=ExtResource("15_2te65")]
+visible = false
+
+[node name="Debris15" parent="Fragments" unique_id=186401026 instance=ExtResource("16_thasp")]
+visible = false

@@ -30,7 +30,6 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	main_scene = $".".owner
 	cannon = main_scene.find_child("Cannon")
-	print(cannon.name)
 	
 	$".".rotation.y = 3
 	$Camera3D.rotation.x = 0
