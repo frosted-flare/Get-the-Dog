@@ -130,6 +130,7 @@ shape = SubResource("BoxShape3D_7u77a")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.513222)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor/Node3D" unique_id=2011650069]
+collision_mask = 3
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Floor/Node3D/StaticBody3D" unique_id=150673290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8355503, 0)
@@ -159,6 +160,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.192518, 0, 12.583817)
 mesh = SubResource("BoxMesh_d1ilt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Boat" unique_id=23378061]
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Boat/StaticBody3D" unique_id=200915794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28.630508)
@@ -183,7 +185,17 @@ mesh = SubResource("BoxMesh_7u77a")
 shape = SubResource("BoxShape3D_7u77a")
 
 [node name="Player" parent="." unique_id=1962825026 instance=ExtResource("1_jjgbg")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 17.310558, -5.292881)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 17.310558, 168.69121)
+able_to_interact_with_cannon = null
+able_to_interact_with_food = null
+able_to_climb = null
+able_to_descend = null
+ladder = null
+climbing = null
+descending = null
+holding_food = null
+speed = null
+quick_time = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075486805]
 transform = Transform3D(-0.560639, 0.8280603, 3.6195665e-08, 0, -4.371139e-08, 1, 0.8280603, 0.560639, 2.450631e-08, 0, 17.70194, 0)
@@ -326,11 +338,7 @@ script = ExtResource("9_ynf5e")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3614626, 0)
 shape = SubResource("BoxShape3D_hptm8")
 
-[node name="RandomEventTimer" type="Timer" parent="." unique_id=682047180]
-wait_time = 0.5
-
 [node name="RandomFragmentTimer" type="Timer" parent="." unique_id=945086783]
-wait_time = 0.25
 
 [node name="Player_Fragments" type="Node3D" parent="." unique_id=1436467485]
 
@@ -418,5 +426,4 @@ travel_cost = 0.0
 [connection signal="body_entered" from="Water/MeshInstance3D/Area3D" to="Water" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Water/MeshInstance3D/Area3D" to="Water" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="QuickTimerTrigger" to="QuickTimerTrigger" method="_on_body_entered"]
-[connection signal="timeout" from="RandomEventTimer" to="." method="_on_random_event_timer_timeout"]
 [connection signal="timeout" from="RandomFragmentTimer" to="." method="_on_random_fragment_timer_timeout"]

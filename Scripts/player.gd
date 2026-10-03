@@ -19,7 +19,7 @@ const mouse_sensitivity_y = 1
 
 var cannon_interacting = false
 var dodging = false
-
+var sway_timer = 0
 var main_scene
 var cannon 
 var food_box
@@ -41,6 +41,9 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	else:
 		dodging = false
+	
+	if dodging == false:
+		$Camera3D.position.y = 0.739
 			
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
@@ -88,21 +91,35 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Interact") and able_to_interact_with_food == true:
 		holding_food = true
 		$Camera3D/RemoteTransform3D.remote_path = food_box.get_path()
-		
+
 	if cannon_interacting == false and climbing == false and descending == false and dodging == false:
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var input_dir := Input.get_vector("Left", "Right", "Foward", "Backwards")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 		if direction:
+			sway_timer += delta * 10
+			$Camera3D.position.y = $Camera3D.position.y + sin(sway_timer) * 0.004
+			$Camera3D.position.x = $Camera3D.position.x + sin(sway_timer) * 0.016
+			$Camera3D/Right_Arm.position.y = $Camera3D/Right_Arm.position.y + cos(sway_timer) * 0.004
+			$Camera3D/Left_Arm.position.y = $Camera3D/Left_Arm.position.y + cos(sway_timer-PI) * 0.004 
+			$Camera3D.rotation.y = cos(sway_timer) * 0.008
+
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 			velocity.z = move_toward(velocity.z, 0, speed)
+			$Camera3D.position.y = $Camera3D.position.y + sin(0) * 0.004
+			$Camera3D.position.x = $Camera3D.position.x + sin(0) * 0.016
+			
 		move_and_slide()
+		
 	if dodging == true:
+		$Camera3D.position.y = -0.25
 		move_and_slide()
+	
 	
 	elif climbing == false and descending == false:
 		if Input.is_action_pressed("Left"):
@@ -128,19 +145,15 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and dodging == false:
 		if not cannon_interacting:
 			$".".rotation.y -= event.relative.x / 1000
 			$Camera3D.rotation.x -= event.relative.y / 1000
 			$Camera3D.rotation.x = clamp($Camera3D.rotation.x,-0.85,1.5)
 			
-			
+func death()
+
 func dodge():
 	dodging = true
-	var direction = transform.basis.x
-	velocity = Vector3(0,0,0)
-	if randi_range(1,2) == 1:
-		velocity += direction * -10
-	else:
-		velocity += direction * 10
-	velocity.y += 3
+	velocity = -transform.basis.z * 20
+	velocity.y += 2
