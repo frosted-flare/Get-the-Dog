@@ -8,6 +8,9 @@ var lock_tracking_value = false
 func _ready() -> void:
 	main_scene = get_tree().current_scene
 	player = main_scene.find_child("Player")
+	var models = $Fragments.get_children()
+	var chosen_model = models.pick_random()
+	chosen_model.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

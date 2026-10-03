@@ -262,7 +262,7 @@ mesh = SubResource("BoxMesh_b3802")
 shape = SubResource("BoxShape3D_wsu2k")
 
 [node name="Player" parent="." unique_id=1962825026 instance=ExtResource("1_jjgbg")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 72.32638, 171.09985)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 78.793655, 185.27332)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075486805]
 transform = Transform3D(-4.371139e-08, -0.32556817, 0.94551855, 0, 0.94551855, 0.32556817, -1, 1.4231037e-08, -4.132993e-08, 0, 17.70194, 0)
@@ -430,7 +430,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3614626, 0)
 shape = SubResource("BoxShape3D_hptm8")
 
 [node name="RandomFragmentTimer" type="Timer" parent="." unique_id=945086783]
-wait_time = 0.25
+wait_time = 0.1
 
 [node name="Player_Fragments" type="Node3D" parent="." unique_id=1436467485]
 

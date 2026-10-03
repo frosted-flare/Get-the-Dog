@@ -48,10 +48,11 @@ func pass_time_event():
 	player.dodge()
 
 func _on_random_fragment_timer_timeout() -> void:
-	if randi_range(1,10) == 1 and player.quick_time == false and level == 1:
+	if randi_range(1,30) == 1 and player.quick_time == false and level == 1:
 		quick_time_event()
-	if randi_range(1,10) == 1 and level == 1:
+	if randi_range(1,5) == 1 and level == 1:
 		var new_fragment = fragment.instantiate()
-		new_fragment.global_position = player.global_position + Vector3(randi_range(-2,2),randi_range(30,50),randi_range(10,20))
+		new_fragment.global_position = player.global_position + Vector3(randi_range(-10,10),randi_range(30,50),randi_range(0,20))
+		
 		new_fragment.lock_tracking()
 		$Player_Fragments.add_child(new_fragment)

@@ -9,9 +9,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if activated == true:
-		if $"../Floor5".rotation.x > 0.1:
-			$"../Floor5".rotation.x -= 0.005 * delta
-		
+		if $"../Floor5".rotation.x > -0.1:
+			$"../Floor5".rotation.x -= 0.01 * delta
 
 func _on_body_entered(body: Node3D) -> void:
 	activated = true
