@@ -23,6 +23,8 @@ size = Vector3(0.2, 0.2, 0.8)
 radius = 0.1
 
 [node name="Player" type="CharacterBody3D" unique_id=1962825026]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_v0iea")
 
 [node name="PlayerCharacter" parent="." unique_id=1474071098 instance=ExtResource("2_6t5aa")]

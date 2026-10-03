@@ -7,7 +7,6 @@ var player
 func _ready() -> void:
 	main_scene = $".".owner
 	player = main_scene.find_child("Player")
-	$"../RandomEventTimer".start()
 	
 func _process(delta: float) -> void:
 	pass
