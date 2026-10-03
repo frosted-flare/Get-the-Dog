@@ -27,9 +27,11 @@ func fire():
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.name == "Player":
+		print("hello")
 		var player = body
 		var player_ui = body.find_child("Camera3D").find_child("UI")
-		
+		player_ui.find_child("QuickTime").visible = false
+		player_ui.find_child("Panel").visible = true
 		player_ui.find_child("Text").text = "Press E to interact"
 		player_ui.visible = true
 		player.able_to_interact_with_cannon = true
@@ -40,6 +42,7 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 		var player_ui = body.find_child("Camera3D").find_child("UI")
 		player_ui.visible = false
 		player.able_to_interact_with_cannon = false
-		
+		player_ui.find_child("Panel").visible = false
+
 func _on_shoot_timer_timeout() -> void:
 	reload = false

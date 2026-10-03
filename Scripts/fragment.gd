@@ -14,12 +14,10 @@ func _process(delta: float) -> void:
 	if get_parent().name == "Player_Fragments":
 		if $RayCast3D.is_colliding():
 			$".".freeze = true
+			lock_tracking_value = true
+			
 		if lock_tracking_value == true:
 			$".".set_collision_layer_value(2,true)
-		if player.quick_time == true and lock_tracking_value == false:
-			self.global_position.x = player.global_position.x
-			self.global_position.z = player.global_position.z
-				
 	
 func lock_tracking():
 	lock_tracking_value = true
