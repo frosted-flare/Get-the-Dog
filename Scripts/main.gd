@@ -4,6 +4,7 @@ var quick_time_text = "Dodge The Fragment!"
 var fragment = preload("res://Scenes/fragment.tscn")
 var dog = preload("res://Scenes/dog.tscn")
 var player
+var quicktimekeys = ["K","J","X","Y","Z"]
 @export var level  = 0
 
 func play_transition():
@@ -117,14 +118,29 @@ func _ready() -> void:
 	player.rotation = Vector3(0,0,0)
 	await get_tree().create_timer(2).timeout 
 	player.in_transition = false
+	while true:
+		await get_tree().create_timer(0.25).timeout 
+		if level == 5:
+			break
+	player.in_transition = true
+	player.dodging = false
+	player.velocity = Vector3(0,0,0)
+	play_transition()
 
-	
+	await get_tree().create_timer(2).timeout 
+	player.find_child("Camera3D").current = false
+	$Camera3D.current = true
+	$Map/Ship.visible = false
+	$Map/BrokenBoat.visible = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
 func quick_time_event():
+	
 	var player_ui = player.find_child("Camera3D").find_child("UI")
+	var key = str(quicktimekeys[randi_range(0,4)])
 	
 	player_ui.find_child("QuickTime").show()
 	player_ui.find_child("QuickTime").position.y = 1080
@@ -132,7 +148,10 @@ func quick_time_event():
 	ui_tween.tween_property(player_ui.find_child("QuickTime"),"position:y",0,1)
 	player_ui.show()
 	player_ui.find_child("QuickTime").find_child("QuickTimeText").text = quick_time_text
+	player_ui.find_child("QuickTime").find_child("Label2").text = key
+	player.quick_time_key = key
 	player_ui.find_child("QuickTime").find_child("QuickTimeTimer").wait_time = 2
+	
 	player_ui.find_child("QuickTime").start()
 	
 	player.quick_time = true

@@ -29,6 +29,7 @@ var dead = false
 var swimming = false
 var in_transition = false
 var aim_time = 0 
+var quick_time_key = false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -80,7 +81,33 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("Fire") and holding_food == true and cannon_interacting == false:
 		food_box.fire(aim_time)
 	# Handle quicktime.
-	if Input.is_action_just_pressed("Fire") and quick_time == true:
+	print(quick_time_key)
+	if Input.is_action_just_pressed("QuickTime1") and quick_time_key == "K":
+		
+		var ui_tween = create_tween()
+		ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
+		quick_time = false
+		main_scene.pass_time_event()
+	elif Input.is_action_just_pressed("QuickTime2") and quick_time_key == "J":
+		
+		var ui_tween = create_tween()
+		ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
+		quick_time = false
+		main_scene.pass_time_event()
+	elif Input.is_action_just_pressed("QuickTime3") and quick_time_key == "X":
+		
+		var ui_tween = create_tween()
+		ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
+		quick_time = false
+		main_scene.pass_time_event()
+	elif Input.is_action_just_pressed("QuickTime4") and quick_time_key == "Y":
+		
+		var ui_tween = create_tween()
+		ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
+		quick_time = false
+		main_scene.pass_time_event()
+	elif Input.is_action_just_pressed("QuickTime5") and quick_time_key == "Z":
+		
 		var ui_tween = create_tween()
 		ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
 		quick_time = false
