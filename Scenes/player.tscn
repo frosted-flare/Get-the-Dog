@@ -5,11 +5,35 @@
 [ext_resource type="Script" uid="uid://dvll6ffmi5eho" path="res://Scripts/quick_time.gd" id="2_cvnsp"]
 [ext_resource type="Script" uid="uid://ck6eteuuiav73" path="res://Scripts/lock_box_ui.gd" id="4_fkybt"]
 [ext_resource type="PackedScene" uid="uid://c7l7ik5cthuj4" path="res://Assets/LeftArm.glb" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://koqgl3064fty" path="res://Scripts/pause_menu.gd" id="5_x3wgy"]
+[ext_resource type="Script" uid="uid://sh4hlggmrydg" path="res://Scripts/settings.gd" id="6_3smsa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f60y1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0iea"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8erm5"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_f1ek2"]
+script/source = "extends Panel
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://Scenes/menu.tscn\")
+	
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvnsp"]
 bg_color = Color(0, 0, 0, 1)
@@ -45,6 +69,44 @@ bg_color = Color(0.22352941, 0.40784314, 1, 0.38039216)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t5aa"]
 bg_color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1ek2"]
+bg_color = Color(1, 1, 1, 0.19607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tx1dd"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gymyn"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu2lt"]
+bg_color = Color(0.6, 0.6, 0.6, 0.39215687)
+
+[sub_resource type="Gradient" id="Gradient_1rerr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ukyrk"]
+gradient = SubResource("Gradient_1rerr")
+
+[sub_resource type="Gradient" id="Gradient_xhh6f"]
+colors = PackedColorArray(0.09803922, 0.09803922, 0.09803922, 1, 0.09803922, 0.09803922, 0.09803922, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7dp3o"]
+gradient = SubResource("Gradient_xhh6f")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4iuc"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fd4e3"]
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_6t5aa"]
 radius = 0.1
 
@@ -62,7 +124,7 @@ shape = SubResource("CapsuleShape3D_f60y1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73910904, -0.48688865)
 
 [node name="UI" type="CanvasLayer" parent="Camera3D" unique_id=461760537]
-visible = false
+process_mode = 3
 
 [node name="Panel" type="Panel" parent="Camera3D/UI" unique_id=819898108]
 visible = false
@@ -85,6 +147,87 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 64
 text = "Press E to interact
+"
+
+[node name="Info" type="Panel" parent="Camera3D/UI" unique_id=1155225157]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
+
+[node name="Text" type="Label" parent="Camera3D/UI/Info" unique_id=930976406]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -279.0
+offset_right = 279.0
+offset_bottom = 179.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "Get To The Other End Of The Boat!
+"
+
+[node name="Death" type="Panel" parent="Camera3D/UI" unique_id=730243003]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8erm5")
+script = SubResource("GDScript_f1ek2")
+
+[node name="Text" type="Label" parent="Camera3D/UI/Death" unique_id=1029653243]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -279.0
+offset_right = 279.0
+offset_bottom = 179.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "YOU DIED
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Text2" type="Label" parent="Camera3D/UI/Death" unique_id=744264006]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -279.0
+offset_top = 97.0
+offset_right = 279.0
+offset_bottom = 367.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "Why not try again?
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Camera3D/UI/Death" unique_id=1529493002]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.0
+offset_top = -48.0
+offset_right = 253.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Return To Menu
 "
 
 [node name="QuickTime" type="Panel" parent="Camera3D/UI" unique_id=781900047]
@@ -278,6 +421,106 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6t5aa")
 
+[node name="PauseMenu" type="Panel" parent="Camera3D/UI" unique_id=772504847]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1ek2")
+script = ExtResource("5_x3wgy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera3D/UI/PauseMenu" unique_id=1343402882]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -236.0
+offset_right = 480.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Return" type="Button" parent="Camera3D/UI/PauseMenu/VBoxContainer" unique_id=2043578587]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_tx1dd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gymyn")
+text = "Return
+
+"
+
+[node name="Settings" type="Button" parent="Camera3D/UI/PauseMenu/VBoxContainer" unique_id=694737378]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_tx1dd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gymyn")
+text = "Settings
+
+"
+
+[node name="Exit" type="Button" parent="Camera3D/UI/PauseMenu/VBoxContainer" unique_id=1146261084]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_tx1dd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gymyn")
+text = "Exit
+
+"
+
+[node name="Settings" type="Panel" parent="Camera3D/UI" unique_id=959320116]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pu2lt")
+script = ExtResource("6_3smsa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera3D/UI/Settings" unique_id=1612610444]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -236.0
+offset_right = 480.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Fullscreen" type="CheckBox" parent="Camera3D/UI/Settings/VBoxContainer" unique_id=178492640]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_icons/checked = SubResource("GradientTexture2D_ukyrk")
+theme_override_icons/unchecked = SubResource("GradientTexture2D_7dp3o")
+text = "Fullscreen
+"
+
+[node name="ReturnToPause" type="Button" parent="Camera3D/UI/Settings/VBoxContainer" unique_id=7771183]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_h4iuc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fd4e3")
+text = "Return
+
+
+
+"
+
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera3D" unique_id=1986006736]
 transform = Transform3D(1, 0, 0, 0, 0.9395135, 0.34251216, 0, -0.34251216, 0.9395135, -0.495, -0.336, -0.662)
 
@@ -301,4 +544,10 @@ transform = Transform3D(1.0000002, -0.0002618134, -1.0528964e-08, 0.0002618134, 
 wait_time = 10.0
 one_shot = true
 
+[connection signal="pressed" from="Camera3D/UI/Death/Button" to="Camera3D/UI/Death" method="_on_button_pressed"]
 [connection signal="timeout" from="Camera3D/UI/QuickTime/QuickTimeTimer" to="Camera3D/UI/QuickTime" method="_on_quick_time_timer_timeout"]
+[connection signal="pressed" from="Camera3D/UI/PauseMenu/VBoxContainer/Return" to="Camera3D/UI/PauseMenu" method="_on_return_pressed"]
+[connection signal="pressed" from="Camera3D/UI/PauseMenu/VBoxContainer/Settings" to="Camera3D/UI/PauseMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="Camera3D/UI/PauseMenu/VBoxContainer/Exit" to="Camera3D/UI/PauseMenu" method="_on_exit_pressed"]
+[connection signal="pressed" from="Camera3D/UI/Settings/VBoxContainer/Fullscreen" to="Camera3D/UI/Settings" method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="Camera3D/UI/Settings/VBoxContainer/ReturnToPause" to="Camera3D/UI/PauseMenu" method="_on_return_to_pause_pressed"]

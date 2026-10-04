@@ -31,4 +31,3 @@ func _on_area_entered(area: Area3D) -> void:
 func _on_area_exited(area: Area3D) -> void:
 	if area.name == "CamArea" and not (player is bool):
 		player.find_child("UI").find_child("Underwater").visible = false
-		player.find_child("UI").visible = false

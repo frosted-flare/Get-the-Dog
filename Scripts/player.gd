@@ -63,6 +63,12 @@ func _physics_process(delta: float) -> void:
 		elif is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			
+	if Input.is_action_pressed("Menu"):
+		get_tree().paused = true
+		$Camera3D/UI/PauseMenu.visible = true
+		$Camera3D/UI.visible = true
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 	# Handle shoot.
 	if Input.is_action_pressed("Fire") and cannon_interacting == true:
 		cannon.fire()
@@ -190,7 +196,10 @@ func _input(event: InputEvent) -> void:
 				
 func death():
 	dead = true
-	pass
+	$Camera3D/UI.visible = true
+	$Camera3D/UI/Death.visible = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 		
 func dodge():
 	dodging = true

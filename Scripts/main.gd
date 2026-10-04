@@ -36,6 +36,7 @@ func _ready() -> void:
 	play_transition()
 	await get_tree().create_timer(2).timeout 
 	$Map/Ship/NavRegion/CharacterBody3D.queue_free()
+	player.rotation = Vector3(0,-1.5,0)
 	
 	$DirectionalLight3D.light_energy = 0.5
 	$Map/Ship.sway_amount_v = 0.005
@@ -59,11 +60,15 @@ func _ready() -> void:
 	$Map/Ship.sway_speed = 0
 	
 	$RandomFragmentTimer.start()
+	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = true
+	player.find_child("Camera3D").find_child("UI").find_child("Info").find_child("Text").text = "Get To The Other End Of The Boat!"
+	
 	
 	while true:
 		await get_tree().create_timer(0.25).timeout 
 		if level == 2:
 			break
+	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = false
 	player.in_transition = true
 	player.dodging = false
 	player.velocity = Vector3(0,0,0)
@@ -71,6 +76,7 @@ func _ready() -> void:
 
 	await get_tree().create_timer(2).timeout 
 	$Player.global_position = $"Level 2/Teleport_Pos".global_position
+	player.rotation = Vector3(0,0,0)
 	await get_tree().create_timer(2).timeout 
 	player.in_transition = false
 	while true:
@@ -84,6 +90,8 @@ func _ready() -> void:
 
 	await get_tree().create_timer(2).timeout 
 	$Player.global_position = $Deck2/Teleport_Pos.global_position
+	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = true
+	player.find_child("Camera3D").find_child("UI").find_child("Info").find_child("Text").text = "Swim to the end!"
 	await get_tree().create_timer(2).timeout 
 	player.in_transition = false
 	player.swimming = true
@@ -96,7 +104,8 @@ func _ready() -> void:
 		await get_tree().create_timer(0.25).timeout 
 		if level == 4:
 			break
-			
+
+	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = false
 	level = 4
 	player.in_transition = true
 	player.dodging = false
@@ -105,6 +114,7 @@ func _ready() -> void:
 
 	await get_tree().create_timer(2).timeout 
 	player.global_position = $NavigationRegion3D2/Deck3/Teleport_Pos.global_position
+	player.rotation = Vector3(0,0,0)
 	await get_tree().create_timer(2).timeout 
 	player.in_transition = false
 

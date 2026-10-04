@@ -509,7 +509,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 11.9
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 9.982831, -10.310873, 301.3159)
 
 [node name="Position3" type="Node3D" parent="Map/Ship/NavRegion" unique_id=2136398600]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.5887346, -10.312, 306.21774)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.13971578, -10.312, 301.50473)
 
 [node name="Position4" type="Node3D" parent="Map/Ship/NavRegion" unique_id=1206939349]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -7.9559994, -10.312, 303.88895)
