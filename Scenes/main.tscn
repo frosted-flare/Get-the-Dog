@@ -425,7 +425,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.634636, 10.706291, 3.031860
 shape = SubResource("BoxShape3D_jkdf5")
 
 [node name="Level3Exit" type="Area3D" parent="." unique_id=111836326]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 208.71387, 44.736847, 304.0449)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 208.71387, 49.437897, 302.5968)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("6_pdsj5")
@@ -445,7 +445,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8142853, -2.8984375)
 shape = SubResource("BoxShape3D_jkdf5")
 
 [node name="SwimWater" type="MeshInstance3D" parent="." unique_id=1683409054]
-transform = Transform3D(1, 0, 0, 0, 0.97870994, 0.20524767, 0, -0.20524767, 0.97870994, 204.6388, 49.72055, 330.9251)
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 204.6388, 49.72055, 330.9251)
 mesh = SubResource("BoxMesh_k12tt")
 
 [node name="Area3D" type="Area3D" parent="SwimWater" unique_id=1430096321]
@@ -829,7 +829,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4396362, -1.007904, 0.0128
 shape = SubResource("ConcavePolygonShape3D_ee4r6")
 
 [node name="Deck2" parent="." unique_id=1556459700 instance=ExtResource("20_pdsj5")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 207.5997, 51.210415, 337.6474)
+transform = Transform3D(-4.3711392e-08, 1.7782625e-15, 1, 0.18307635, 0.98309875, 8.0025195e-09, -0.98309875, 0.18307635, -4.2972616e-08, 207.5997, 51.210415, 337.6474)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Deck2" unique_id=880418369]
 
