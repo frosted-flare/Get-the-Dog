@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cbtya4go2oack"]
+
+[ext_resource type="PackedScene" uid="uid://c7l7ik5cthuj4" path="res://Assets/LeftArm.glb" id="1_xqyfg"]
+
+[node name="LeftArm" unique_id=980045048 instance=ExtResource("1_xqyfg")]
+
+[node name="PlayerArms" parent="." index="0" unique_id=425018977]
+cast_shadow = 0

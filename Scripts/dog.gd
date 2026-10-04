@@ -52,14 +52,15 @@ func update_target():
 				state = "Idle"
 				velocity = Vector3(0,0,0)
 
-			elif found_food is bool and closest_food is bool:
-				if distance < closest_food_distance and distance < 5:
+			elif found_food is bool and closest_food is bool and bullet.anchored == true:
+				if distance < closest_food_distance and distance < 10:
 					closest_food_distance = distance
 					closest_food = bullet
 					found_food = true
 					moving = true
 					state = "Track"
-					$NavigationAgent3D.target_position = closest_food.position
+					$NavigationAgent3D.target_position = closest_food.global_position
+					print($NavigationAgent3D.target_position)
 				
 func _on_timer_timeout() -> void:
 	if state != "Jump":

@@ -125,7 +125,6 @@ func quick_time_event():
 	player_ui.find_child("QuickTime").find_child("QuickTimeTimer").wait_time = 2
 	player_ui.find_child("QuickTime").start()
 	
-	
 	player.quick_time = true
 
 func fail_time_event():
@@ -150,3 +149,8 @@ func _on_random_fragment_timer_timeout() -> void:
 func _on_transition_timer_timeout() -> void:
 	player.find_child("Camera3D").find_child("UI").find_child("Transition").position.y = 1080
 	player.find_child("Camera3D").find_child("UI").find_child("Transition").visible = false
+
+func unlock_lock_box():
+	$Food.global_position = $LockBox.global_position - Vector3(0,0.8,0)
+	$LockBox.queue_free()
+	

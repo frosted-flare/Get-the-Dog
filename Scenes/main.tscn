@@ -307,7 +307,7 @@ environment = SubResource("Environment_jjvhh")
 [node name="Bullets" type="Node3D" parent="." unique_id=1849115264]
 
 [node name="Food" parent="." unique_id=188544478 instance=ExtResource("6_6bp64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 288.68387, 45.56795, 379.11203)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 288.68387, 39.146526, 379.11203)
 
 [node name="QuickTimerTrigger" type="Area3D" parent="." unique_id=987750757]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.679993, 15.916804, 154.21925)

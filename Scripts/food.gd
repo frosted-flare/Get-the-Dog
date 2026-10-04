@@ -3,7 +3,7 @@ extends Node3D
 var reload = false
 var main_scene
 var food_object = preload("res://Scenes/food_object.tscn")
-var launch_strength = 10
+var launch_strength = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,13 +26,13 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 
 
-func fire():
+func fire(aim_time):
 	if reload == false:
 		var direction = -main_scene.find_child("Player").find_child("Camera3D").global_transform.basis.z
 		var food = food_object.instantiate()
 		main_scene.find_child("Bullets").add_child(food)
 		food.global_position = main_scene.find_child("Player").find_child("Camera3D").find_child("Right_Arm").find_child("Throw_Position").global_position
-		food.apply_central_impulse(direction * launch_strength)
+		food.apply_central_impulse(direction * launch_strength * aim_time)
 		
 		reload = true
 		$ShootTimer.start()

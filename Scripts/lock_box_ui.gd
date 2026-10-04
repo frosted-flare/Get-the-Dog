@@ -8,4 +8,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$Node/Panel/Dial.rotation += 3*delta
+	if $"../../..".lockbox_interacting == true:
+		$Node2D/Panel/Dial.rotation += 3*delta
+	if 	$Node2D/Panel/Dial.rotation >= 4.5:
+		$Node2D/Panel/Dial.rotation = -1.8

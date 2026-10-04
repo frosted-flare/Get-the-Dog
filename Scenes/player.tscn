@@ -172,7 +172,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
 script = ExtResource("4_fkybt")
 
 [node name="LockBoxText" type="Label" parent="Camera3D/UI/LockBox" unique_id=223359378]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -186,30 +185,29 @@ offset_bottom = 544.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 100
-text = "Pick The Lock"
+text = "Press F "
 horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
 
-[node name="Node" type="Node" parent="Camera3D/UI/LockBox" unique_id=661205038]
+[node name="Node2D" type="Node2D" parent="Camera3D/UI/LockBox" unique_id=702917464]
 
-[node name="Panel" type="Panel" parent="Camera3D/UI/LockBox/Node" unique_id=1287394840]
-visible = false
+[node name="Panel" type="Panel" parent="Camera3D/UI/LockBox/Node2D" unique_id=1287394840]
 clip_contents = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -80.0
-offset_right = 80.0
-offset_bottom = 80.0
+offset_left = 880.0
+offset_top = 460.0
+offset_right = 1040.0
+offset_bottom = 620.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fkybt")
 
-[node name="Panel3" type="Panel" parent="Camera3D/UI/LockBox/Node/Panel" unique_id=771208646]
+[node name="Panel3" type="Panel" parent="Camera3D/UI/LockBox/Node2D/Panel" unique_id=771208646]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -225,10 +223,10 @@ grow_vertical = 2
 rotation = 1.5707964
 theme_override_styles/panel = SubResource("StyleBoxFlat_3smsa")
 
-[node name="Dial" type="Node2D" parent="Camera3D/UI/LockBox/Node/Panel" unique_id=1457086228]
+[node name="Dial" type="Node2D" parent="Camera3D/UI/LockBox/Node2D/Panel" unique_id=1457086228]
 position = Vector2(80, 80)
 
-[node name="Panel2" type="Panel" parent="Camera3D/UI/LockBox/Node/Panel/Dial" unique_id=617008335]
+[node name="Panel2" type="Panel" parent="Camera3D/UI/LockBox/Node2D/Panel/Dial" unique_id=617008335]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
