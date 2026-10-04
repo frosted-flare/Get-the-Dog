@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://bftwc00pxg4xn" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://cjvdas1x3dyjh" path="res://Assets/PlayerCharacter.glb" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://dvll6ffmi5eho" path="res://Scripts/quick_time.gd" id="2_cvnsp"]
-[ext_resource type="PackedScene" uid="uid://dd3xbaku0aomh" path="res://Scenes/player_arms.tscn" id="5_fkybt"]
+[ext_resource type="Script" uid="uid://ck6eteuuiav73" path="res://Scripts/lock_box_ui.gd" id="4_fkybt"]
+[ext_resource type="PackedScene" uid="uid://c7l7ik5cthuj4" path="res://Assets/LeftArm.glb" id="4_vgqql"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f60y1"]
 
@@ -17,8 +18,32 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkybt"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3smsa"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3wgy"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgqql"]
+bg_color = Color(0.22352941, 0.40784314, 1, 0.38039216)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t5aa"]
-bg_color = Color(0.22745098, 0.4509804, 1, 0.5411765)
+bg_color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6t5aa"]
 radius = 0.1
@@ -136,6 +161,87 @@ horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
 
+[node name="LockBox" type="Panel" parent="Camera3D/UI" unique_id=1535876057]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
+script = ExtResource("4_fkybt")
+
+[node name="LockBoxText" type="Label" parent="Camera3D/UI/LockBox" unique_id=223359378]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -788.0
+offset_top = 271.0
+offset_right = 788.0
+offset_bottom = 544.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Pick The Lock"
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 1
+
+[node name="Node" type="Node" parent="Camera3D/UI/LockBox" unique_id=661205038]
+
+[node name="Panel" type="Panel" parent="Camera3D/UI/LockBox/Node" unique_id=1287394840]
+visible = false
+clip_contents = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkybt")
+
+[node name="Panel3" type="Panel" parent="Camera3D/UI/LockBox/Node/Panel" unique_id=771208646]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = 37.0
+offset_right = 180.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+theme_override_styles/panel = SubResource("StyleBoxFlat_3smsa")
+
+[node name="Dial" type="Node2D" parent="Camera3D/UI/LockBox/Node/Panel" unique_id=1457086228]
+position = Vector2(80, 80)
+
+[node name="Panel2" type="Panel" parent="Camera3D/UI/LockBox/Node/Panel/Dial" unique_id=617008335]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -5.0
+offset_right = 160.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.011923401
+theme_override_styles/panel = SubResource("StyleBoxFlat_x3wgy")
+
 [node name="Underwater" type="Panel" parent="Camera3D/UI" unique_id=215200277]
 visible = false
 anchors_preset = 15
@@ -143,7 +249,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_6t5aa")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vgqql")
 
 [node name="Time" type="Label" parent="Camera3D/UI/Underwater" unique_id=1296377402]
 custom_minimum_size = Vector2(512, 273)
@@ -165,6 +271,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
 
+[node name="Transition" type="Panel" parent="Camera3D/UI" unique_id=82901120]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6t5aa")
+
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera3D" unique_id=1986006736]
 transform = Transform3D(1, 0, 0, 0, 0.9395135, 0.34251216, 0, -0.34251216, 0.9395135, -0.495, -0.336, -0.662)
 
@@ -173,14 +288,14 @@ transform = Transform3D(1, 0, 0, 0, 0.9395135, 0.34251216, 0, -0.34251216, 0.939
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/CamArea" unique_id=222596773]
 shape = SubResource("SphereShape3D_6t5aa")
 
-[node name="Left_Arm" parent="Camera3D" unique_id=1662901491 instance=ExtResource("5_fkybt")]
-transform = Transform3D(-4.371138e-08, -1.7256831e-15, -1, -0.49067566, 0.8713423, 2.144811e-08, 0.8713423, 0.49067566, -3.8087578e-08, -0.61, -1.35, -0.44)
+[node name="Left_Arm" parent="Camera3D" unique_id=980045048 instance=ExtResource("4_vgqql")]
+transform = Transform3D(-3.8081964e-08, -2.1458083e-08, -1, -0.49090374, 0.8712138, 0, 0.8712138, 0.49090374, -4.371139e-08, -0.61, -1.35, -0.44)
 
-[node name="Right_Arm" parent="Camera3D" unique_id=1810898172 instance=ExtResource("5_fkybt")]
-transform = Transform3D(-4.371138e-08, -1.7256831e-15, -1, -0.49067566, 0.8713423, 2.144811e-08, 0.8713423, 0.49067566, -3.8087578e-08, 0.495, -1.35, -0.44)
+[node name="Right_Arm" parent="Camera3D" unique_id=1395098829 instance=ExtResource("4_vgqql")]
+transform = Transform3D(-3.8081964e-08, -2.1458083e-08, -1, -0.49090374, 0.8712138, 0, 0.8712138, 0.49090374, -4.371139e-08, 0.61, -1.35, -0.44)
 
-[node name="ThrowPosition" type="Node3D" parent="Camera3D/Right_Arm" unique_id=1187748524]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 1.4210855e-14, 1, -0.6194396, 0.7165297, 0.032982707)
+[node name="Throw_Position" type="Node3D" parent="Camera3D/Right_Arm" unique_id=1187748524]
+transform = Transform3D(1.0000002, -0.0002618134, -1.0528964e-08, 0.0002618134, 1.0000002, 1.8685883e-08, 1.0524079e-08, -1.8688631e-08, 1, -0.60145867, 0.7141261, 0.03736162)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1060638923]
 

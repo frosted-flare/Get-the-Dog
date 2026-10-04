@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dppm2pxpixyn5"]
+
+[ext_resource type="PackedScene" uid="uid://n7wa4g7c1swm" path="res://Assets/Ship.glb" id="1_78pfh"]
+
+[node name="Ship" unique_id=1672478635 instance=ExtResource("1_78pfh")]

@@ -8,6 +8,7 @@ const mouse_sensitivity_y = 1
 
 @export var able_to_interact_with_cannon = false
 @export var able_to_interact_with_food = false
+@export var able_to_interact_with_lockbox = false
 @export var able_to_climb = false
 @export var able_to_descend = false
 @export var ladder = false
@@ -18,6 +19,7 @@ const mouse_sensitivity_y = 1
 @export var quick_time = false
 
 var cannon_interacting = false
+var lockbox_interacting = false
 var dodging = false
 var sway_timer = 0
 var main_scene
@@ -25,6 +27,7 @@ var cannon
 var food_box
 var dead = false
 var swimming = false
+var in_transition = false
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -36,7 +39,6 @@ func _ready():
 	food_box = main_scene.find_child("Food")
 	
 func _physics_process(delta: float) -> void:
-	
 	if dead == true:
 		return
 		
@@ -54,7 +56,7 @@ func _physics_process(delta: float) -> void:
 		$Camera3D.position.y = 0.739
 			
 	# Handle jump.
-	if Input.is_action_just_pressed("Jump"):
+	if Input.is_action_just_pressed("Jump") and main_scene.level != 0 and in_transition == false:
 		if swimming:
 			velocity.y = JUMP_VELOCITY / 2
 		elif is_on_floor():
@@ -87,6 +89,12 @@ func _physics_process(delta: float) -> void:
 		$Camera3D/UI.visible = false
 		$".".hide()
 		$"../Food".hide()
+	
+	if Input.is_action_just_pressed("Interact") and lockbox_interacting == true:
+		pass
+
+	elif Input.is_action_just_pressed("Interact") and able_to_interact_with_lockbox == true:
+		lockbox_interacting = true
 
 	if Input.is_action_just_pressed("Interact") and able_to_climb == true and not ladder is bool:
 		climbing = true
@@ -109,8 +117,7 @@ func _physics_process(delta: float) -> void:
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var input_dir := Input.get_vector("Left", "Right", "Foward", "Backwards")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		
-		if direction:
+		if direction and main_scene.level != 0  and in_transition == false:
 			sway_timer += delta * 10
 			if $"..".level == 1:
 				$Camera3D.position.y = $Camera3D.position.y + sin(sway_timer) * 0.004
@@ -121,12 +128,11 @@ func _physics_process(delta: float) -> void:
 
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
-		else:
+		elif main_scene.level != 0 and in_transition == false:
 			velocity.x = move_toward(velocity.x, 0, speed)
 			velocity.z = move_toward(velocity.z, 0, speed)
 			$Camera3D.position.y = $Camera3D.position.y + sin(0) * 0.004
 			$Camera3D.position.x = $Camera3D.position.x + sin(0) * 0.016
-			
 		move_and_slide()
 		
 	if dodging == true:
@@ -135,16 +141,18 @@ func _physics_process(delta: float) -> void:
 	
 	
 	elif climbing == false and descending == false:
-		if Input.is_action_pressed("Left"):
-			cannon.rotation.y += 0.3 * delta
-		elif Input.is_action_pressed("Right"):
-			cannon.rotation.y -= 0.3 * delta
-		if Input.is_action_pressed("Foward"):
-			cannon.rotation.x += 0.3 * delta
-			cannon.rotation.x = clamp(cannon.rotation.x,-0.6,0.4)
-		elif Input.is_action_pressed("Backwards"):
-			cannon.rotation.x -= 0.3 * delta
-			cannon.rotation.x = clamp(cannon.rotation.x,-0.6,0.4)
+		if cannon_interacting == true:
+			if Input.is_action_pressed("Left"):
+				cannon.rotation.y += 0.3 * delta
+			elif Input.is_action_pressed("Right"):
+				cannon.rotation.y -= 0.3 * delta
+			if Input.is_action_pressed("Foward"):
+				cannon.rotation.x += 0.3 * delta
+				cannon.rotation.x = clamp(cannon.rotation.x,-0.6,0.4)
+			elif Input.is_action_pressed("Backwards"):
+				cannon.rotation.x -= 0.3 * delta
+				cannon.rotation.x = clamp(cannon.rotation.x,-0.6,0.4)
+			
 	elif climbing == true:
 		$".".velocity.y = 2
 		$".".velocity.x = 0
@@ -157,7 +165,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 	
 func _input(event: InputEvent) -> void:
-	if dead == false:
+	if dead == false and main_scene.level != 0 and in_transition == false:
 		if event is InputEventMouseMotion and dodging == false:
 			if not cannon_interacting:
 				$".".rotation.y -= event.relative.x / 1000
