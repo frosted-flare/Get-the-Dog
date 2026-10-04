@@ -192,7 +192,7 @@ data = PackedVector3Array(1, -0.8267, -0.8267, 0.9033, 0.8267, -0.8267, 1, 0.826
 script = ExtResource("1_c5erv")
 
 [node name="Player" parent="." unique_id=1962825026 instance=ExtResource("2_af2a1")]
-transform = Transform3D(-0.86012834, 0, 0.5100776, 0, 1, 0, -0.5100776, 0, -0.86012834, 26.315264, 0, 0)
+transform = Transform3D(0.010070264, 0, -0.99994946, 0, 1, 0, 0.99994946, 0, 0.010070264, -25.324175, -2.3969421, -0.29272997)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1075486805]
 transform = Transform3D(-0.9477684, 0.15947968, -0.2762269, 0, 0.8660254, 0.5, 0.31895936, 0.4738842, -0.8207915, 0, 40.26463, 0)
@@ -203,6 +203,7 @@ shadow_enabled = true
 environment = SubResource("Environment_jjvhh")
 
 [node name="Deck" parent="." unique_id=979280950 instance=ExtResource("3_c5erv")]
+transform = Transform3D(0.525, 0, 0, 0, 0.525, 0, 0, 0, 0.525, 0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Deck" unique_id=1583190455]
 
@@ -213,10 +214,19 @@ shape = SubResource("ConcavePolygonShape3D_c5erv")
 [node name="Assets" type="Node3D" parent="." unique_id=1095926589]
 
 [node name="Barrel1" parent="Assets" unique_id=1641376046 instance=ExtResource("4_bs12r")]
+transform = Transform3D(1.95, 0, 0, 0, 1.95, 0, 0, 0, 1.95, -22.682413, -2.7917516, -2.5906358)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/Barrel1" unique_id=224127209]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/Barrel1/StaticBody3D" unique_id=205017326]
+shape = SubResource("ConcavePolygonShape3D_hrsvw")
+
+[node name="Barrel4" parent="Assets" unique_id=986960352 instance=ExtResource("4_bs12r")]
+transform = Transform3D(1.95, 0, 0, 0, 1.95, 0, 0, 0, 1.95, -23.367569, -2.7917519, -0.39737296)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Assets/Barrel4" unique_id=303814999]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Assets/Barrel4/StaticBody3D" unique_id=1189051961]
 shape = SubResource("ConcavePolygonShape3D_hrsvw")
 
 [node name="Barrel2" parent="Assets" unique_id=862621006 instance=ExtResource("5_rqhku")]
@@ -256,6 +266,7 @@ shape = SubResource("ConcavePolygonShape3D_xqgpj")
 shape = SubResource("ConcavePolygonShape3D_44m78")
 
 [node name="BrokenBoat" parent="Assets" unique_id=1508067409 instance=ExtResource("10_wwu6c")]
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/BrokenBoat" unique_id=693720638]
 
@@ -274,6 +285,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4608283, 1.0195713, -0.643
 shape = SubResource("ConcavePolygonShape3D_mr61u")
 
 [node name="Coconut_Tree" parent="Assets" unique_id=1225740586 instance=ExtResource("20_tfirt")]
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/Coconut_Tree" unique_id=1657531266]
 
@@ -387,6 +399,7 @@ shape = SubResource("ConcavePolygonShape3D_8ott8")
 shape = SubResource("ConcavePolygonShape3D_g5olg")
 
 [node name="Dog" parent="Assets" unique_id=821240442 instance=ExtResource("18_nstho")]
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/Dog" unique_id=1976165525]
 
@@ -394,6 +407,7 @@ shape = SubResource("ConcavePolygonShape3D_g5olg")
 shape = SubResource("ConcavePolygonShape3D_evwh2")
 
 [node name="Island2" parent="Assets" unique_id=1702533726 instance=ExtResource("19_p4bhf")]
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/Island2" unique_id=931467402]
 
@@ -402,6 +416,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2248087, 0)
 shape = SubResource("ConcavePolygonShape3D_p6p4e")
 
 [node name="Ladder2" parent="Assets" unique_id=1493437729 instance=ExtResource("31_43uat")]
+transform = Transform3D(-1.2632592e-07, 0, 2.89, 0, 2.89, 0, -2.89, 0, -1.2632592e-07, 21.731508, -8.12016, -0.8646946)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/Ladder2" unique_id=514834115]
 
@@ -453,6 +468,7 @@ shape = SubResource("ConcavePolygonShape3D_ggpca")
 shape = SubResource("ConcavePolygonShape3D_i3eyu")
 
 [node name="Shark" parent="Assets" unique_id=974020034 instance=ExtResource("38_8ott8")]
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/Shark" unique_id=1379863193]
 
@@ -460,6 +476,7 @@ shape = SubResource("ConcavePolygonShape3D_i3eyu")
 shape = SubResource("ConcavePolygonShape3D_hwpog")
 
 [node name="Ship" parent="Assets" unique_id=1672478635 instance=ExtResource("15_c4ifa")]
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Assets/Ship" unique_id=1593503487]
 
