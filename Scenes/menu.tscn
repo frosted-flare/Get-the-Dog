@@ -19,17 +19,17 @@ bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_158mb"]
 bg_color = Color(0.6, 0.6, 0.6, 0.39215687)
 
-[sub_resource type="Gradient" id="Gradient_1rerr"]
+[sub_resource type="Gradient" id="Gradient_158mb"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xhh6f"]
-gradient = SubResource("Gradient_1rerr")
+gradient = SubResource("Gradient_158mb")
 
-[sub_resource type="Gradient" id="Gradient_xhh6f"]
+[sub_resource type="Gradient" id="Gradient_wwsa2"]
 colors = PackedColorArray(0.09803922, 0.09803922, 0.09803922, 1, 0.09803922, 0.09803922, 0.09803922, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cayip"]
-gradient = SubResource("Gradient_xhh6f")
+gradient = SubResource("Gradient_wwsa2")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwsa2"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

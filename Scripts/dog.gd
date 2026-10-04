@@ -11,6 +11,7 @@ var direction = Vector3()
 var state = "Idle"
 var next_location 
 var about_to_jump = false 
+var in_air = false
 
 func _ready():
 	main_scene = $".".owner
@@ -28,14 +29,16 @@ func _physics_process(delta: float) -> void:
 			$Dog.find_child("AnimationPlayer").play("Walk-loop")
 	elif state == "Idle":
 		$Dog.find_child("AnimationPlayer").stop(false)
-	
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	if $RayCast3D.is_colliding() and state == "Jump" and in_air == false:
+		state = "Track"
+		update_target()
 	move_and_slide()
 	
-
-func _on_timer_timeout() -> void:
+func update_target():
 	var bullets = main_scene.find_child("Bullets").get_children()
 	var closest_food_distance = 10000
 	for bullet in bullets:
@@ -49,16 +52,19 @@ func _on_timer_timeout() -> void:
 				state = "Idle"
 				velocity = Vector3(0,0,0)
 
-			elif found_food is bool and closest_food is bool:
-				if distance < closest_food_distance:
+			elif found_food is bool and closest_food is bool and bullet.anchored == true:
+				if distance < closest_food_distance and distance < 10:
 					closest_food_distance = distance
 					closest_food = bullet
-	
-	if is_instance_valid(closest_food) and is_on_floor() and about_to_jump == false:
-		found_food = true
-		state = "Track"
-		$NavigationAgent3D.target_position = closest_food.position
-
+					found_food = true
+					moving = true
+					state = "Track"
+					$NavigationAgent3D.target_position = closest_food.global_position
+					print($NavigationAgent3D.target_position)
+				
+func _on_timer_timeout() -> void:
+	if state != "Jump":
+		update_target()
 
 func _on_navigation_agent_3d_link_reached(details: Dictionary) -> void:
 	state = "Jump"
@@ -71,6 +77,7 @@ func _on_navigation_agent_3d_link_reached(details: Dictionary) -> void:
 	$JumpTimer.start()
 	$Dog.find_child("AnimationPlayer").stop()
 	$Dog.find_child("AnimationPlayer").play("Jump")
+	in_air = true
 
 func _on_jump_timer_timeout() -> void:
 	about_to_jump = false 
@@ -81,3 +88,23 @@ func _on_jump_timer_timeout() -> void:
 	velocity = new_velocity
 	velocity.y += 5
 	$Dog.find_child("AnimationPlayer").stop(false)
+	$JumpAirTimer.start()
+	in_air = true
+
+func _on_jump_air_timer_timeout() -> void:
+	in_air = false
+	
+func go_to_pos(pos):
+	found_food = true
+	moving = true
+	state = "Track"
+	$NavigationAgent3D.target_position = pos
+
+
+func _on_navigation_agent_3d_target_reached() -> void:
+	found_food = false
+	state = "Idle"
+	velocity = Vector3(0,0,0)
+	
+	
+	
