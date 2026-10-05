@@ -10,20 +10,20 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_return_pressed() -> void:
-	get_tree().paused = false
-	$".".visible = false
-	$".".get_parent().visible = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-func _on_exit_pressed() -> void:
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
-	
-func _on_settings_pressed() -> void:
-	$".".visible = false
-	$"../Settings".visible = true
-
 func _on_return_to_pause_pressed() -> void:
 	$".".visible = true
 	$"../Settings".visible = false
+	
+func _on__pressed() -> void:
+	get_tree().paused = false
+	$".".visible = false
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	$"../Dialogue".paused = false
+
+func _on_number_2_pressed() -> void:
+	$".".visible = false
+	$"../Settings".visible = true
+
+func _on_texture_button_3_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/menu.tscn")

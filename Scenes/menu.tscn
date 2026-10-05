@@ -2,19 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dph3ihv0m6fpn" path="res://Scripts/menu.gd" id="1_1rerr"]
 [ext_resource type="Texture2D" uid="uid://5jmpsf5pa2mp" path="res://UIs/title_screen.png" id="2_xhh6f"]
+[ext_resource type="Texture2D" uid="uid://dtbhweead2udk" path="res://UIs/menubutton.png" id="3_cayip"]
+[ext_resource type="Texture2D" uid="uid://uld3ay47cvso" path="res://UIs/menubuttonclicked.png" id="4_158mb"]
+[ext_resource type="FontFile" uid="uid://68malovwus5m" path="res://UIs/Font/Inika-Regular.ttf" id="5_wwsa2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cayip"]
 bg_color = Color(0.6, 0.6, 0.6, 0.39215687)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4yt8"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rerr"]
-bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_158mb"]
 bg_color = Color(0.6, 0.6, 0.6, 0.39215687)
@@ -35,7 +28,7 @@ gradient = SubResource("Gradient_wwsa2")
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhh6f"]
-bg_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -70,48 +63,93 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -480.0
-offset_top = -236.0
-offset_right = 480.0
-offset_bottom = 236.0
+offset_left = -275.0
+offset_top = -320.0
+offset_right = 275.0
+offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
 
-[node name="Play" type="Button" parent="CanvasLayer/Main/VBoxContainer" unique_id=1925801027]
+[node name="1" type="TextureButton" parent="CanvasLayer/Main/VBoxContainer" unique_id=1981345197]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
-text = "Play
-"
+texture_normal = ExtResource("3_cayip")
+texture_pressed = ExtResource("4_158mb")
 
-[node name="Settings" type="Button" parent="CanvasLayer/Main/VBoxContainer" unique_id=50732]
+[node name="Label" type="Label" parent="CanvasLayer/Main/VBoxContainer/1" unique_id=1516105403]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 64
+text = "
+Play
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="2" type="TextureButton" parent="CanvasLayer/Main/VBoxContainer" unique_id=1112127938]
 layout_mode = 2
+texture_normal = ExtResource("3_cayip")
+texture_pressed = ExtResource("4_158mb")
+
+[node name="Label" type="Label" parent="CanvasLayer/Main/VBoxContainer/2" unique_id=36669366]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_wwsa2")
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
-text = "Settings
-
+text = "
+Settings
 "
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Credits" type="Button" parent="CanvasLayer/Main/VBoxContainer" unique_id=1753402512]
+[node name="3" type="TextureButton" parent="CanvasLayer/Main/VBoxContainer" unique_id=1696067059]
 layout_mode = 2
+texture_normal = ExtResource("3_cayip")
+texture_pressed = ExtResource("4_158mb")
+
+[node name="Label" type="Label" parent="CanvasLayer/Main/VBoxContainer/3" unique_id=2144858536]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_wwsa2")
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
-text = "Credits
-
+text = "
+Credits
 "
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Exit" type="Button" parent="CanvasLayer/Main/VBoxContainer" unique_id=1001567778]
+[node name="4" type="TextureButton" parent="CanvasLayer/Main/VBoxContainer" unique_id=1450882654]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
-text = "Exit
+texture_normal = ExtResource("3_cayip")
+texture_pressed = ExtResource("4_158mb")
 
+[node name="Label" type="Label" parent="CanvasLayer/Main/VBoxContainer/4" unique_id=1757918806]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 64
+text = "
+Exit
 "
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Settings" type="Panel" parent="CanvasLayer" unique_id=1582258569]
 visible = false
@@ -129,34 +167,52 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -480.0
-offset_top = -236.0
-offset_right = 480.0
-offset_bottom = 236.0
+offset_left = -275.0
+offset_top = -320.0
+offset_right = 275.0
+offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
 
-[node name="Fullscreen" type="CheckBox" parent="CanvasLayer/Settings/VBoxContainer" unique_id=1166034096]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Settings/VBoxContainer" unique_id=1740464075]
 layout_mode = 2
+texture = ExtResource("3_cayip")
+
+[node name="Fullscreen" type="CheckBox" parent="CanvasLayer/Settings/VBoxContainer/TextureRect" unique_id=1166034096]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 14.0
+offset_right = 616.0
+offset_bottom = 110.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_wwsa2")
 theme_override_font_sizes/font_size = 64
 theme_override_icons/checked = SubResource("GradientTexture2D_xhh6f")
 theme_override_icons/unchecked = SubResource("GradientTexture2D_cayip")
 text = "Fullscreen
 "
 
-[node name="Return" type="Button" parent="CanvasLayer/Settings/VBoxContainer" unique_id=880362344]
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Settings/VBoxContainer" unique_id=933783471]
 layout_mode = 2
+texture_normal = ExtResource("3_cayip")
+texture_pressed = ExtResource("4_158mb")
+
+[node name="Label" type="Label" parent="CanvasLayer/Settings/VBoxContainer/TextureButton" unique_id=775656656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_wwsa2")
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
-text = "Return
-
-
-
+text = "
+Return
 "
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Credits" type="Panel" parent="CanvasLayer" unique_id=1190485824]
 visible = false
@@ -182,57 +238,108 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
 
-[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1705022113]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Credits/VBoxContainer" unique_id=460838656]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+texture = ExtResource("3_cayip")
+
+[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer/TextureRect" unique_id=1705022113]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -30.0
+offset_right = 1036.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
-text = "This excellent game was 
-made by the amazing team of:"
+text = "Music : Batata"
 vertical_alignment = 1
 
-[node name="Label5" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=382733423]
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Credits/VBoxContainer" unique_id=421501553]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+texture = ExtResource("3_cayip")
+
+[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer/TextureRect2" unique_id=346271096]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -30.0
+offset_right = 1036.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
-text = "Game Designer: Leftchester"
+text = "Programmation : Frosted Flare"
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1649390998]
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1525714410]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+texture = ExtResource("3_cayip")
+
+[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer/TextureRect3" unique_id=2126154194]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -30.0
+offset_right = 1036.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
-text = "Modeler: a.mathyas"
+text = "Game Design : LeftChester - a.mathyas"
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1397602670]
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1717738604]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+texture = ExtResource("3_cayip")
+
+[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer/TextureRect4" unique_id=2097769823]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -30.0
+offset_right = 1036.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
-text = "Composer: BATATA ALADA"
+text = "Art :  a.mathyas"
 vertical_alignment = 1
 
-[node name="Label4" type="Label" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1383596125]
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/Credits/VBoxContainer" unique_id=216684224]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+texture = ExtResource("3_cayip")
+
+[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer/TextureRect5" unique_id=1212268058]
+layout_mode = 0
+offset_left = 76.0
+offset_top = -30.0
+offset_right = 1036.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
-text = "Programmer: SWX"
+text = "Writing :  LeftChester"
 vertical_alignment = 1
 
-[node name="CreditsReturn" type="Button" parent="CanvasLayer/Credits/VBoxContainer" unique_id=198801459]
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Credits/VBoxContainer" unique_id=515413863]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_u4yt8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_1rerr")
-text = "Return
+texture_normal = ExtResource("3_cayip")
+texture_pressed = ExtResource("4_158mb")
 
+[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer/TextureButton" unique_id=1237686650]
+layout_mode = 0
+offset_left = -278.0
+offset_top = -25.0
+offset_right = 682.0
+offset_bottom = 154.0
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
+text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-
-"
-
-[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="CanvasLayer/Settings/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
-[connection signal="pressed" from="CanvasLayer/Settings/VBoxContainer/Return" to="." method="_on_return_pressed"]
-[connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/CreditsReturn" to="." method="_on_credits_return_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/1" to="." method="_on__pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/2" to="." method="_on_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/3" to="." method="_on_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/4" to="." method="_on_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/Settings/VBoxContainer/TextureRect/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="CanvasLayer/Settings/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/TextureButton" to="." method="_on_texture_2_button_pressed"]

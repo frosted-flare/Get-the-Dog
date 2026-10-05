@@ -81,6 +81,7 @@ func _physics_process(delta: float) -> void:
 			
 	if Input.is_action_pressed("Menu"):
 		get_tree().paused = true
+		$Camera3D/UI/Dialogue.paused = true
 		$Camera3D/UI/PauseMenu.visible = true
 		$Camera3D/UI.visible = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
