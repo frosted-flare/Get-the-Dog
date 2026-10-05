@@ -284,7 +284,7 @@ offset_bottom = 149.0
 theme_override_fonts/font = ExtResource("5_wwsa2")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
-text = "Game Design : LeftChester - a.mathyas"
+text = "Game Design : Leftchester - a.mathyas"
 vertical_alignment = 1
 
 [node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Credits/VBoxContainer" unique_id=1717738604]
@@ -316,7 +316,7 @@ offset_bottom = 149.0
 theme_override_fonts/font = ExtResource("5_wwsa2")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
-text = "Writing :  LeftChester"
+text = "Writing :  Leftchester"
 vertical_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Credits/VBoxContainer" unique_id=515413863]
