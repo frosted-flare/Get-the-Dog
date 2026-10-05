@@ -158,64 +158,64 @@ func reset_level():
 		
 func _ready() -> void:
 	player = $Player
-	$SeaMusicPlayer.play()
-	player.find_child("Camera3D").find_child("Left_Arm").visible = false
-	player.find_child("Camera3D").find_child("Right_Arm").visible = false
-	await get_tree().create_timer(2).timeout 
-	$Camera3D/AnimationPlayer.play("Boat_Look")
-	
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("On this day 2 years ago I got the news about his illness. 
-	That he would only have 2 more years to live...")
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("Since that day I asked every doctor, 
-	looked through all the books I could find and search for alternative medicines.")
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I finally found him. A herbalist. He told me there is one thing. 
-	Only one thing that could rescue my best friend from death.")
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("It is a plant that grows where no human lives. 
-	That I would have to search through the depths of the sea. ")
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I bought this boat with all the money I had left. 
-	Sold my house and quit my Job...")
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("...so I could spend all my time with him and save his life. He is getting weaker.")
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("The last few weeks he slept more and didn't even hunt the dolphins anymore. 
-	Each night I'm worried he wouldn't wake up the next day. ")
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I have to hurry! I'm getting closer. I Just know it")
-		
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if dialogue_active == false:
-			break
-			
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position1.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position2.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position3.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position4.global_position)
-	await get_tree().create_timer(3).timeout 
-	
-	setup_level_1()
-	$SeaMusicPlayer.stop()
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 2:
-			break
-			
-	$WinSound.play()
-	setup_level_2()
-	
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 3:
-			break
-	$WinSound.play()
-	setup_level_3()
-	
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 4:
-			break
-	$WinSound.play()
+	#$SeaMusicPlayer.play()
+	#player.find_child("Camera3D").find_child("Left_Arm").visible = false
+	#player.find_child("Camera3D").find_child("Right_Arm").visible = false
+	#await get_tree().create_timer(2).timeout 
+	#$Camera3D/AnimationPlayer.play("Boat_Look")
+	#
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("On this day 2 years ago I got the news about his illness. 
+	#That he would only have 2 more years to live...")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("Since that day I asked every doctor, 
+	#looked through all the books I could find and search for alternative medicines.")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I finally found him. A herbalist. He told me there is one thing. 
+	#Only one thing that could rescue my best friend from death.")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("It is a plant that grows where no human lives. 
+	#That I would have to search through the depths of the sea. ")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I bought this boat with all the money I had left. 
+	#Sold my house and quit my Job...")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("...so I could spend all my time with him and save his life. He is getting weaker.")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("The last few weeks he slept more and didn't even hunt the dolphins anymore. 
+	#Each night I'm worried he wouldn't wake up the next day. ")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I have to hurry! I'm getting closer. I Just know it")
+		#
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if dialogue_active == false:
+			#break
+			#
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position1.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position2.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position3.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position4.global_position)
+	#await get_tree().create_timer(3).timeout 
+	#
+	#setup_level_1()
+	#$SeaMusicPlayer.stop()
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if level == 2:
+			#break
+			#
+	#$WinSound.play()
+	#setup_level_2()
+	#
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if level == 3:
+			#break
+	#$WinSound.play()
+	#setup_level_3()
+	#
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if level == 4:
+			#break
+	#$WinSound.play()
 	setup_level_4()
 
 	while true:
@@ -290,8 +290,7 @@ func shark_quick_time_event():
 	player.shark_quick_time = true
 
 func fail_time_event():
-	$Player.death()
-	$FailSound.play()
+	reset_level()
 	
 func pass_time_event():
 	if level == 3:

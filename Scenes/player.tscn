@@ -95,7 +95,7 @@ func _process(delta: float) -> void:
 
 func _on_quick_time_timer_timeout() -> void:
 	if is_instance_valid(player):
-		if player.quick_time == true:
+		if player.quick_time == true or player.swimming == true:
 			main_scene.fail_time_event()
 		$\".\".hide()
 		if is_instance_valid(player):
@@ -189,6 +189,7 @@ shape = SubResource("CapsuleShape3D_x3wgy")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=694327252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73910904, -0.48688865)
+current = true
 fov = 90.0
 
 [node name="UI" type="CanvasLayer" parent="Camera3D" unique_id=461760537]
