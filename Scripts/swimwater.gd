@@ -38,3 +38,4 @@ func _on_area_exited(area: Area3D) -> void:
 	if area.name == "CamArea" and not (player is bool):
 		player.find_child("UI").find_child("Underwater").visible = false
 		player.jump_speed = 0
+		player.find_child("SwimTimer").stop()

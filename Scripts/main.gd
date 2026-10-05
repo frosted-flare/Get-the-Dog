@@ -6,6 +6,7 @@ var dog = preload("res://Scenes/dog.tscn")
 var player
 var quicktimekeys = ["K","J","X","Y","Z"]
 var in_end = false
+var dialogue_active = false
 @export var level  = 0
 
 func play_transition():
@@ -25,7 +26,7 @@ func end_game_scene():
 	$EndScene/Camera3D2.current = true
 	player.find_child("Camera3D").find_child("UI").find_child("End").visible = true
 	player.find_child("Camera3D").find_child("UI").find_child("Panel").visible = false
-	$DirectionalLight3D.rotation = Vector3(-15,42,0)
+	player.find_child("Camera3D").find_child("UI").find_child("ItemFind").visible = false
 
 func setup_level_1():
 	player.in_transition = true
@@ -38,6 +39,7 @@ func setup_level_1():
 	$Map/Ship.sway_amount_v = 0.005
 	$Map/Ship.sway_amount_h = 0.08
 	$Map/Ship.sway_speed = 2
+	$tornado.show()
 	$Sea.show()
 	$SeaCalm.hide()
 	$Camera3D/AnimationPlayer.play("Storm")
@@ -63,6 +65,7 @@ func setup_level_1():
 	
 func setup_level_2():
 	level = 2
+	$tornado.hide()
 	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = false
 	player.in_transition = true
 	player.dodging = false
@@ -90,18 +93,18 @@ func setup_level_3():
 	await get_tree().create_timer(2).timeout 
 	$Player.global_position = $"Level 3/Teleport_Pos".global_position
 	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = true
-	player.find_child("Camera3D").position.y = 0.2
+	player.find_child("Camera3D").position.y = 0.5
 	player.find_child("Camera3D").find_child("UI").find_child("Info").find_child("Text").text = "Swim to the end!"
 	player.rotation = Vector3(0,-1.75,0)
 	player.speed = 2.5
 	await get_tree().create_timer(2).timeout 
+	$RandomSharkTimer.start()
 	player.in_transition = false
-
-	player.find_child("SwimTimer").start()
-	
+		
 func setup_level_4():
 	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = false
 	level = 4
+	player.find_child("Camera3D").position.y = 0.739
 	player.in_transition = true
 	player.dodging = false
 	player.velocity = Vector3(0,0,0)
@@ -128,7 +131,6 @@ func setup_level_5():
 	$Camera3D.current = true
 	$Map/Ship.visible = false
 	$Map/BrokenBoat.visible = true
-	player.speed = 50
 	
 func reset_level():
 	if level == 1:
@@ -144,52 +146,72 @@ func reset_level():
 		
 func _ready() -> void:
 	player = $Player
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("And on that day, the person thought he was very smart. 
-And he was very smart, as he had a very smart hat.")
 	
-	player.find_child("Camera3D").find_child("Left_Arm").visible = false
-	player.find_child("Camera3D").find_child("Right_Arm").visible = false
-	await get_tree().create_timer(2).timeout 
-	$Camera3D/AnimationPlayer.play("Boat_Look")
-	
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position1.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position2.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position3.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position4.global_position)
-	await get_tree().create_timer(3).timeout 
-	
-	setup_level_1()
-	
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 2:
-			break
+	#player.find_child("Camera3D").find_child("Left_Arm").visible = false
+	#player.find_child("Camera3D").find_child("Right_Arm").visible = false
+	#await get_tree().create_timer(2).timeout 
+	#$Camera3D/AnimationPlayer.play("Boat_Look")
+	#
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("On this day 2 years ago I got the news about his illness. 
+	#That he would only have 2 more years to live...")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("Since that day I asked every doctor, 
+	#looked through all the books I could find and search for alternative medicines.")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I finally found him. A herbalist. He told me there is one thing. 
+	#Only one thing that could rescue my best friend from death.")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("It is a plant that grows where no human lives. 
+	#That I would have to search through the depths of the sea. ")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I bought this boat with all the money I had left. 
+	#Sold my house and quit my Job...")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("...so I could spend all my time with him and save his life. He is getting weeker.")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("The last few weeks he slept more and didn't even hunt the dolphins anymore. 
+	#Each night I'm worried he wouldn't wake up the next day. ")
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I have to hurry! I'm getting closer. I Just know it")
+	#
+	#end_game_scene()
+	#
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if dialogue_active == true:
+			#break
 			#
-	
-	setup_level_2()
-	
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 3:
-			break
-	
-	setup_level_3()
-	
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 4:
-			break
-			
-	setup_level_4()
-
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 5:
-			break
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position1.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position2.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position3.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position4.global_position)
+	#await get_tree().create_timer(3).timeout 
+	#
+	#setup_level_1()
+	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("Quick ")
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if level == 2:
+			#break
+			#
+	#
+	#setup_level_2()
+	#
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if level == 3:
+			#break
+	#
+	#setup_level_3()
+	#
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if level == 4:
+			#break
+			#
+	#setup_level_4()
+#
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if level == 5:
+			#break
 	
 	setup_level_5()
 	await get_tree().create_timer(2).timeout 
@@ -213,13 +235,9 @@ And he was very smart, as he had a very smart hat.")
 
 	await get_tree().create_timer(2).timeout 
 	
-	
 	player.in_transition = false
 	$Dog.visible = true
 	player.find_child("Camera3D").find_child("UI").find_child("ItemFind").visible = true
-	player.find_child("Camera3D").find_child("UI").find_child("ItemFind").find_child("Label").visible = false
-
-	
 	
 func quick_time_event():
 	
@@ -239,15 +257,37 @@ func quick_time_event():
 	player_ui.find_child("QuickTime").start()
 	
 	player.quick_time = true
+	
+func shark_quick_time_event():
+	
+	var player_ui = player.find_child("Camera3D").find_child("UI")
+	var key = str(quicktimekeys[randi_range(0,4)])
+
+	player_ui.find_child("QuickTime").find_child("QuickTimeText").text = "Dodge the shark"
+	player_ui.find_child("QuickTime").show()
+	player_ui.find_child("QuickTime").position.y = 1080
+	var ui_tween = create_tween()
+	ui_tween.tween_property(player_ui.find_child("QuickTime"),"position:y",0,1)
+	player_ui.show()
+	player_ui.find_child("QuickTime").find_child("Label2").text = key
+	player.quick_time_key = key
+	player_ui.find_child("QuickTime").find_child("QuickTimeTimer").wait_time = 3
+	
+	player_ui.find_child("QuickTime").start()
+	
+	player.shark_quick_time = true
 
 func fail_time_event():
 	$Player.death()
 	
 func pass_time_event():
-	var new_fragment = fragment.instantiate()
-	new_fragment.global_position = player.global_position + Vector3(0,10,0)
-	$Player_Fragments.add_child(new_fragment)
-	player.dodge()
+	if level == 3:
+		player.swim_dodge()
+	else:
+		var new_fragment = fragment.instantiate()
+		new_fragment.global_position = player.global_position + Vector3(0,10,0)
+		$Player_Fragments.add_child(new_fragment)
+		player.dodge()
 
 func _on_random_fragment_timer_timeout() -> void:
 	if randi_range(1,30) == 1 and player.quick_time == false and level == 1:
@@ -267,3 +307,6 @@ func unlock_lock_box():
 	$Food.global_position = $LockBox.global_position - Vector3(0,0.8,0)
 	$LockBox.queue_free()
 	
+func _on_random_shark_timer_timeout() -> void:
+	if randi_range(1,20) == 1 and player.quick_time == false and player.swimming == true:
+		shark_quick_time_event()

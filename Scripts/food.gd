@@ -38,7 +38,6 @@ func fire(aim_time):
 func _on_shoot_timer_timeout() -> void:
 	reload = false
 
-
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.name == "Player":
 		var player = body

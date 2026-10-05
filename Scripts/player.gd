@@ -9,8 +9,8 @@ const mouse_sensitivity_y = 1
 @export var able_to_interact_with_food = false
 @export var able_to_interact_with_lockbox = false
 @export var able_to_interact_pickup = false
-@export var able_to_interact_give_dog_water = false
-@export var able_to_get_water = false
+@export var able_to_interact_give_dog_herb = false
+@export var able_to_get_herb = false
 @export var able_to_climb = false
 @export var able_to_descend = false
 @export var ladder = false
@@ -19,8 +19,9 @@ const mouse_sensitivity_y = 1
 @export var holding_food = false
 @export var speed = 10
 @export var quick_time = false
+@export var shark_quick_time = false
 @export var jump_speed = 4.5
-@export var holding_water = false
+@export var holding_herb = false
 
 var cannon_interacting = false
 var lockbox_interacting = false
@@ -34,7 +35,7 @@ var swimming = false
 var in_transition = false
 var aim_time = 0 
 var quick_time_key = false
-var itemspickedup = {"wood":0,"stone":0,"branch":0,"sharp_stone":0,"coconut":0}
+var itemspickedup = {"wood":0,"stone":0,"branch":0,"sharp_stone":0}
 var ablepickupitem = false
 var saved_dog = false
 var game_end = false
@@ -49,6 +50,7 @@ func _ready():
 	food_box = main_scene.find_child("Food")
 	
 func _physics_process(delta: float) -> void:
+	
 	if dead == true:
 		return
 		
@@ -65,8 +67,13 @@ func _physics_process(delta: float) -> void:
 	if dodging == false and main_scene.level != 3:
 		$Camera3D.position.y = 0.739
 	
+	if Input.is_action_pressed("Interact"):
+		$Camera3D/UI/Dialogue.text_debounce = 0.01
+	else:
+		$Camera3D/UI/Dialogue.text_debounce = 0.05
+
 	# Handle jump.
-	if Input.is_action_just_pressed("Jump") and main_scene.level != 0 and in_transition == false:
+	if Input.is_action_pressed("Jump") and main_scene.level != 0 and in_transition == false:
 		if swimming:
 			velocity.y = jump_speed / 2
 		elif is_on_floor():
@@ -78,11 +85,10 @@ func _physics_process(delta: float) -> void:
 		$Camera3D/UI.visible = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
-	print(game_end)
 	if Input.is_action_pressed("Interact") and game_end == true:
 		main_scene.end_game_scene()
 	
-	if saved_dog == true and itemspickedup["wood"] == 5 and itemspickedup["stone"] == 12 and itemspickedup["branch"] == 3 and itemspickedup["sharp_stone"] == 2 and itemspickedup["coconut"] == 1 and game_end_timer_started == false:
+	if saved_dog == true and itemspickedup["wood"] == 5 and itemspickedup["stone"] == 12 and itemspickedup["branch"] == 3 and itemspickedup["sharp_stone"] == 2 and game_end_timer_started == false:
 		$Camera3D/UI/Panel/Text.text = "Press E to place campfire(End the game)"
 		$Camera3D/UI/Panel.visible = true
 		$GameEndTimer.start()
@@ -92,26 +98,21 @@ func _physics_process(delta: float) -> void:
 		var item_name = str(ablepickupitem.get_script().get_global_name())
 		itemspickedup[item_name] = itemspickedup[item_name] + 1
 		if item_name == "wood":
-			$Camera3D/UI/ItemFind/VBoxContainer/Wood.text = "Wood:" + str(itemspickedup[item_name]) + "/5"
+			$Camera3D/UI/ItemFind/VBoxContainer/Back2/Wood.text = "Wood:" + str(itemspickedup[item_name]) + "/5"
 			if itemspickedup[item_name] == 5:
-				$Camera3D/UI/ItemFind/VBoxContainer/Wood.visible = false
+				$Camera3D/UI/ItemFind/VBoxContainer/Back2.visible = false
 		elif item_name == "stone":
-			$Camera3D/UI/ItemFind/VBoxContainer/Stones.text = "Stones:" + str(itemspickedup[item_name]) + "/12"
+			$Camera3D/UI/ItemFind/VBoxContainer/Back3/Stones.text = "Stones:" + str(itemspickedup[item_name]) + "/12"
 			if itemspickedup[item_name] == 12:
-				$Camera3D/UI/ItemFind/VBoxContainer/Stones.visible = false
+				$Camera3D/UI/ItemFind/VBoxContainer/Back3.visible = false
 		elif item_name == "branch":
-			$Camera3D/UI/ItemFind/VBoxContainer/Branches.text = "Branches:" + str(itemspickedup[item_name]) + "/3"
+			$Camera3D/UI/ItemFind/VBoxContainer/Back4/Branches.text = "Branches:" + str(itemspickedup[item_name]) + "/3"
 			if itemspickedup[item_name] == 3:
-				$Camera3D/UI/ItemFind/VBoxContainer/Branches.visible = false
+				$Camera3D/UI/ItemFind/VBoxContainer/Back4.visible = false
 		elif item_name == "sharp_stone":
-			$"Camera3D/UI/ItemFind/VBoxContainer/SharpStones".text = "SharpStones:" + str(itemspickedup[item_name]) + "/2"
+			$"Camera3D/UI/ItemFind/VBoxContainer/Back5/Sharp Stone".text = "SharpStones:" + str(itemspickedup[item_name]) + "/2"
 			if itemspickedup[item_name] == 2:
-				$Camera3D/UI/ItemFind/VBoxContainer/SharpStones.visible = false
-		elif item_name == "coconut":
-			$Camera3D/UI/ItemFind/VBoxContainer/Coconut.text = "Coconut:" + str(itemspickedup[item_name]) + "/1"
-			if itemspickedup[item_name] == 1:
-				$Camera3D/UI/ItemFind/VBoxContainer/Coconut.visible = false
-			$Camera3D/UI/ItemFind/VBoxContainer/FullWithWater.visible = true
+				$Camera3D/UI/ItemFind/VBoxContainer/Back5.visible = false
 				
 		ablepickupitem.queue_free()
 		
@@ -132,32 +133,37 @@ func _physics_process(delta: float) -> void:
 			var ui_tween = create_tween()
 			ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
 			quick_time = false
+			quick_time_key = false
+
 			main_scene.pass_time_event()
 		elif Input.is_action_just_pressed("QuickTime2") and quick_time_key == "J":
 			
 			var ui_tween = create_tween()
 			ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
 			quick_time = false
+			quick_time_key = false
 			main_scene.pass_time_event()
 		elif Input.is_action_just_pressed("QuickTime3") and quick_time_key == "X":
 			
 			var ui_tween = create_tween()
 			ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
 			quick_time = false
+			quick_time_key = false
 			main_scene.pass_time_event()
 		elif Input.is_action_just_pressed("QuickTime4") and quick_time_key == "Y":
 			
 			var ui_tween = create_tween()
 			ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
 			quick_time = false
+			quick_time_key = false
 			main_scene.pass_time_event()
 		elif Input.is_action_just_pressed("QuickTime5") and quick_time_key == "Z":
-			
 			var ui_tween = create_tween()
 			ui_tween.tween_property($Camera3D/UI/QuickTime,"position:y",1080,1)
 			quick_time = false
+			quick_time_key = false
 			main_scene.pass_time_event()
-		
+
 	if Input.is_action_just_pressed("Fire") and lockbox_interacting == true:
 		if $Camera3D/UI/LockBox/Node2D/Panel/Dial.rotation > 1 and $Camera3D/UI/LockBox/Node2D/Panel/Dial.rotation < 2:
 			main_scene.unlock_lock_box()
@@ -196,18 +202,23 @@ func _physics_process(delta: float) -> void:
 		move_tween.tween_property($".","global_position",ladder.find_child("StartClimbPoint").global_position,0.25)
 		$Camera3D/UI.visible = false
 		
-	if Input.is_action_just_pressed("Interact") and able_to_interact_give_dog_water:
-		$Camera3D/UI/ItemFind/VBoxContainer/GiveToDog.visible = false
+	if Input.is_action_just_pressed("Interact") and able_to_interact_give_dog_herb and holding_herb == true:
+		$Camera3D/UI/ItemFind/VBoxContainer/Back7.visible = false
 		main_scene.find_child("PlayDog").global_position = main_scene.find_child("Dog").global_position 
 		main_scene.find_child("Dog").queue_free()
-		$"../IslandRegion/DogWaterPrompt".queue_free()
 		saved_dog = true
-		able_to_interact_give_dog_water = false
+		$Camera3D/UI/ItemFind/VBoxContainer/Back2.visible = true
+		$Camera3D/UI/ItemFind/VBoxContainer/Back3.visible = true
+		$Camera3D/UI/ItemFind/VBoxContainer/Back4.visible = true
+		$Camera3D/UI/ItemFind/VBoxContainer/Back5.visible = true
+		main_scene.find_child("Pickups").position = Vector3(-24.57,3.7,37.4)
+
+		able_to_interact_give_dog_herb = false
 		
-	if Input.is_action_just_pressed("Interact") and able_to_get_water:
-			$Camera3D/UI/ItemFind/VBoxContainer/FullWithWater.visible = false
-			holding_water = true
-			$Camera3D/UI/ItemFind/VBoxContainer/GiveToDog.visible = true
+	if Input.is_action_just_pressed("Interact") and able_to_get_herb:
+			$Camera3D/UI/ItemFind/VBoxContainer/Back6.visible = false
+			holding_herb = true
+			$Camera3D/UI/ItemFind/VBoxContainer/Back7.visible = true
 
 
 		
@@ -240,7 +251,7 @@ func _physics_process(delta: float) -> void:
 			$Camera3D.position.x = $Camera3D.position.x + sin(0) * 0.016
 		move_and_slide()
 		
-	if dodging == true:
+	if dodging == true and main_scene.level != 3:
 		$Camera3D.position.y = -0.25
 		move_and_slide()
 	
@@ -290,10 +301,18 @@ func dodge():
 	dodging = true
 	velocity = transform.basis.z * 15
 	velocity.y += 2
-
+			
+func swim_dodge():
+	if global_position.y < -296.7:
+		velocity.y += 2
+	else:
+		velocity.y -= 8
+	$"../Shark".global_position = global_position
+	$"../Shark/AnimationPlayer".play("SharkAttack")
+	
+		
 func _on_game_end_timer_timeout() -> void:
 	game_end = true
-
 
 func _on_swim_timer_timeout() -> void:
 	main_scene.reset_level()

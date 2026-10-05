@@ -3,10 +3,14 @@
 [ext_resource type="Script" uid="uid://bftwc00pxg4xn" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://cjvdas1x3dyjh" path="res://Assets/PlayerCharacter.glb" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://bdvcykixqahq7" path="res://Scripts/dialogue.gd" id="3_3smsa"]
-[ext_resource type="Texture2D" uid="uid://cmp3ihixo5cms" path="res://Assets/playerface_icon.png" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://dnclbb1q73v5q" path="res://UIs/dialogueplayericon.png" id="4_f1ek2"]
+[ext_resource type="Texture2D" uid="uid://dh43kr17q8mde" path="res://UIs/dialoguebox.png" id="5_8erm5"]
+[ext_resource type="Texture2D" uid="uid://cr0asn5pjadmc" path="res://UIs/PlayerIcon.png" id="5_tx1dd"]
 [ext_resource type="Script" uid="uid://koqgl3064fty" path="res://Scripts/pause_menu.gd" id="5_x3wgy"]
 [ext_resource type="Script" uid="uid://sh4hlggmrydg" path="res://Scripts/settings.gd" id="6_3smsa"]
 [ext_resource type="PackedScene" uid="uid://c3hs38akdg1ur" path="res://AssetScenes/left_arm.tscn" id="7_8erm5"]
+[ext_resource type="Texture2D" uid="uid://d18da3kqqdffu" path="res://UIs/checklist.png" id="7_tx1dd"]
+[ext_resource type="Texture2D" uid="uid://dnwi1dord563r" path="res://UIs/checklistbuttons.png" id="8_gymyn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x3wgy"]
 
@@ -14,7 +18,7 @@
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fs7ks"]
-bg_color = Color(0, 0, 0, 0.43137255)
+bg_color = Color(0, 0, 0, 0)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -24,7 +28,7 @@ corner_radius_bottom_left = 10
 bg_color = Color(0, 0.06666667, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0iea"]
-bg_color = Color(0, 0.06666667, 0, 0.14117648)
+bg_color = Color(0, 0.06666667, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8erm5"]
 bg_color = Color(0, 0, 0, 1)
@@ -200,6 +204,7 @@ shape = SubResource("CapsuleShape3D_x3wgy")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=694327252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73910904, -0.48688865)
+current = true
 fov = 90.0
 
 [node name="UI" type="CanvasLayer" parent="Camera3D" unique_id=461760537]
@@ -241,31 +246,63 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ukyrk")
 script = ExtResource("3_3smsa")
 
-[node name="Text" type="Label" parent="Camera3D/UI/Dialogue" unique_id=1052449032]
+[node name="Box" type="TextureRect" parent="Camera3D/UI/Dialogue" unique_id=1803268544]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -907.0
-offset_top = 302.0
-offset_right = 907.0
-offset_bottom = 481.0
+offset_left = -294.0
+offset_top = 262.0
+offset_right = 931.0
+offset_bottom = 504.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
+texture = ExtResource("5_8erm5")
+
+[node name="Text" type="Label" parent="Camera3D/UI/Dialogue/Box" unique_id=1052449032]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_fs7ks")
 text = "And on that day, the person thought he was very smart. 
 And he was very smart, as he had a very smart hat."
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Camera3D/UI/Dialogue" unique_id=704239183]
+[node name="TextureRect" type="TextureRect" parent="Camera3D/UI/Dialogue" unique_id=1090044169]
 layout_mode = 0
-offset_left = 1543.0
-offset_top = 547.0
-offset_right = 1843.0
-offset_bottom = 847.0
-texture = ExtResource("3_x3wgy")
+offset_left = 1549.5
+offset_top = 519.0
+offset_right = 1837.5
+offset_bottom = 791.0
+texture = ExtResource("4_f1ek2")
+
+[node name="Player" type="TextureRect" parent="Camera3D/UI/Dialogue/TextureRect" unique_id=704239183]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.75
+offset_top = -119.75
+offset_right = 119.75
+offset_bottom = 119.75
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_tx1dd")
+expand_mode = 1
 
 [node name="End" type="Panel" parent="Camera3D/UI" unique_id=2087171766]
 visible = false
@@ -326,86 +363,151 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
 
-[node name="Label" type="Label" parent="Camera3D/UI/ItemFind" unique_id=667508680]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -240.0
-offset_right = 240.0
-offset_bottom = 179.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 40
-text = "Find These Objects!"
-horizontal_alignment = 1
+[node name="TextureRect" type="TextureRect" parent="Camera3D/UI/ItemFind" unique_id=1990895807]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_tx1dd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera3D/UI/ItemFind" unique_id=708725830]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 66.0
+offset_left = 21.0
+offset_top = 152.0
+offset_right = -227.0
+offset_bottom = 310.40002
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Coconut" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=725709421]
+[node name="Back2" type="TextureRect" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=725024599]
+visible = false
+z_index = 10
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Coconut: 0/1"
-horizontal_alignment = 1
+texture = ExtResource("8_gymyn")
 
-[node name="Wood" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=186720867]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
+[node name="Wood" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer/Back2" unique_id=1544572008]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
 text = "Wood: 0/5"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Stones" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=540089768]
+[node name="Back3" type="TextureRect" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=1511383383]
+visible = false
+z_index = 10
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+texture = ExtResource("8_gymyn")
+
+[node name="Stones" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer/Back3" unique_id=659582790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
 text = "Stones: 0/12"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Branches" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=341162846]
+[node name="Back4" type="TextureRect" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=1318221746]
+visible = false
+z_index = 10
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+texture = ExtResource("8_gymyn")
+
+[node name="Branches" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer/Back4" unique_id=2031652331]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
 text = "Branches: 0/3"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="SharpStones" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=1153783365]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Sharp Stone: 0/2"
-horizontal_alignment = 1
-
-[node name="FullWithWater" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=1755939514]
+[node name="Back5" type="TextureRect" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=1322403144]
 visible = false
+z_index = 10
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Fill Coconut with water"
-horizontal_alignment = 1
+texture = ExtResource("8_gymyn")
 
-[node name="GiveToDog" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=583471392]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Give Water To Dog"
+[node name="Sharp Stone" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer/Back5" unique_id=24842354]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Sharp Stones: 0/2"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LightFire" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=43293359]
-visible = false
+[node name="Back6" type="TextureRect" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=675647693]
+z_index = 10
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Light the Fire"
-horizontal_alignment = 1
+texture = ExtResource("8_gymyn")
 
-[node name="SharkMeat" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=418028313]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Grab The Shark Meat
-And Cook It On The Fire"
+[node name="GrabPlant" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer/Back6" unique_id=1070380266]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Herb"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back7" type="TextureRect" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=1434327283]
+visible = false
+z_index = 10
+layout_mode = 2
+texture = ExtResource("8_gymyn")
+
+[node name="FeedPlant" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer/Back7" unique_id=1117395055]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Give Herb To Dog"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="TextureRect" parent="Camera3D/UI/ItemFind" unique_id=1184293653]
+z_index = 10
+layout_mode = 0
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 253.0
+offset_bottom = 102.0
+texture = ExtResource("8_gymyn")
+
+[node name="Title" type="Label" parent="Camera3D/UI/ItemFind/Title" unique_id=660030913]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Find These Objects!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Death" type="Panel" parent="Camera3D/UI" unique_id=730243003]
 visible = false
@@ -777,7 +879,7 @@ transform = Transform3D(1.0000002, -0.0002618134, -1.0528964e-08, 0.0002618134, 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1060638923]
 
 [node name="SwimTimer" type="Timer" parent="." unique_id=217814019]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [node name="GameEndTimer" type="Timer" parent="." unique_id=1051637629]

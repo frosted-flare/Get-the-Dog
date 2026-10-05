@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cs6sq3ryqa4gc"]
 
 [ext_resource type="Script" uid="uid://dph3ihv0m6fpn" path="res://Scripts/menu.gd" id="1_1rerr"]
-[ext_resource type="Texture2D" uid="uid://dp4gamw0o8rf0" path="res://Assets/background.png" id="2_xhh6f"]
+[ext_resource type="Texture2D" uid="uid://5jmpsf5pa2mp" path="res://UIs/title_screen.png" id="2_xhh6f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cayip"]
 bg_color = Color(0.6, 0.6, 0.6, 0.39215687)
@@ -47,9 +47,11 @@ script = ExtResource("1_1rerr")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1277456596]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=839239109]
-offset_right = 960.0
-offset_bottom = 540.0
-scale = Vector2(2, 2)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_xhh6f")
 
 [node name="Main" type="Panel" parent="CanvasLayer" unique_id=437374334]
