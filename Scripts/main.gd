@@ -144,8 +144,8 @@ func reset_level():
 		
 func _ready() -> void:
 	player = $Player
-	#player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("And on that day, the person thought he was very smart. 
-#And he was very smart, as he had a very smart hat.")
+	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("And on that day, the person thought he was very smart. 
+And he was very smart, as he had a very smart hat.")
 	
 	player.find_child("Camera3D").find_child("Left_Arm").visible = false
 	player.find_child("Camera3D").find_child("Right_Arm").visible = false
