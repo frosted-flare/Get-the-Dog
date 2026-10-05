@@ -26,9 +26,9 @@ func _physics_process(delta: float) -> void:
 		var new_velocity = (next_location-current_location).normalized() * 3
 		velocity = velocity.move_toward(new_velocity, .25)
 		if is_on_floor():
-			$Dog.find_child("AnimationPlayer").play("Walk-loop")
+			$DogMesh.find_child("AnimationPlayer").play("Walk-loop")
 	elif state == "Idle":
-		$Dog.find_child("AnimationPlayer").stop(false)
+		$DogMesh.find_child("AnimationPlayer").stop(false)
 		velocity = Vector3(0,0,0)
 
 	# Add the gravity.
@@ -79,8 +79,8 @@ func _on_navigation_agent_3d_link_reached(details: Dictionary) -> void:
 		next_location = details["link_entry_position"]
 	velocity = Vector3(0,0,0)
 	$JumpTimer.start()
-	$Dog.find_child("AnimationPlayer").stop()
-	$Dog.find_child("AnimationPlayer").play("Jump")
+	$DogMesh.find_child("AnimationPlayer").stop()
+	$DogMesh.find_child("AnimationPlayer").play("Jump")
 	in_air = true
 
 func _on_jump_timer_timeout() -> void:
@@ -91,7 +91,7 @@ func _on_jump_timer_timeout() -> void:
 	var new_velocity = (next_location-current_location).normalized() * $".".global_position.distance_to(next_location)
 	velocity = new_velocity
 	velocity.y += 5
-	$Dog.find_child("AnimationPlayer").stop(false)
+	$DogMesh.find_child("AnimationPlayer").stop(false)
 	$JumpAirTimer.start()
 	in_air = true
 

@@ -43,6 +43,5 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.name == "Player":
 		var player = body
 		var player_ui = body.find_child("Camera3D").find_child("UI")
-		player_ui.visible = false
 		player.able_to_interact_with_food = false
 		player_ui.find_child("Panel").visible = false
