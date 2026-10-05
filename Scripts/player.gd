@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 
-const JUMP_VELOCITY = 4.5
 
 const mouse_sensitivity_x = 1
 const mouse_sensitivity_y = 1
@@ -9,6 +8,7 @@ const mouse_sensitivity_y = 1
 @export var able_to_interact_with_cannon = false
 @export var able_to_interact_with_food = false
 @export var able_to_interact_with_lockbox = false
+@export var able_to_interact_pickup = false
 @export var able_to_climb = false
 @export var able_to_descend = false
 @export var ladder = false
@@ -17,7 +17,7 @@ const mouse_sensitivity_y = 1
 @export var holding_food = false
 @export var speed = 10
 @export var quick_time = false
-
+@export var jump_speed = 4.5
 var cannon_interacting = false
 var lockbox_interacting = false
 var dodging = false
@@ -30,11 +30,13 @@ var swimming = false
 var in_transition = false
 var aim_time = 0 
 var quick_time_key = false
+var itemspickedup = {"wood":0,"stone":0,"branch":0,"sharp_stone":0,"coconut":0}
+var ablepickupitem = false
+
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	main_scene = $".".owner
-	cannon = main_scene.find_child("Cannon")
 	
 	$".".rotation.y = 3
 	$Camera3D.rotation.x = 0
@@ -54,15 +56,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		dodging = false
 	
-	if dodging == false:
+	if dodging == false and main_scene.level != 3:
 		$Camera3D.position.y = 0.739
-			
+	
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and main_scene.level != 0 and in_transition == false:
 		if swimming:
-			velocity.y = JUMP_VELOCITY / 2
+			velocity.y = jump_speed / 2
 		elif is_on_floor():
-			velocity.y = JUMP_VELOCITY
+			velocity.y = jump_speed
 			
 	if Input.is_action_pressed("Menu"):
 		get_tree().paused = true
@@ -70,6 +72,23 @@ func _physics_process(delta: float) -> void:
 		$Camera3D/UI.visible = true
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+	if Input.is_action_just_pressed("Interact") and able_to_interact_pickup and not (ablepickupitem is bool):
+		var item_name = str(ablepickupitem.get_script().get_global_name())
+		itemspickedup[item_name] = itemspickedup[item_name] + 1
+		if item_name == "wood":
+			$Camera3D/UI/ItemFind/VBoxContainer/Wood.text = "Wood:" + str(itemspickedup[item_name]) + "/5"
+		elif item_name == "stone":
+			$Camera3D/UI/ItemFind/VBoxContainer/Stones.text = "Stones:" + str(itemspickedup[item_name]) + "/12"
+		elif item_name == "branch":
+			$Camera3D/UI/ItemFind/VBoxContainer/Branches.text = "Branches:" + str(itemspickedup[item_name]) + "/3"		
+		elif item_name == "sharp_stone":
+			$"Camera3D/UI/ItemFind/VBoxContainer/SharpStones".text = "SharpStones:" + str(itemspickedup[item_name]) + "/2"
+		elif item_name == "coconut":
+			$Camera3D/UI/ItemFind/VBoxContainer/Coconut.text = "Coconut:" + str(itemspickedup[item_name]) + "/1"
+		
+		
+		ablepickupitem.queue_free()
+		
 	# Handle shoot.
 	if Input.is_action_pressed("Fire") and cannon_interacting == true:
 		cannon.fire()
@@ -81,7 +100,6 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_released("Fire") and holding_food == true and cannon_interacting == false:
 		food_box.fire(aim_time)
 	# Handle quicktime.
-	print(quick_time_key)
 	if Input.is_action_just_pressed("QuickTime1") and quick_time_key == "K":
 		
 		var ui_tween = create_tween()
@@ -227,6 +245,8 @@ func death():
 	$Camera3D/UI/Death.visible = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+func reset():
+	pass
 		
 func dodge():
 	dodging = true

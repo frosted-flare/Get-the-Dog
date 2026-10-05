@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cmrk1n8abga6b" path="res://Assets/Canon.glb" id="2_qlvt6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3uv2y"]
-radius = 3.0
+radius = 1.5
 
 [node name="Canon" type="Node3D" unique_id=1598722398]
 script = ExtResource("1_qayxd")

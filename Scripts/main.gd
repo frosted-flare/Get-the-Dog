@@ -16,23 +16,10 @@ func play_transition():
 	$TransitionTimer.start()
 	
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	player = $Player
+
+
 	
-	player.find_child("Camera3D").find_child("Left_Arm").visible = false
-	player.find_child("Camera3D").find_child("Right_Arm").visible = false
-	await get_tree().create_timer(2).timeout 
-	$Camera3D/AnimationPlayer.play("Boat_Look")
-	
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position1.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position2.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position3.global_position)
-	await get_tree().create_timer(3.0).timeout 
-	$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position4.global_position)
-	await get_tree().create_timer(3).timeout 
+func setup_level_1():
 	player.in_transition = true
 	play_transition()
 	await get_tree().create_timer(2).timeout 
@@ -64,48 +51,44 @@ func _ready() -> void:
 	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = true
 	player.find_child("Camera3D").find_child("UI").find_child("Info").find_child("Text").text = "Get To The Other End Of The Boat!"
 	
-	
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 2:
-			break
+func setup_level_2():
+	level = 2
 	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = false
 	player.in_transition = true
 	player.dodging = false
 	player.velocity = Vector3(0,0,0)
 	play_transition()
-
+	var quick_time_key = false
+	player.find_child("Camera3D").find_child("UI").find_child("QuickTime").visible = false
 	await get_tree().create_timer(2).timeout 
+	player.speed = 3
+	player.jump_speed = 4
+	
 	$Player.global_position = $"Level 2/Teleport_Pos".global_position
-	player.rotation = Vector3(0,0,0)
+	player.rotation = Vector3(0,-1.75,0)
 	await get_tree().create_timer(2).timeout 
 	player.in_transition = false
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 3:
-			break
+	
+func setup_level_3():
+	level = 3
 	player.in_transition = true
 	player.dodging = false
 	player.velocity = Vector3(0,0,0)
 	play_transition()
 
 	await get_tree().create_timer(2).timeout 
-	$Player.global_position = $Deck2/Teleport_Pos.global_position
+	$Player.global_position = $"Level 3/Teleport_Pos".global_position
 	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = true
+	player.find_child("Camera3D").position.y = 0.2
 	player.find_child("Camera3D").find_child("UI").find_child("Info").find_child("Text").text = "Swim to the end!"
+	player.rotation = Vector3(0,-1.75,0)
+	player.speed = 2.5
 	await get_tree().create_timer(2).timeout 
 	player.in_transition = false
-	player.swimming = true
-	player.speed = 7.5
-	player.find_child("UI").find_child("Underwater").visible = true
-	player.find_child("UI").visible = true
+
 	player.find_child("SwimTimer").start()
 	
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 4:
-			break
-
+func setup_level_4():
 	player.find_child("Camera3D").find_child("UI").find_child("Info").visible = false
 	level = 4
 	player.in_transition = true
@@ -114,14 +97,15 @@ func _ready() -> void:
 	play_transition()
 
 	await get_tree().create_timer(2).timeout 
-	player.global_position = $NavigationRegion3D2/Deck3/Teleport_Pos.global_position
+	player.global_position = $DogLevel/NavigationRegion3D2/Teleport_Pos.global_position
+	$PlayDog.global_position = $DogLevel/NavigationRegion3D2/Dog_Teleport_Pos.global_position
 	player.rotation = Vector3(0,0,0)
 	await get_tree().create_timer(2).timeout 
 	player.in_transition = false
-	while true:
-		await get_tree().create_timer(0.25).timeout 
-		if level == 5:
-			break
+	player.speed = 5
+	player.jump_speed = 5
+	
+func setup_level_5():
 	player.in_transition = true
 	player.dodging = false
 	player.velocity = Vector3(0,0,0)
@@ -132,7 +116,94 @@ func _ready() -> void:
 	$Camera3D.current = true
 	$Map/Ship.visible = false
 	$Map/BrokenBoat.visible = true
+	await get_tree().create_timer(2).timeout 
+	
+func reset_level():
+	if level == 1:
+		setup_level_1()
+	elif level == 2:
+		setup_level_2()
+	elif level == 3:
+		setup_level_3()
+	elif level == 4:
+		setup_level_4()
+	elif level == 5:
+		setup_level_5()
+		
+func _ready() -> void:
+	player = $Player
+	
+	#player.find_child("Camera3D").find_child("Left_Arm").visible = false
+	#player.find_child("Camera3D").find_child("Right_Arm").visible = false
+	#await get_tree().create_timer(2).timeout 
+	#$Camera3D/AnimationPlayer.play("Boat_Look")
+	#
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position1.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position2.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position3.global_position)
+	#await get_tree().create_timer(3.0).timeout 
+	#$Map/Ship/NavRegion/CharacterBody3D.go_to_pos($Map/Ship/NavRegion/Position4.global_position)
+	#await get_tree().create_timer(3).timeout 
+	#
+	#setup_level_1()
+	#
+	#while true:
+		#await get_tree().create_timer(0.25).timeout 
+		#if level == 2:
+			#break
+			##
+	
+	setup_level_2()
+	
+	while true:
+		await get_tree().create_timer(0.25).timeout 
+		if level == 3:
+			break
+	
+	setup_level_3()
+	
+	while true:
+		await get_tree().create_timer(0.25).timeout 
+		if level == 4:
+			break
+			
+	setup_level_4()
 
+	while true:
+		await get_tree().create_timer(0.25).timeout 
+		if level == 5:
+			break
+	
+	setup_level_5()
+	
+	$Map/BrokenBoat/Dog/AnimationPlayer2.play("DogSwim")
+	$Map/BrokenBoat/SwimmingPlayer/AnimationPlayer2.play("Swim")
+	await get_tree().create_timer(3).timeout 
+	
+	player.in_transition = true
+	player.dodging = false
+	player.velocity = Vector3(0,0,0)
+	play_transition()
+
+	await get_tree().create_timer(2).timeout 
+	player.global_position = $IslandRegion/Island2/PlayerIslandSpawn.global_position
+	$Camera3D.current = false
+	player.find_child("Camera3D").current = true
+	player.rotation = Vector3(0,0,0)
+	$Map/BrokenBoat/Dog.queue_free()
+	$Map/BrokenBoat/SwimmingPlayer.queue_free()
+	await get_tree().create_timer(2).timeout 
+	$Food.position = Vector3(-24,4.111,35)
+	
+	player.in_transition = false
+	$Dog.visible = true
+	player.find_child("Camera3D").find_child("UI").find_child("ItemFind").visible = true
+	player.find_child("Camera3D").find_child("UI").find_child("ItemFind").find_child("Label").visible = false
+
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

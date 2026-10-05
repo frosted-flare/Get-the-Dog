@@ -24,8 +24,6 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		player.able_to_interact_with_food = true
 		player_ui.find_child("Panel").visible = true
 
-
-
 func fire(aim_time):
 	if reload == false:
 		var direction = -main_scene.find_child("Player").find_child("Camera3D").global_transform.basis.z

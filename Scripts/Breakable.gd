@@ -11,5 +11,9 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is cannon_ball:
-		$"..".queue_free()
 		body.queue_free()
+		$"../AnimationPlayer".play("Explode")
+		$"../DestroyTimer".start()
+
+func _on_destroy_timer_timeout() -> void:
+	$"..".queue_free()

@@ -13,6 +13,7 @@ func _process(delta: float) -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.name == "Player":
 		body.speed = 2.5
+		body.find
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.name == "Player":

@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name dog
 
 const SPEED = 1
 const JUMP_VELOCITY = 4.5
@@ -29,7 +29,8 @@ func _physics_process(delta: float) -> void:
 			$Dog.find_child("AnimationPlayer").play("Walk-loop")
 	elif state == "Idle":
 		$Dog.find_child("AnimationPlayer").stop(false)
-		
+		velocity = Vector3(0,0,0)
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -41,6 +42,9 @@ func _physics_process(delta: float) -> void:
 func update_target():
 	var bullets = main_scene.find_child("Bullets").get_children()
 	var closest_food_distance = 10000
+	if not (closest_food is bool):
+		if closest_food.global_position.y > -320:
+			closest_food = false
 	for bullet in bullets:
 		if bullet is food_object:
 			var distance = global_position.distance_to(bullet.global_position)
@@ -52,7 +56,7 @@ func update_target():
 				state = "Idle"
 				velocity = Vector3(0,0,0)
 
-			elif found_food is bool and closest_food is bool and bullet.anchored == true:
+			elif found_food is bool and closest_food is bool and bullet.anchored == true and bullet.global_position.y > -320:
 				if distance < closest_food_distance and distance < 10:
 					closest_food_distance = distance
 					closest_food = bullet
@@ -60,8 +64,8 @@ func update_target():
 					moving = true
 					state = "Track"
 					$NavigationAgent3D.target_position = closest_food.global_position
-					print($NavigationAgent3D.target_position)
-				
+					
+			
 func _on_timer_timeout() -> void:
 	if state != "Jump":
 		update_target()
