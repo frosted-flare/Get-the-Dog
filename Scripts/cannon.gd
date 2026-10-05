@@ -34,6 +34,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		player_ui.find_child("Text").text = "Press E to interact"
 		player_ui.visible = true
 		player.able_to_interact_with_cannon = true
+		player.cannon = self
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.name == "Player":

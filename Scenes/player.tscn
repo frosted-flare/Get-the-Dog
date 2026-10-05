@@ -2,16 +2,29 @@
 
 [ext_resource type="Script" uid="uid://bftwc00pxg4xn" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://cjvdas1x3dyjh" path="res://Assets/PlayerCharacter.glb" id="2_6t5aa"]
-[ext_resource type="Script" uid="uid://dvll6ffmi5eho" path="res://Scripts/quick_time.gd" id="2_cvnsp"]
-[ext_resource type="Script" uid="uid://ck6eteuuiav73" path="res://Scripts/lock_box_ui.gd" id="4_fkybt"]
-[ext_resource type="PackedScene" uid="uid://c7l7ik5cthuj4" path="res://Assets/LeftArm.glb" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://bdvcykixqahq7" path="res://Scripts/dialogue.gd" id="3_3smsa"]
+[ext_resource type="Texture2D" uid="uid://cmp3ihixo5cms" path="res://Assets/playerface_icon.png" id="3_x3wgy"]
 [ext_resource type="Script" uid="uid://koqgl3064fty" path="res://Scripts/pause_menu.gd" id="5_x3wgy"]
 [ext_resource type="Script" uid="uid://sh4hlggmrydg" path="res://Scripts/settings.gd" id="6_3smsa"]
+[ext_resource type="PackedScene" uid="uid://c3hs38akdg1ur" path="res://AssetScenes/left_arm.tscn" id="7_8erm5"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f60y1"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x3wgy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukyrk"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fs7ks"]
+bg_color = Color(0, 0, 0, 0.43137255)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqcod"]
+bg_color = Color(0, 0.06666667, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0iea"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0, 0.06666667, 0, 0.14117648)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8erm5"]
 bg_color = Color(0, 0, 0, 1)
@@ -35,12 +48,77 @@ func _on_button_pressed() -> void:
 	
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dp3o"]
+bg_color = Color(0, 0.06666667, 0, 0)
+
+[sub_resource type="GDScript" id="GDScript_h4iuc"]
+script/source = "extends Panel
+
+var timer 
+var time_elapsed = 0
+var var_last_update = 0
+var active = false
+var main_scene
+var player
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	player = $\"../../..\"
+	main_scene = player.owner
+
+func start():
+	timer = $QuickTimeTimer
+	timer.start()
+	$\"..\".show()
+	$\"../Panel\".hide()
+	active = true
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if active == true:
+		time_elapsed += delta
+		if time_elapsed-var_last_update > 0.1:
+			var_last_update = time_elapsed
+			$VBoxContainer/Label.text = str(snapped(timer.time_left,0.1))
+	
+	if is_instance_valid($\"../../../SwimTimer\"): # Does swim timer
+		$\"../Underwater/Time\".text = str(snapped($\"../../../SwimTimer\".time_left,0.1))
+
+func _on_quick_time_timer_timeout() -> void:
+	if is_instance_valid(player):
+		if player.quick_time == true:
+			main_scene.fail_time_event()
+		$\".\".hide()
+		if is_instance_valid(player):
+			player.quick_time = false
+"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvnsp"]
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igrcy"]
+bg_color = Color(0, 0.06666667, 0, 0)
+
+[sub_resource type="GDScript" id="GDScript_fs7ks"]
+script/source = "extends Panel
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if $\"../../..\".lockbox_interacting == true:
+		$Node2D/Panel/Dial.rotation += 3*delta
+	if 	$Node2D/Panel/Dial.rotation >= 4.5:
+		$Node2D/Panel/Dial.rotation = -1.8
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkybt"]
 bg_color = Color(0, 0, 0, 1)
@@ -112,42 +190,108 @@ radius = 0.1
 
 [node name="Player" type="CharacterBody3D" unique_id=1962825026]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 387
 script = ExtResource("1_v0iea")
 
 [node name="PlayerCharacter" parent="." unique_id=1474071098 instance=ExtResource("2_6t5aa")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1827617054]
-shape = SubResource("CapsuleShape3D_f60y1")
+shape = SubResource("CapsuleShape3D_x3wgy")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=694327252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73910904, -0.48688865)
+fov = 90.0
 
 [node name="UI" type="CanvasLayer" parent="Camera3D" unique_id=461760537]
 process_mode = 3
 
 [node name="Panel" type="Panel" parent="Camera3D/UI" unique_id=819898108]
 visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ukyrk")
 
 [node name="Text" type="Label" parent="Camera3D/UI/Panel" unique_id=2055747752]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 661.0
-offset_top = 861.0
-offset_right = 1219.0
-offset_bottom = 1040.0
+anchor_bottom = 0.5
+offset_left = -279.0
+offset_top = -89.5
+offset_right = 279.0
+offset_bottom = 89.5
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Press E to interact
 "
+
+[node name="Dialogue" type="Panel" parent="Camera3D/UI" unique_id=2000830462]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ukyrk")
+script = ExtResource("3_3smsa")
+
+[node name="Text" type="Label" parent="Camera3D/UI/Dialogue" unique_id=1052449032]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -907.0
+offset_top = 302.0
+offset_right = 907.0
+offset_bottom = 481.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_fs7ks")
+text = "And on that day, the person thought he was very smart. 
+And he was very smart, as he had a very smart hat."
+
+[node name="TextureRect" type="TextureRect" parent="Camera3D/UI/Dialogue" unique_id=704239183]
+layout_mode = 0
+offset_left = 1543.0
+offset_top = 547.0
+offset_right = 1843.0
+offset_bottom = 847.0
+texture = ExtResource("3_x3wgy")
+
+[node name="End" type="Panel" parent="Camera3D/UI" unique_id=2087171766]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ukyrk")
+
+[node name="Text" type="Label" parent="Camera3D/UI/End" unique_id=1733497463]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.0
+offset_top = -469.0
+offset_right = 279.0
+offset_bottom = -290.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 120
+text = "The End"
+horizontal_alignment = 1
 
 [node name="Info" type="Panel" parent="Camera3D/UI" unique_id=1155225157]
 visible = false
@@ -156,7 +300,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
+theme_override_styles/panel = SubResource("StyleBoxFlat_qqcod")
 
 [node name="Text" type="Label" parent="Camera3D/UI/Info" unique_id=930976406]
 layout_mode = 1
@@ -170,6 +314,98 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 64
 text = "Get To The Other End Of The Boat!
 "
+
+[node name="ItemFind" type="Panel" parent="Camera3D/UI" unique_id=551640044]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1440.0
+offset_bottom = -626.4
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
+
+[node name="Label" type="Label" parent="Camera3D/UI/ItemFind" unique_id=667508680]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_right = 240.0
+offset_bottom = 179.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Find These Objects!"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera3D/UI/ItemFind" unique_id=708725830]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Coconut" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=725709421]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Coconut: 0/1"
+horizontal_alignment = 1
+
+[node name="Wood" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=186720867]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Wood: 0/5"
+horizontal_alignment = 1
+
+[node name="Stones" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=540089768]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Stones: 0/12"
+horizontal_alignment = 1
+
+[node name="Branches" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=341162846]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Branches: 0/3"
+horizontal_alignment = 1
+
+[node name="SharpStones" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=1153783365]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Sharp Stone: 0/2"
+horizontal_alignment = 1
+
+[node name="FullWithWater" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=1755939514]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Fill Coconut with water"
+horizontal_alignment = 1
+
+[node name="GiveToDog" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=583471392]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Give Water To Dog"
+horizontal_alignment = 1
+
+[node name="LightFire" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=43293359]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Light the Fire"
+horizontal_alignment = 1
+
+[node name="SharkMeat" type="Label" parent="Camera3D/UI/ItemFind/VBoxContainer" unique_id=418028313]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Grab The Shark Meat
+And Cook It On The Fire"
+horizontal_alignment = 1
 
 [node name="Death" type="Panel" parent="Camera3D/UI" unique_id=730243003]
 visible = false
@@ -237,8 +473,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
-script = ExtResource("2_cvnsp")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7dp3o")
+script = SubResource("GDScript_h4iuc")
 
 [node name="Label2" type="Label" parent="Camera3D/UI/QuickTime" unique_id=1371896135]
 layout_mode = 1
@@ -311,8 +547,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_v0iea")
-script = ExtResource("4_fkybt")
+theme_override_styles/panel = SubResource("StyleBoxFlat_igrcy")
+script = SubResource("GDScript_fs7ks")
 
 [node name="LockBoxText" type="Label" parent="Camera3D/UI/LockBox" unique_id=223359378]
 layout_mode = 1
@@ -529,19 +765,22 @@ transform = Transform3D(1, 0, 0, 0, 0.9395135, 0.34251216, 0, -0.34251216, 0.939
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/CamArea" unique_id=222596773]
 shape = SubResource("SphereShape3D_6t5aa")
 
-[node name="Left_Arm" parent="Camera3D" unique_id=980045048 instance=ExtResource("4_vgqql")]
+[node name="Left_Arm" parent="Camera3D" unique_id=980045048 instance=ExtResource("7_8erm5")]
 transform = Transform3D(-3.8081964e-08, -2.1458083e-08, -1, -0.49090374, 0.8712138, 0, 0.8712138, 0.49090374, -4.371139e-08, -0.61, -1.35, -0.44)
 
-[node name="Right_Arm" parent="Camera3D" unique_id=1395098829 instance=ExtResource("4_vgqql")]
+[node name="Right_Arm" parent="Camera3D" unique_id=320192552 instance=ExtResource("7_8erm5")]
 transform = Transform3D(-3.8081964e-08, -2.1458083e-08, -1, -0.49090374, 0.8712138, 0, 0.8712138, 0.49090374, -4.371139e-08, 0.61, -1.35, -0.44)
 
 [node name="Throw_Position" type="Node3D" parent="Camera3D/Right_Arm" unique_id=1187748524]
-transform = Transform3D(1.0000002, -0.0002618134, -1.0528964e-08, 0.0002618134, 1.0000002, 1.8685883e-08, 1.0524079e-08, -1.8688631e-08, 1, -0.60145867, 0.7141261, 0.03736162)
+transform = Transform3D(1.0000002, -0.0002618134, -1.0528964e-08, 0.0002618134, 1.0000002, 1.8685883e-08, 1.0524083e-08, -1.8688631e-08, 1, -0.60145867, 0.7141261, 0.03736162)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1060638923]
 
 [node name="SwimTimer" type="Timer" parent="." unique_id=217814019]
-wait_time = 10.0
+wait_time = 3.0
+one_shot = true
+
+[node name="GameEndTimer" type="Timer" parent="." unique_id=1051637629]
 one_shot = true
 
 [connection signal="pressed" from="Camera3D/UI/Death/Button" to="Camera3D/UI/Death" method="_on_button_pressed"]
@@ -551,3 +790,5 @@ one_shot = true
 [connection signal="pressed" from="Camera3D/UI/PauseMenu/VBoxContainer/Exit" to="Camera3D/UI/PauseMenu" method="_on_exit_pressed"]
 [connection signal="pressed" from="Camera3D/UI/Settings/VBoxContainer/Fullscreen" to="Camera3D/UI/Settings" method="_on_fullscreen_pressed"]
 [connection signal="pressed" from="Camera3D/UI/Settings/VBoxContainer/ReturnToPause" to="Camera3D/UI/PauseMenu" method="_on_return_to_pause_pressed"]
+[connection signal="timeout" from="SwimTimer" to="." method="_on_swim_timer_timeout"]
+[connection signal="timeout" from="GameEndTimer" to="." method="_on_game_end_timer_timeout"]

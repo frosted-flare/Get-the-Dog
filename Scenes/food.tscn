@@ -1,28 +1,13 @@
 [gd_scene format=3 uid="uid://fnmstsegn4sl"]
 
 [ext_resource type="Script" uid="uid://c1sygtampjeu8" path="res://Scripts/food.gd" id="1_j4qko"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_i36i8"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4qko"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_i36i8")
-
-[sub_resource type="BoxMesh" id="BoxMesh_fhto3"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_j4qko")
-size = Vector3(0.5, 0.5, 0.5)
+[ext_resource type="PackedScene" uid="uid://s7fmvlvfrhad" path="res://Assets/TreatBox.glb" id="2_fhto3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h4kkx"]
 radius = 5.0
 
 [node name="Food" type="Node3D" unique_id=188544478]
 script = ExtResource("1_j4qko")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=193907942]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-mesh = SubResource("BoxMesh_fhto3")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1133154086]
 transform = Transform3D(1, 0, 0, 0, 0.9579378, -0.286976, 0, 0.286976, 0.9579378, 0, -0.25, 0)
@@ -43,6 +28,9 @@ offset_bottom = 23.0
 theme_override_font_sizes/font_size = 32
 text = "DOG FOOD
 "
+
+[node name="TreatBox" parent="." unique_id=1632901652 instance=ExtResource("2_fhto3")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
