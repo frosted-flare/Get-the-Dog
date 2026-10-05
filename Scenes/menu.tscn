@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dtbhweead2udk" path="res://UIs/menubutton.png" id="3_cayip"]
 [ext_resource type="Texture2D" uid="uid://uld3ay47cvso" path="res://UIs/menubuttonclicked.png" id="4_158mb"]
 [ext_resource type="FontFile" uid="uid://68malovwus5m" path="res://UIs/Font/Inika-Regular.ttf" id="5_wwsa2"]
+[ext_resource type="AudioStream" uid="uid://bnoiu1yb14gsd" path="res://Sounds/button.mp3" id="6_jsrd8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cayip"]
 bg_color = Color(0.6, 0.6, 0.6, 0.39215687)
@@ -335,6 +336,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_xhh6f")
 text = "Return"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="." unique_id=275455381]
+stream = ExtResource("6_jsrd8")
 
 [connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/1" to="." method="_on__pressed"]
 [connection signal="pressed" from="CanvasLayer/Main/VBoxContainer/2" to="." method="_on_2_pressed"]

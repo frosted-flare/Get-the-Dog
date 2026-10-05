@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cj7ycxkju5hvq"]
+
+[ext_resource type="PackedScene" uid="uid://bj1ocvpovauva" path="res://Assets/Rock4.glb" id="1_q5jce"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osg74"]
+albedo_color = Color(0.076052986, 3.3465913e-08, 9.024516e-09, 1)
+
+[node name="Rock4" unique_id=975781302 instance=ExtResource("1_q5jce")]
+
+[node name="Rock5" parent="." index="0" unique_id=1108796859]
+material_override = SubResource("StandardMaterial3D_osg74")

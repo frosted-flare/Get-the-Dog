@@ -19,24 +19,31 @@ func _on_fullscreen_pressed() -> void:
 		get_window().mode = Window.MODE_WINDOWED
 
 func _on__pressed() -> void:
+	$ButtonSound.play()
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 func _on_2_pressed() -> void:
 	$CanvasLayer/Settings.show()
 	$CanvasLayer/Main.hide()
-	
+	$ButtonSound.play()
+
 func _on_3_pressed() -> void:
 	$CanvasLayer/Main.hide()
 	$CanvasLayer/Credits.show()
-	
+	$ButtonSound.play()
+
 func _on_4_pressed() -> void:
 	get_tree().quit()
+	$ButtonSound.play()
+
 
 func _on_texture_button_pressed() -> void:
 	$CanvasLayer/Settings.hide()
 	$CanvasLayer/Main.show()
+	$ButtonSound.play()
 
 
 func _on_texture_2_button_pressed() -> void:
 	$CanvasLayer/Main.show()
 	$CanvasLayer/Credits.hide()
+	$ButtonSound.play()

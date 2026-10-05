@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bikuo2e4rj45k" path="res://UIs/quicktimetext.png" id="9_ukyrk"]
 [ext_resource type="Texture2D" uid="uid://0facxyoa24ub" path="res://UIs/quicktimetouch.png" id="10_7dp3o"]
 [ext_resource type="Texture2D" uid="uid://uld3ay47cvso" path="res://UIs/menubuttonclicked.png" id="11_qqcod"]
+[ext_resource type="AudioStream" uid="uid://bnoiu1yb14gsd" path="res://Sounds/button.mp3" id="16_igrcy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x3wgy"]
 
@@ -302,6 +303,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_tx1dd")
 expand_mode = 1
+
+[node name="Label" type="Label" parent="Camera3D/UI/Dialogue" unique_id=148230994]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1010.0
+offset_right = 378.0
+offset_bottom = 1053.0
+theme_override_fonts/font = ExtResource("4_fd4e3")
+theme_override_font_sizes/font_size = 32
+text = "Hold E to speed up."
 
 [node name="End" type="Panel" parent="Camera3D/UI" unique_id=2087171766]
 visible = false
@@ -925,6 +936,9 @@ theme_override_font_sizes/font_size = 64
 text = "Exit"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="Camera3D/UI/PauseMenu" unique_id=807435155]
+stream = ExtResource("16_igrcy")
 
 [node name="Settings" type="Panel" parent="Camera3D/UI" unique_id=959320116]
 visible = false

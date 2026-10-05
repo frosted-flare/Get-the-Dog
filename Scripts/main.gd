@@ -52,6 +52,7 @@ func setup_level_1():
 	$Sea.show()
 	$SeaCalm.hide()
 	$Camera3D/AnimationPlayer.play("Storm")
+	$ThunderSound.play()
 	await get_tree().create_timer(4).timeout 
 	player.in_transition = false
 	$Map/Ship/NavRegion/Lightning.visible = true
@@ -67,6 +68,7 @@ func setup_level_1():
 	$Map/Ship.sway_amount_v = 0
 	$Map/Ship.sway_amount_h = 0
 	$Map/Ship.sway_speed = 0
+	$ThunderSound.play()
 	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I got to reach the end of the ship, so I can reach the next deck and rescue my dog!")
 	$RandomFragmentTimer.start()
 	
@@ -156,7 +158,7 @@ func reset_level():
 		
 func _ready() -> void:
 	player = $Player
-	
+	$SeaMusicPlayer.play()
 	player.find_child("Camera3D").find_child("Left_Arm").visible = false
 	player.find_child("Camera3D").find_child("Right_Arm").visible = false
 	await get_tree().create_timer(2).timeout 
@@ -172,7 +174,7 @@ func _ready() -> void:
 	That I would have to search through the depths of the sea. ")
 	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I bought this boat with all the money I had left. 
 	Sold my house and quit my Job...")
-	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("...so I could spend all my time with him and save his life. He is getting weeker.")
+	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("...so I could spend all my time with him and save his life. He is getting weaker.")
 	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("The last few weeks he slept more and didn't even hunt the dolphins anymore. 
 	Each night I'm worried he wouldn't wake up the next day. ")
 	player.find_child("Camera3D").find_child("UI").find_child("Dialogue").show_message("I have to hurry! I'm getting closer. I Just know it")
@@ -193,6 +195,7 @@ func _ready() -> void:
 	await get_tree().create_timer(3).timeout 
 	
 	setup_level_1()
+	$SeaMusicPlayer.stop()
 	while true:
 		await get_tree().create_timer(0.25).timeout 
 		if level == 2:
@@ -223,6 +226,7 @@ func _ready() -> void:
 	$WinSound.play()
 	setup_level_5()
 	await get_tree().create_timer(2).timeout 
+	$SeaMusicPlayer.play()
 	$Map/BrokenBoat/Dog/AnimationPlayer2.play("DogSwim")
 	$Map/BrokenBoat/SwimmingPlayer/AnimationPlayer2.play("Swim")
 	await get_tree().create_timer(3).timeout 
