@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.name == "Player":
+	if body.name == "Player" and body.saved_dog == false:
 		if body.holding_herb == true:
 			var player = body
 			var player_ui = body.find_child("Camera3D").find_child("UI")

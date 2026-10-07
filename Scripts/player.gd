@@ -203,7 +203,7 @@ func _physics_process(delta: float) -> void:
 		move_tween.tween_property($".","global_position",ladder.find_child("StartClimbPoint").global_position,0.25)
 		$Camera3D/UI.visible = false
 		
-	if Input.is_action_just_pressed("Interact") and able_to_interact_give_dog_herb and holding_herb == true:
+	if Input.is_action_just_pressed("Interact") and able_to_interact_give_dog_herb and holding_herb == true and saved_dog == false:
 		$Camera3D/UI/ItemFind/VBoxContainer/Back7.visible = false
 		main_scene.find_child("PlayDog").global_position = main_scene.find_child("Dog").global_position 
 		main_scene.find_child("Dog").queue_free()

@@ -138,6 +138,7 @@ func setup_level_5():
 	$SeaCalm.show()
 	$Sea.hide()
 	player.find_child("Camera3D").current = false
+	$Camera3D/AnimationPlayer.play("RESET")
 	$Camera3D.current = true
 	$Map/Ship.visible = false
 	$Map/BrokenBoat.visible = true
@@ -293,6 +294,7 @@ func fail_time_event():
 	reset_level()
 	
 func pass_time_event():
+	player.find_child("Camera3D").find_child("UI").find_child("QuickTime").find_child("QuickTimeTimer").stop()
 	if level == 3:
 		player.swim_dodge()
 	else:
